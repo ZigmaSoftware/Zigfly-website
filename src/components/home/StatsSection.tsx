@@ -27,7 +27,7 @@ interface ImpactMetric {
   countTarget: number;
   countPrefix?: string;
   countSuffix?: string;
-  countDecimals?: number;n
+  countDecimals?: number;
 }
 
 const CHAIN_PATH =
