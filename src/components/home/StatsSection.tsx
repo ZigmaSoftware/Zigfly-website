@@ -27,7 +27,7 @@ interface ImpactMetric {
   countTarget: number;
   countPrefix?: string;
   countSuffix?: string;
-  countDecimals?: number;
+  countDecimals?: number;n
 }
 
 const CHAIN_PATH =
@@ -602,7 +602,7 @@ const StatsSection = () => {
             Proven Ecological <span className="text-primary">Outcomes</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-lg">
-           y
+           We harnesses Black Soldier Fly to achieve the fastest possible conversion of wet waste into protein-rich larvae — turning an urban challenge into agricultural value, naturally.
           </p>
         </div>
 
