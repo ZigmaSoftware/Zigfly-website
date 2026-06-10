@@ -320,7 +320,10 @@ const About = (): JSX.Element => {
 
         {/* Blueplanet  */}
         <BluePlanetSection/>
-        <section data-no-animate className="scroll-mt-24 lg:scroll-mt-28">
+
+
+        
+        {/* <section data-no-animate className="scroll-mt-24 lg:scroll-mt-28">
           <div className="group relative mx-auto w-full overflow-hidden border border-border shadow-xl">
             <div className="relative w-full pt-[56.25%]">
               <iframe
@@ -334,7 +337,7 @@ const About = (): JSX.Element => {
               />
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section
           data-no-animate

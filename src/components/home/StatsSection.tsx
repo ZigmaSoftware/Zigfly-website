@@ -3,9 +3,6 @@ import type { CSSProperties } from "react";
 import {
   Beaker,
   Factory,
-  Map,
-  MountainSnow,
-  Shovel,
   Sprout,
   Trash2,
   Users2,
@@ -31,13 +28,13 @@ interface ImpactMetric {
 }
 
 const CHAIN_PATH =
-  "M 63,158 L 9,104 Q -3,92 9,80 L 71,18 Q 83,6 95,18 L 157,80 Q 169,92 157,104 L 95,166 Q 83,178 95,190 L 157,252 Q 169,264 181,252 L 243,190 Q 255,178 243,166 L 181,104 Q 169,92 181,80 L 243,18 Q 255,6 267,18 L 329,80 Q 341,92 329,104 L 267,166 Q 255,178 267,190 L 329,252 Q 341,264 353,252 L 415,190 Q 427,178 415,166 L 353,104 Q 341,92 353,80 L 415,18 Q 427,6 439,18 L 501,80 Q 513,92 501,104 L 439,166 Q 427,178 439,190 L 501,252 Q 513,264 525,252 L 587,190 Q 599,178 587,166 L 525,104 Q 513,92 525,80 L 587,18 Q 599,6 611,18 L 673,80 Q 685,92 673,104 L 611,166 Q 599,178 611,190 L 673,252 Q 685,264 697,252 L 759,190 Q 771,178 759,166 L 697,104";
+  "M 63,158 L 9,104 Q -3,92 9,80 L 71,18 Q 83,6 95,18 L 157,80 Q 169,92 157,104 L 95,166 Q 83,178 95,190 L 157,252 Q 169,264 181,252 L 243,190 Q 255,178 243,166 L 181,104 Q 169,92 181,80 L 243,18 Q 255,6 267,18 L 329,80 Q 341,92 329,104 L 267,166 Q 255,178 267,190 L 329,252 Q 341,264 353,252 L 415,190 Q 427,178 415,166 L 353,104 Q 341,92 353,80 L 415,18 Q 427,6 439,18 L 501,80 Q 513,92 501,104 L 439,166";
 
 const VIEWBOX = {
   minX: -10,
   minY: 5,
-  width: 790,
-  height: 340,
+  width: 540,
+  height: 280,
 } as const;
 const SVG_VIEWBOX = `${VIEWBOX.minX} ${VIEWBOX.minY} ${VIEWBOX.width} ${VIEWBOX.height}`;
 const CHAIN_ANIMATION_MS = 60000;
@@ -54,120 +51,69 @@ const DESC_FONT_SIZE = 9;
 const DESC_FONT_WEIGHT = 500;
 const metrics: ImpactMetric[] = [
   {
-    id: "waste-processed",
-    icon: Trash2,
+    id: "processing-capacity",
+    icon: Factory,
     x: 83,
     y: 90,
     dx: 2,
     revealStart: 0.005,
     revealEnd: 0.05,
-    titleLines: ["11.71+ Million", "Tons"],
-    descLines: ["Waste", "processed"],
-    countTarget: 11.71,
-    countSuffix: "+ Million",
-    countDecimals: 2,
+    titleLines: ["50 Tons", "per day"],
+    descLines: ["Processing", "capacity"],
+    countTarget: 50,
+    countSuffix: " Tons",
   },
-
   {
-    id: "soil-repurposed",
-    icon: Sprout,
+    id: "wet-waste-diverted",
+    icon: Trash2,
     x: 173,
     y: 170,
     dx: -2,
     revealStart: 0.02,
     revealEnd: 0.06,
-    titleLines: ["7.9+ Million Tons", "soil repurposed"],
-    descLines: ["For sustainable", "earthfilling"],
-    countTarget: 7.9,
-    countSuffix: "+ Million Tons",
-    countDecimals: 1,
+    titleLines: ["Tons"],
+    descLines: ["Wet waste diverted", "from landfills"],
+    countTarget: 0,
+    countSuffix: " Tons",
   },
-
   {
-    id: "daily-capacity",
-    icon: Factory,
+    id: "larvae-generation",
+    icon: Beaker,
     x: 258,
     y: 82,
     dy: 2,
     revealStart: 0.04,
     revealEnd: 0.06,
-    titleLines: ["27,000+", "Metric Tons"],
-    descLines: ["Daily waste processing", "capacity"],
-    countTarget: 27000,
-    countSuffix: "+",
+    titleLines: ["Tons", "per day"],
+    descLines: ["Larvae generation", "capacity"],
+    countTarget: 0,
+    countSuffix: " Tons",
   },
-
   {
-    id: "stones-reused",
-    icon: MountainSnow,
+    id: "employees",
+    icon: Users2,
     x: 343,
     y: 164,
     dx: 1,
     dy: 2,
     revealStart: 0.06,
     revealEnd: 0.12,
-    titleLines: ["3.2+ Million Tons", "stones reused"],
-    descLines: ["Minimizing dependence", "on materials"],
-    countTarget: 3.2,
-    countSuffix: "+ Million Tons",
-    countDecimals: 1,
+    titleLines: ["20", "Employees"],
+    descLines: ["On-ground", "workforce"],
+    countTarget: 20,
   },
-
   {
-    id: "rdf",
-    icon: Beaker,
+    id: "manure-utilised",
+    icon: Sprout,
     x: 430,
     y: 89,
     dx: -1,
     revealStart: 0.09,
     revealEnd: 0.12,
-    titleLines: ["2.9+ Million Tons"],
-    descLines: ["RDF used as", "alternative fuel"],
-    countTarget: 2.9,
-    countSuffix: "+ Million Tons",
-    countDecimals: 1,
-  },
-  {
-    id: "landfills",
-    icon: Shovel,
-    x: 515,
-    y: 164,
-    dx: -2,
-    revealStart: 0.11,
-    revealEnd: 0.16,
-    titleLines: ["70+ Landfills"],
-    descLines: ["Remediation projects", "completed"],
-    countTarget: 70,
-    countSuffix: "+ Landfills",
-  },
-
-  {
-    id: "land-reclaimed",
-    icon: Map,
-    x: 605,
-    y: 80,
-    dy: 2,
-    revealStart: 0.14,
-    revealEnd: 0.16,
-    titleLines: ["850+ Acres"],
-    descLines: ["Land reclaimed"],
-    countTarget: 850,
-    countSuffix: "+ Acres",
-  },
-
-  {
-    id: "employees",
-    icon: Users2,
-    x: 689,
-    y: 165,
-    dx: -5,
-    dy: 2,
-    revealStart: 0.18,
-    revealEnd: 0.21,
-    titleLines: ["2,000+", "Employees"],
-    descLines: ["Working for sustainable", "future"],
-    countTarget: 2000,
-    countSuffix: "+",
+    titleLines: ["Tons"],
+    descLines: ["Manure already", "utilised"],
+    countTarget: 0,
+    countSuffix: " Tons",
   },
 ];
 
@@ -480,7 +426,7 @@ const ChainGraphic = ({
         preserveAspectRatio="xMidYMid meet"
         role="img"
         aria-labelledby={titleId}
-        className="mx-auto block w-full max-w-[1080px] overflow-visible"
+        className="mx-auto block w-full max-w-[760px] overflow-visible"
       >
         <title id={titleId}>Animated diamond chain with ecological metrics</title>
         <defs>
@@ -582,8 +528,8 @@ const StatsSection = () => {
   }, [prefersReducedMotion]);
 
   const videoSrc = prefersReducedMotion
-    ? "https://www.youtube.com/embed/tf9xo3Q0x3Q?rel=0&modestbranding=1&playsinline=1"
-    : "https://www.youtube.com/embed/tf9xo3Q0x3Q?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=tf9xo3Q0x3Q&rel=0&modestbranding=1&playsinline=1&vq=hd1080";
+    ? "https://www.youtube.com/embed/owZyeZR7-2k?rel=0&modestbranding=1&playsinline=1"
+    : "https://www.youtube.com/embed/owZyeZR7-2k?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=owZyeZR7-2k&rel=0&modestbranding=1&playsinline=1&vq=hd1080";
 
   return (
     <section className="relative isolate overflow-hidden bg-background">
@@ -596,14 +542,13 @@ const StatsSection = () => {
       <div className="container-main relative z-10 py-16 md:py-10">
         <div className="mb-10 text-center md:mb-14">
           <p className="mt-8 text-xs uppercase tracking-[0.35em] text-muted-foreground md:text-sm">
-            Why Zigma
+            Why Zigfly
           </p>
           <h2 className="mt-3 text-3xl font-bold leading-tight text-foreground md:text-4xl">
             Proven Ecological <span className="text-primary">Outcomes</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-lg">
-           We harnesses Black Soldier Fly to achieve the fastest possible conversion of wet waste into protein-rich larvae — turning an urban challenge into agricultural value, naturally.
-          </p>
+          <p className="mx-auto mt-6 max-w-xl text-md leading-relaxed text-muted-foreground md:text-lg">
+            We harnesses Black Soldier Fly to achieve the fastest possible conversion of wet waste into protein-rich larvae — turning an urban challenge into agricultural value, naturally.          </p>
         </div>
 
         <div ref={statsRef} className="w-full">
@@ -621,7 +566,7 @@ const StatsSection = () => {
         <div className="relative w-full pt-[56.25%]">
           <iframe
             src={videoSrc}
-            title="Zigma avpn summit Video"
+            title="Zigfly Stats Section Video"
             className="absolute inset-0 h-full w-full"
             frameBorder={0}
             loading="lazy"

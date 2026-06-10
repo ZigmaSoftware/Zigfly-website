@@ -6,7 +6,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
-import bsflsolarr from "@/assets/BSFL project pictures/pic 3.jpeg";
+import bsflPic1 from "@/assets/BSFL project pictures/pic 1.jpeg";
+import bsflPic2 from "@/assets/BSFL project pictures/pic 2.jpeg";
+import bsflPic3 from "@/assets/BSFL project pictures/pic 3.jpeg";
+import bsflPic4 from "@/assets/BSFL project pictures/pic 4.jpeg";
 
 
 const SLOW_EASE = "power2.out";
@@ -37,14 +40,51 @@ const EMPHASIS_MAP: Record<string, string[]> = {
     "high-value compost",
     "RDF (Refuse Derived Fuel) management",
   ],
-  "bsfl-organic-waste": [
-    "industrial-scale Black Soldier Fly (BSF) bio-conversion system",
-    "in-house breeding",
-    "high-speed recovery",
-    "very low reject profile",
-    "BSFL biomass",
-    "high-protein animal feed",
-    "high-quality manure and frass",
+  "waste-sourcing": [
+    "segregated organic wet waste",
+    "municipal households",
+    "bulk generators",
+    "biodegradable waste",
+    "non-biodegradable contaminants",
+    "bioconversion process",
+  ],
+  "pre-processing": [
+    "purpose-built machinery",
+    "homogenous mass",
+    "surface area",
+    "18 days",
+    "48 days",
+    "conventional composting",
+  ],
+  "bioconversion": [
+    "BSF processing beds",
+    "20,000 and 35,000 larvae",
+    "200 mg of food waste per day",
+    "six instar stages",
+    "harmful pathogens",
+    "toxic substances",
+  ],
+  "harvesting": [
+    "30–40% protein",
+    "28–35% oil content",
+    "poultry and aquaculture industries",
+    "fish meal",
+    "soybean meal",
+    "biodiesel production",
+  ],
+  "residual-outputs": [
+    "Manure",
+    "Frass",
+    "natural fertilizer",
+    "biofertiliser",
+    "soil health benefits",
+  ],
+  "zero-waste": [
+    "larvae, manure, or frass",
+    "Nothing is landfilled",
+    "Nothing is wasted",
+    "closed-loop bioconversion system",
+    "greenhouse gas emissions",
   ],
   "machinery-sales-rentals": [
     "state-of-the-art machinery",
@@ -163,16 +203,81 @@ const services = [
   //   ],
   // },
   {
-    id: "bsfl-organic-waste",
-    title: "BSFL Based Organic Waste Management",
-    eyebrow: "Advanced Organic Waste Processing",
-    image: bsflsolarr,
-    description: "We operate a sophisticated, industrial-scale Black Soldier Fly (BSF) bio-conversion system featuring integrated in-house breeding and cultivation protocols. This advanced biological treatment is engineered for the high-speed recovery of organic waste streams with a very low reject profile, ensuring maximum efficiency and resource utilization. Our process facilitates the high-volume generation of BSFL biomass, which serves as a high-protein animal feed supplement, alongside the production of high-quality manure and frass. This technology provides a high-efficiency, sustainable solution for nutrient upcycling and the production of alternative protein sources.",
+    id: "waste-sourcing",
+    title: "Waste Sourcing",
+    eyebrow: "Collection",
+    image: bsflPic1,
+    description: "The process begins with the collection of segregated organic wet waste from municipal households, bulk generators such as hotels, markets, and wedding halls, and other commercial establishments. Only biodegradable waste enters our facility — free from non-biodegradable contaminants — ensuring the integrity of the bioconversion process from the very first step.",
     features: [
-      "In-House Lifecycle Management: Proprietary BSF breeding and cultivation to ensure consistent industrial throughput.",
-      "Accelerated Bio-Conversion: Rapid transformation of organic matter into value-added products at a high recovery rate.",
-      "Biomass Protein Production: Systematic generation of nutrient-dense larvae for the animal nutrition sector.",
-      "Nutrient-Rich Bio-Fertilizers: High-speed production of enriched manure and frass with minimal residual waste.",
+      "Segregated collection from municipal households and bulk generators.",
+      "Sources include hotels, markets, wedding halls, and commercial establishments.",
+      "Strictly biodegradable waste — zero non-biodegradable contaminants.",
+      "Integrity of the bioconversion process maintained from the first step.",
+    ],
+  },
+  {
+    id: "pre-processing",
+    title: "Pre-Processing",
+    eyebrow: "Shredding & Preparation",
+    image: bsflPic2,
+    description: "On arrival at the facility, the incoming wet waste is shredded using purpose-built machinery to create a homogenous mass. This shredding is a critical step — it significantly accelerates biodegradation by increasing the surface area available to the larvae. What conventional composting methods take 48 days to achieve, our BSF technology accomplishes in as little as 18 days, using a fraction of the land area required by traditional methods.",
+    features: [
+      "Purpose-built shredding machinery for homogenous mass preparation.",
+      "Increased surface area accelerates larval biodegradation significantly.",
+      "18-day processing cycle vs. 48 days for conventional composting.",
+      "Fraction of the land area required by traditional methods.",
+    ],
+  },
+  {
+    id: "bioconversion",
+    title: "Bioconversion — The BSF Larvae at Work",
+    eyebrow: "Biological Processing",
+    image: bsflPic3,
+    description: "The shredded organic mass is transferred to BSF processing beds where baby larvae, hatched from carefully managed egg batches, are introduced. A single gram of BSF eggs yields between 20,000 and 35,000 larvae. Each larva is capable of consuming up to 200 mg of food waste per day. The larvae progress through six instar stages over approximately 14 days, growing from 1.8 mm to 20 mm in size. Their biological activity suppresses harmful pathogens and can remove certain toxic substances — a distinct advantage over conventional composting and vermicomposting technologies.",
+    features: [
+      "1 gram of BSF eggs yields 20,000–35,000 larvae.",
+      "Each larva consumes up to 200 mg of food waste per day.",
+      "Six instar stages over ~14 days, growing from 1.8 mm to 20 mm.",
+      "Suppresses harmful pathogens and removes toxic substances from waste.",
+    ],
+  },
+  {
+    id: "harvesting",
+    title: "Harvesting",
+    eyebrow: "Protein Recovery",
+    image: bsflPic4,
+    description: "By the fifth instar, the larvae are harvested. The harvested larvae are protein-rich biomass containing 30–40% protein and 28–35% oil content, making them a highly sought-after ingredient for the poultry and aquaculture industries as a sustainable alternative to conventional fish meal. Defatted larvae can achieve protein concentrations comparable to soybean meal, while the extracted oils find application in animal nutrition, chemical industries, and biodiesel production.",
+    features: [
+      "Harvested at fifth instar for peak protein and oil content.",
+      "30–40% protein and 28–35% oil content per larvae biomass.",
+      "Sustainable alternative to conventional fish meal for poultry and aquaculture.",
+      "Extracted oils used in animal nutrition, chemical industries, and biodiesel.",
+    ],
+  },
+  {
+    id: "residual-outputs",
+    title: "The Residual Outputs",
+    eyebrow: "Manure & Frass",
+    image: bsflPic1,
+    description: "Beyond the larvae, the process generates two additional valuable outputs. Manure — the organic residue from the bioconversion — serves as a nutrient-rich natural fertilizer for agriculture, horticulture, and urban gardening. Frass, the combination of larval excrement and shed skins, functions as a potent biofertiliser with documented soil health benefits.",
+    features: [
+      "Manure: nutrient-rich natural fertilizer for agriculture and horticulture.",
+      "Frass: potent biofertiliser combining larval excrement and shed skins.",
+      "Documented soil health benefits from frass application.",
+      "Suitable for urban gardening, commercial farming, and horticulture.",
+    ],
+  },
+  {
+    id: "zero-waste",
+    title: "Zero Waste. Total Value.",
+    eyebrow: "Closed-Loop Bioconversion",
+    image: bsflPic2,
+    description: "The Zigfly process ensures that every tonne of wet waste entering our facility exits as one of three commercially valuable outputs — larvae, manure, or frass. Nothing is landfilled. Nothing is wasted. The result is a closed-loop bioconversion system that reduces landfill burden, cuts greenhouse gas emissions, and delivers measurable agricultural and economic value — all driven by the remarkable biology of the Black Soldier Fly.",
+    features: [
+      "Every tonne of waste exits as larvae, manure, or frass — zero residue.",
+      "Nothing is landfilled. Nothing is wasted.",
+      "Reduces landfill burden and cuts greenhouse gas emissions.",
+      "Delivers measurable agricultural and economic value at scale.",
     ],
   },
   // {

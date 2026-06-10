@@ -1,43 +1,32 @@
 import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ScrollToTop from "@/components/ScrollToTop";
+import manureImg from "@/assets/website/hero/Manure.jpeg";
+import larvaeImg from "@/assets/website/hero/larvae in hand.webp";
+import feedingImg from "@/assets/website/hero/Feeding pic.webp";
+import droneImg from "@/assets/website/hero/Drone shot.webp";
+import bsflPic2 from "@/assets/BSFL project pictures/pic 2.jpeg";
 
 const slides = [
   {
-    image: "/hero/noida-present-hero.webp",
-    title: "Transforming Landfills into Living Landscapes.",
+    image: manureImg,
+    title: "Turning Wet Waste into Nature's Gold.",
   },
   {
-    image: "/hero/landfill-mining-hero.jpg",
-    title: "Clearing Legacy Waste, Creating Sustainable Futures.",
+    image: larvaeImg,
+    title: "Nature's Most Efficient Recyclers, Engineered for Impact.",
   },
   {
-    image: "/hero/Pdgclose.webp",
-    title: "Science-Driven Solutions for a Cleaner Tomorrow.",
+    image: feedingImg,
+    title: "Feeding Farms, Fuelling Futures — From Waste, Responsibly.",
   },
   {
-    image: "/hero/wpe-product.webp",
-    title: "From Waste to Wealth, Responsibly.",
+    image: droneImg,
+    title: "Partnering with Urban Local Bodies for Cleaner, Greener Cities.",
   },
   {
-    image: "/hero/kumbakonam.webp",
-    title: "Pioneering Bio-Mining, Protecting Generations.",
-  },
-  {
-    image: "/hero/vairapalayam.webp",
-    title: "Restoring Land, Reviving Communities.",
-  },
-  {
-    image: "/hero/kdg.webp",
-    title: "Reclaiming Landfills, Redefining Possibilities.",
-  },
-  {
-    image: "/hero/war-room.webp",
-    title: "Engineering Transparency, Delivering Sustainability.",
-  },
-  {
-    image: "/hero/rdf-plant.webp",
-    title: "Innovating Waste Management, Inspiring Change.",
+    image: bsflPic2,
+    title: "Innovating Waste Management, Inspiring a Greener Tomorrow.",
   },
 ];
 

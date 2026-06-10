@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, ChevronUp, Facebook, Linkedin, Instagram, Youtube } from "lucide-react";
+import zigmaBpLogo from "@/assets/icons/logo-zig-bp.png";
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -14,19 +15,12 @@ const Footer = () => {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(148,163,184,0.14),transparent_50%)]" />
         </div>
 
-        <div className="container-main py-10 lg:py-12 relative z-10">
+        <div className="container-main py-6 lg:py-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_2.5fr_1.8fr] gap-4 lg:gap-x-4 lg:gap-y-5">
             <div className="flex flex-col gap-8">
               <Link to="/" className="flex items-center gap-3 mb-4">
                 <img
-                  src="/zigfly logo.png"
-                  alt="Zigfly"
-                  className="h-14 w-auto object-contain"
-                  loading="lazy"
-                />
-                <div className="w-px h-8 bg-gray-400 shrink-0" />
-                <img
-                  src="/zigma_blueplanet_logo.png"
+                  src={zigmaBpLogo}
                   alt="Zigma Blue Planet"
                   className="h-14 w-auto object-contain"
                   loading="lazy"
@@ -35,7 +29,7 @@ const Footer = () => {
 
               <div className="flex gap-3">
                 <a
-                  href="https://www.facebook.com/zigmaglobal/"
+                  href="https://www.facebook.com/share/18kiMiyZRp/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 hover:bg-[#1877F2] hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -44,7 +38,7 @@ const Footer = () => {
                   <Facebook className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://x.com/zigmaglobal1"
+                  href="https://x.com/zigfly_official"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 hover:bg-[#000000] hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -55,7 +49,7 @@ const Footer = () => {
                   </svg>
                 </a>
                 <a
-                  href="https://in.linkedin.com/company/zigma-global-environ-solutions-plc"
+                  href="https://www.linkedin.com/company/zigfly/posts/?feedView=all"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 hover:bg-[#0A66C2] hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -64,7 +58,7 @@ const Footer = () => {
                   <Linkedin className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://www.instagram.com/zigma_2015/?hl=en"
+                  href="https://www.instagram.com/zigfly_official/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 hover:bg-[#E1306C] hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -73,7 +67,7 @@ const Footer = () => {
                   <Instagram className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://www.youtube.com/channel/UCoSAp-9wtY6m58IknjmweHg/null"
+                  href="https://www.youtube.com/@zigfly_official"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 hover:bg-[#FF0000] hover:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -93,13 +87,13 @@ const Footer = () => {
                   { label: "Projects", path: "/projects" },
                   { label: "Products", path: "/products" },
                   { label: "In the News", path: "/newsroom" },
-                  { label: "Publications", path: "/publications" },
+
                   { label: "Testimonials", path: "/testimonials" },
-                  { label: "Newsletters", path: "/newsletters" },
+
                   { label: "Careers", path: "/careers" },
                   { label: "Contact", path: "/contact" },
-                  { label: "Governance Policies", path: "/about" },
-                  { label: "Awards and Recognition", path: "/awardsandrecognition" },
+                  // { label: "Governance Policies", path: "/about" },
+                  // { label: "Awards and Recognition", path: "/awardsandrecognition" },
                 ].map((link) => (
                   <li key={link.label}>
                     <Link
@@ -119,7 +113,7 @@ const Footer = () => {
                 <li className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 mt-1.5 flex-shrink-0" />
                   <span className="text-foreground/70 text-md">
-                    178, Indu Nagar, Palayapalayam, Perundurai Road, Erode, Tamilnadu - 638 011, India.
+                  Near Brahmapuram Waste to Energy Plant,Brahmapuram,Kakkanad, Ernakulam, Keralam - 682030.
                   </span>
                 </li>
                 <li className="flex items-center gap-3">
@@ -140,7 +134,7 @@ const Footer = () => {
 
           <div className="mt-12 pt-10 border-t border-foreground/20 flex flex-col md:flex-row justify-between items-center gap-3">
             <p className="text-foreground/60 text-sm">
-              (c) {new Date().getFullYear()} Zigma Global Environ Solutions Pvt Ltd. All Rights Reserved.
+              © {new Date().getFullYear()} Zigma Global Environ Solutions Pvt Ltd. All Rights Reserved.
             </p>
             <div className="flex gap-6">
               <Link to="/about" className="text-foreground/60 hover:text-foreground text-sm transition-colors">

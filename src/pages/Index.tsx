@@ -7,9 +7,6 @@ import StatsSection from "@/components/home/StatsSection";
 import SDGSection from "@/components/home/SdgSection";
 // import ULBClientsSectioncp from "@/components/home/ULBClientsSectioncp";
 
-const IndiaPresence = lazy(() =>
-  import("@/components/home/Indiapresence").then((module) => ({ default: module.IndiaPresence })),
-);
 const ServicesSection = lazy(() => import("@/components/home/ServicesSection"));
 // const ULBClientsSection = lazy(() => import("@/components/home/ULBClientsSection"));
 // const PartnersSectioncp = lazy(() => import("@/components/home/PartnersSectioncp"));
@@ -52,7 +49,6 @@ const Index = () => {
         <AboutSection />
         {showDeferredSections && (
           <>
-            <IndiaPresence />
             <ServicesSection />
             {/* <ULBClientsSection /> */}
             {/* <PartnersSectioncp /> */}

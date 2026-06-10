@@ -8,9 +8,7 @@ import missionGif from "@/assets/icons/target.gif";
 // Using the same Mission/Vision text but in a narrative format as implied by "message"
 // If specific message text is provided later, simply update this const.
 const edQuote = `
-We deliver technology-driven waste management solutions that protect the environment, 
-restore ecosystems, and drive measurable climate impact—advancing a zero-waste future through innovation, 
-integrity, and sustainable resource optimization.
+We partner with Urban Local Bodies and waste generators to address one of urban India's most persistent challenges — organic wet waste. Through scientifically managed Black Soldier Fly processing, we divert waste from landfills and convert it into larvae, organic manure, and frass, creating measurable environmental value at every stage of the process.
 `;
 
 const Vision = () => {
@@ -70,8 +68,8 @@ const Vision = () => {
 
             <div
               className={`mt-5 max-w-3xl mx-auto relative transition-all duration-700 ease-out ${isQuoteVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-85 translate-y-1"
+                ? "opacity-100 translate-y-0"
+                : "opacity-85 translate-y-1"
                 }`}
             >
               <p
@@ -79,16 +77,16 @@ const Vision = () => {
                 className="text-lg leading-relaxed text-center relative z-10"
                 aria-label={quoteText}
               >
-                <span className="inline-flex align-middle mr-2 text-primary/80">
-                  <Quote className="w-6 h-6 text-primary/80 rotate-180" />
+                <span className="inline-flex  align-middle mr-2 text-primary/80">
+                  <Quote className="w-6 h-6 text-primary/80 rotate-180  " />
                 </span>
 
                 {quoteText.split("").map((char, index) => (
                   <span
                     key={`${char}-${index}`}
                     className={`inline transition-[color,opacity,filter] duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] ${isQuoteVisible
-                        ? "text-foreground/80 opacity-100 blur-0"
-                        : "text-muted-foreground/40 opacity-70 blur-[0.5px]"
+                      ? "text-foreground/80 opacity-100 blur-0"
+                      : "text-muted-foreground/40 opacity-70 blur-[0.5px]"
                       }`}
                     style={
                       isQuoteVisible

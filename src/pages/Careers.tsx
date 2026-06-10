@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import picture1 from "@/assets/website/hero/career-bg.jpeg";
+import picture1 from "@/assets/website/hero/career-bg.jpg";
 
 import {
   Send,
@@ -58,28 +58,28 @@ const jobOpenings: JobOpening[] = [
   //     "Prepare technical reports and project documentation",
   //   ],
   // },
-  {
-    id: 2,
-    title: "Project Engineer",
-    department: "Project Management",
-    location:
-      "Chennai, Chittoor, Srikalasti, Nellore, Guwahati, Tirupati, Visakhapatnam",
-    type: "Full-time",
-    experience: "2-4 years",
-    summary:
-      "Execute large-scale waste-management and landfill-reclamation projects with quality, cost, and timeline control.",
-    qualifications: [
-      "Diploma / B.E. in any specialization",
-      "Experience in project planning, reporting, and stakeholder coordination",
-      "Ability to manage multiple workstreams and site teams",
-    ],
-    responsibilities: [
-      "Oversee project planning and execution",
-      "Manage project budgets and schedules",
-      "Coordinate with clients and cross-functional stakeholders",
-      "Track project risks and ensure timely closure",
-    ],
-  },
+  // {
+  //   id: 2,
+  //   title: "Project Engineer",
+  //   department: "Project Management",
+  //   location:
+  //     "Chennai, Chittoor, Srikalasti, Nellore, Guwahati, Tirupati, Visakhapatnam",
+  //   type: "Full-time",
+  //   experience: "2-4 years",
+  //   summary:
+  //     "Execute large-scale waste-management and landfill-reclamation projects with quality, cost, and timeline control.",
+  //   qualifications: [
+  //     "Diploma / B.E. in any specialization",
+  //     "Experience in project planning, reporting, and stakeholder coordination",
+  //     "Ability to manage multiple workstreams and site teams",
+  //   ],
+  //   responsibilities: [
+  //     "Oversee project planning and execution",
+  //     "Manage project budgets and schedules",
+  //     "Coordinate with clients and cross-functional stakeholders",
+  //     "Track project risks and ensure timely closure",
+  //   ],
+  // },
   // {
   //   id: 3,
   //   title: "Machine Operator",
@@ -127,7 +127,6 @@ const jobOpenings: JobOpening[] = [
 /* ---------------- COMPONENT ---------------- */
 
 const Careers = () => {
-  const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null);
   const [isJobDetailsOpen, setIsJobDetailsOpen] = useState(false);
 
@@ -171,16 +170,6 @@ const Careers = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  /* ---------------- FILTER DATA ---------------- */
-
-  const departments = ["all", ...new Set(jobOpenings.map((j) => j.department))];
-
-  const filteredJobs = jobOpenings.filter((job) => {
-    const departmentMatch =
-      selectedDepartment === "all" || job.department === selectedDepartment;
-    return departmentMatch;
-  });
 
   /* ---------------- HANDLERS ---------------- */
 
@@ -251,51 +240,18 @@ const Careers = () => {
 
         {/* JOB OPENINGS */}
 
-        <section id="job-openings" className="section-padding">
+        {/* <section id="job-openings" className="section-padding">
 
           <div className="container-main">
 
-            <div className="text-center mb-10">
-              <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground">
-                Explore Our Roles
-              </p>
 
-              <h2 className="text-4xl font-semibold mt-3">
-                Explore Your <span className="text-primary">Career Path</span>
-              </h2>
-            </div>
-
-            {/* DEPARTMENT FILTER */}
-
-            <div className="flex gap-2 border-b mb-8 overflow-x-auto scrollbar-hide px-1 sm:gap-6">
-
-              {departments.map((dept) => {
-
-                const active = selectedDepartment === dept;
-
-                return (
-                  <button
-                    key={dept}
-                    onClick={() => setSelectedDepartment(dept)}
-                    className={`shrink-0 whitespace-nowrap pb-3 text-sm font-semibold transition-colors sm:text-base ${
-                      active ? "text-primary border-b-2 border-primary" : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {dept === "all" ? "All Openings" : dept}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* JOB CARDS */}
-
-            {filteredJobs.length === 0 ? (
+            {jobOpenings.length === 0 ? (
               <div className="rounded-xl border border-dashed p-8 text-center text-muted-foreground">
-                No openings found for the selected filters.
+                No openings available at the moment.
               </div>
             ) : (
               <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredJobs.map((job) => (
+                {jobOpenings.map((job) => (
                   <div
                     key={job.id}
                     className="border rounded-xl p-5 bg-card hover:shadow-lg transition"
@@ -331,7 +287,7 @@ const Careers = () => {
 
           </div>
 
-        </section>
+        </section> */}
 
         {/* JOB DETAILS DIALOG */}
 

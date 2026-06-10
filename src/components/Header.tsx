@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/website/zigma_blueplanet_logo.png";
+import logo from "@/assets/icons/logo-zig-bp.png";
 import zigflyLogo from "@/assets/services/zigfly.png";
 import livelarvae from "@/assets/Products/larvae.jpeg";
 import drylarvae from "@/assets/website/larva.jpeg";
@@ -315,12 +315,6 @@ const Header = () => {
           {/* LOGO */}
 
           <Link to="/" className="flex items-center gap-3 shrink-0">
-            <img
-              src="/zigfly logo.png"
-              alt="Zigfly"
-              className="h-10 sm:h-12 w-auto object-contain"
-            />
-            <div className="w-px h-8 bg-gray-300 shrink-0" />
             <img
               src={logo}
               alt="Zigma Blue Planet"

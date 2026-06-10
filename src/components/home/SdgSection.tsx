@@ -1,303 +1,193 @@
-import { useState, useCallback, useRef } from "react";
-import sdgLogo from "@/assets/website/Sustainable-Development-Goals.logo.png";
-import sdgBgVideo from "@/assets/website/sdg-bg.mp4";
+import { useState } from "react";
+import sdg02 from "@/assets/website/sdg-icons/sdg-02.webp";
 import sdg03 from "@/assets/website/sdg-icons/sdg-03.png";
 import sdg06 from "@/assets/website/sdg-icons/sdg-06.png";
+import sdg07 from "@/assets/website/sdg-icons/sdg-07.webp";
 import sdg08 from "@/assets/website/sdg-icons/sdg-08.png";
 import sdg09 from "@/assets/website/sdg-icons/sdg-09.png";
-import sdg10 from "@/assets/website/sdg-icons/sdg-10.png";
 import sdg11 from "@/assets/website/sdg-icons/sdg-11.png";
 import sdg12 from "@/assets/website/sdg-icons/sdg-12.png";
 import sdg13 from "@/assets/website/sdg-icons/sdg-13.png";
+import sdg14 from "@/assets/website/sdg-icons/sdg-14.webp";
 import sdg15 from "@/assets/website/sdg-icons/sdg-15.png";
 import sdg17 from "@/assets/website/sdg-icons/sdg-17.png";
-
-// Add styles for wheel rotation animation
-const wheelAnimationStyle = `
-  @keyframes wheelRotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  .sdg-wheel-rotate {
-    transform-origin: 250px 250px;
-    animation: wheelRotate 20s linear infinite;
-  }
-  .sdg-wheel-pause {
-    animation-play-state: paused;
-  }
-`;
+import Reveal from "@/components/animation/Reveal";
+import sdgLogo from "@/assets/website/Sustainable-Development-Goals.logo.png";
 
 const GOALS = [
-  { id: 3,  name: "Good Health and Well-Being",               color: "#4C9F38", lines: ["GOOD HEALTH", "AND WELL-BEING"],             img: sdg03 },
-  { id: 6,  name: "Clean Water and Sanitation",               color: "#26BDE2", lines: ["CLEAN WATER", "AND SANITATION"],             img: sdg06 },
-  { id: 8,  name: "Decent Work and Economic Growth",          color: "#A21942", lines: ["DECENT WORK", "AND ECONOMIC GROWTH"],        img: sdg08 },
-  { id: 9,  name: "Industry, Innovation and Infrastructure",  color: "#FD6925", lines: ["INDUSTRY, INNOVATION", "& INFRASTRUCTURE"],  img: sdg09 },
-  { id: 10, name: "Reduced Inequalities",                     color: "#e11484",  lines: ["REDUCED", "INEQUALITIES"],                  img: sdg10 },
-  { id: 11, name: "Sustainable Cities and Communities",       color: "#FD9D24", lines: ["SUSTAINABLE CITIES", "AND COMMUNITIES"],     img: sdg11 },
-  { id: 12, name: "Responsible Consumption and Production",   color: "#BF8B2E", lines: ["RESPONSIBLE", "CONSUMPTION & PRODUCTION"],   img: sdg12 },
-  { id: 13, name: "Climate Action",                           color: "#3F7E44", lines: ["CLIMATE", "ACTION"],                         img: sdg13 },
-  { id: 15, name: "Life on Land",                             color: "#56C02B", lines: ["LIFE", "ON LAND"],                           img: sdg15 },
-  { id: 17, name: "Partnerships for the Goals",               color: "#19486A", lines: ["PARTNERSHIPS", "FOR THE GOALS"],             img: sdg17 },
+  { id: 2, name: "Zero Hunger", color: "#D4A23C", contribution: "BSF larvae produce protein-rich biomass with 30–40% protein content, offering a sustainable alternative to conventional fish meal and animal feed. The manure and frass generated serve as natural fertilizers, improving agricultural productivity and contributing directly to food security.", img: sdg02 },
+  { id: 3, name: "Good Health", color: "#4C9F38", contribution: "By scientifically processing wet waste at source, the technology eliminates open dumping and the associated breeding of disease vectors such as mosquitoes, flies, and rodents. This directly improves public health outcomes in urban areas. The process also suppresses harmful pathogens in waste, reducing community health risks.", img: sdg03 },
+  { id: 6, name: "Clean Water", color: "#26BDE2", contribution: "Unprocessed wet waste is a primary source of leachate contamination of groundwater and surface water bodies. The Zigfly process treats leachate within the facility and converts organic waste before it can contaminate water sources, protecting freshwater ecosystems and supporting sanitation goals.", img: sdg06 },
+  { id: 7, name: "Clean Energy", color: "#FDB713", contribution: "The oils extracted from BSF larvae have demonstrated application in biodiesel production, offering a renewable, bio-based energy source derived entirely from waste — contributing to the clean energy transition without competing with food crops.", img: sdg07 },
+  { id: 8, name: "Decent Work", color: "#A21942", contribution: "The establishment and operation of BSF processing facilities creates direct employment opportunities across waste collection, plant operations, larvae harvesting, product processing, and marketing. The DBFOO model also stimulates private sector investment in the green economy.", img: sdg08 },
+  { id: 9, name: "Innovation", color: "#FD6925", contribution: "BSF bioconversion represents a scientifically advanced, innovative approach to waste management — far superior in speed, efficiency, and output value compared to conventional composting, biogas, or vermicomposting technologies. Zigfly's scalable facility model demonstrates replicable green infrastructure for urban India.", img: sdg09 },
+  { id: 11, name: "Sustainable Cities", color: "#FD9D24", contribution: "By partnering with Urban Local Bodies to manage municipal wet waste, the technology directly addresses one of urban India's most persistent environmental challenges. It reduces landfill burden, improves city cleanliness, and supports Swachh Bharat Mission objectives — making cities more liveable and sustainable.", img: sdg11 },
+  { id: 12, name: "Responsible Production", color: "#BF8B2E", contribution: "The BSF process is the embodiment of circular economy principles — waste from one system becomes the input for another. With near-zero residue and three commercially valuable outputs, the technology maximises resource recovery and minimises waste generation at every stage of the production chain.", img: sdg12 },
+  { id: 13, name: "Climate Action", color: "#3F7E44", contribution: "Research demonstrates that manure treated with BSF larvae produces 47 times lower greenhouse gas emissions compared to windrow composting. By diverting organic waste from landfills — a significant source of methane — the Zigfly process directly reduces the carbon footprint of urban waste management.", img: sdg13 },
+  { id: 14, name: "Life Below Water", color: "#0082BD", contribution: "BSF larvae serve as a high-quality, sustainable substitute for fish meal in aquaculture feed. This reduces the pressure on wild fish stocks harvested for conventional feed production, directly protecting marine ecosystems and supporting sustainable aquaculture practices.", img: sdg14 },
+  { id: 15, name: "Life on Land", color: "#56C02B", contribution: "The organic manure and frass produced enrich soil health and biodiversity. By reducing dependence on chemical fertilizers and returning nutrients to the soil naturally, the process supports healthier terrestrial ecosystems and sustainable land use.", img: sdg15 },
+  { id: 17, name: "Partnerships", color: "#19486A", contribution: "The DBFOO model is built on structured, contractual partnerships between private operators like Zigfly and Urban Local Bodies, demonstrating how public-private collaboration can deliver scalable, sustainable solutions to civic challenges. The model is replicable across municipalities nationwide.", img: sdg17 },
 ] as const;
 
-const CX = 250, CY = 250, R_IN = 105, R_OUT = 245;
-const N = GOALS.length;
-const SEG = 360 / N;
-const GAP = 5;
-const ICON_SIZE = 66;
-const ff = "'Franklin Gothic Medium','Arial Narrow',Arial,sans-serif";
-
-function polar(cx: number, cy: number, r: number, deg: number): [number, number] {
-  const a = ((deg - 90) * Math.PI) / 180;
-  return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
-}
-
-function segPath(i: number) {
-  const a1 = i * SEG + GAP / 2, a2 = (i + 1) * SEG - GAP / 2;
-  const [x1, y1] = polar(CX, CY, R_OUT, a1);
-  const [x2, y2] = polar(CX, CY, R_OUT, a2);
-  const [x3, y3] = polar(CX, CY, R_IN,  a2);
-  const [x4, y4] = polar(CX, CY, R_IN,  a1);
-  return `M${x1},${y1} A${R_OUT},${R_OUT},0,0,1,${x2},${y2} L${x3},${y3} A${R_IN},${R_IN},0,0,0,${x4},${y4}Z`;
-}
-
-function segCenter(i: number): [number, number] {
-  return polar(CX, CY, (R_IN + R_OUT) / 2, i * SEG + SEG / 2);
-}
-
-function getRotationDeg(el: SVGGraphicsElement): number {
-  const transform = getComputedStyle(el).transform;
-  if (!transform || transform === "none") return 0;
-
-  const values = transform
-    .replace(/^matrix3d\(|^matrix\(|\)$/g, "")
-    .split(",")
-    .map((v) => Number(v.trim()));
-
-  if (values.length === 6) {
-    const [a, b] = values;
-    return (Math.atan2(b, a) * 180) / Math.PI;
-  }
-
-  if (values.length === 16) {
-    const a = values[0];
-    const b = values[1];
-    return (Math.atan2(b, a) * 180) / Math.PI;
-  }
-
-  return 0;
-}
-
-/**
- * Returns the segment index clicked, or:
- *  -1  → clicked in the hub (inside R_IN)  → clear active
- *  -2  → clicked outside the wheel (> R_OUT) → clear active
- */
-function getClickedSegment(e: React.MouseEvent<SVGSVGElement>, rotationDeg: number): number {
-  const svg = e.currentTarget as SVGSVGElement;
-  const rect = svg.getBoundingClientRect();
-  const x = (e.clientX - rect.left) * (500 / rect.width);
-  const y = (e.clientY - rect.top)  * (500 / rect.height);
-  const dx = x - CX, dy = y - CY;
-  const dist = Math.hypot(dx, dy);
-
-  // Inside hub → dismiss
-  if (dist < R_IN) return -1;
-  // Outside ring → dismiss
-  if (dist > R_OUT) return -2;
-
-  let angle = (Math.atan2(dy, dx) * 180) / Math.PI + 90;
-  if (angle < 0) angle += 360;
-  angle = (angle - rotationDeg) % 360;
-  if (angle < 0) angle += 360;
-  return Math.floor(angle / SEG) % N;
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// SDG Wheel Section
-// ═══════════════════════════════════════════════════════════════════════════════
-
 export default function SDGSection() {
-  const half = ICON_SIZE / 2;
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
-  const wheelRef = useRef<SVGGElement | null>(null);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const handleClick = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
-    e.stopPropagation();
-    const rotationDeg = wheelRef.current ? getRotationDeg(wheelRef.current) : 0;
-    const idx = getClickedSegment(e, rotationDeg);
-
-    // -1 or -2 means "outside a segment" → clear selection
-    if (idx < 0) {
-      setActiveIdx(null);
-      return;
-    }
-
-    setActiveIdx(idx);
-  }, []);
-
   const active = activeIdx !== null ? GOALS[activeIdx] : null;
+  const radius = 155;
+  const center = 210;
 
   return (
-    <section
-      className="relative isolate overflow-hidden bg-background"
-      onClick={() => setActiveIdx(null)}
-    >
-      <style>{wheelAnimationStyle}</style>
-      {/* Background video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
-      >
-        <source src={sdgBgVideo} type="video/mp4" />
-      </video>
-      {/* Overlay to keep text readable */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-black/30" />
-      
-      <div className="container-main relative z-10 py-16 md:py-20">
-        <div className="flex flex-col lg:flex-row items-center gap-12 ">
-          {/* Left text panel */}
-          <div className="w-full ">
-            {/* <p className=" md:text-md uppercase text-white">
-              UN Sustainable Development Goals
-            </p> */}
-            <h2 className="mt-3 text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
-              Our Commitment to the UN Sustainable Development <span className="text-white">Goals</span>
-            </h2>
-            <p className="text-white text-md md:text-lg leading-relaxed mb-4 text-justify">
-              As part of the Blue Planet Group, Zigma embeds sustainability into the very core of
-              its mission. By advancing the Triple Bottom Line of People, Planet, and Prosperity,
-              we ensure that every initiative delivers enduring value to communities and ecosystems.
-            </p>
-            <p className="text-white text-md md:text-lg leading-relaxed mb-4 text-justify">
-              Guided by the United Nations Sustainable Development Goals, our operations generate
-              measurable impact - strengthening public health and well - being through safe and
-              scientific waste management, safeguarding clean water and sanitation by protecting
-              vital resources, and enabling sustainable cities and communities through circular
-              solutions that make urban environments more resilient and future - ready.
-            </p>
-            <p className="text-white text-md md:text-lg leading-relaxed mb-4 text-justify">
-              Zigma contributes to 10 of the 17 UN Sustainable Development Goals, aligning
-              innovation with responsibility to achieve a Net Positive Impact - leaving behind
-              stronger communities, cleaner environments, and a more sustainable future.
-            </p>
+    <section className="bg-background section-padding">
+      <div className="container-main">
+        <Reveal className="mb-12 text-center" variant="fade-up">
+          <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
+            Sustainability
+          </span>
+          <h2 className="mt-2 text-3xl font-bold leading-tight text-foreground md:text-4xl">
+          Our Commitment to the <span className="text-primary">UN SDGs</span>
+          </h2>
+        </Reveal>
+
+        <div className="flex flex-col items-center gap-12 lg:flex-row">
+          <div className="flex w-full justify-center overflow-visible lg:w-1/2">
+            <div
+              className="relative h-[420px] w-[420px] select-none"
+              onClick={() => setActiveIdx(null)}
+            >
+              <svg
+                className="pointer-events-none absolute inset-0 h-full w-full"
+                viewBox="0 0 420 420"
+              >
+                {GOALS.map((_, i) => {
+                  const angle = (i / GOALS.length) * 2 * Math.PI - Math.PI / 2;
+                  const x2 = center + radius * Math.cos(angle);
+                  const y2 = center + radius * Math.sin(angle);
+
+                  return (
+                    <line
+                      key={i}
+                      x1={center}
+                      y1={center}
+                      x2={x2}
+                      y2={y2}
+                      stroke={activeIdx === i ? GOALS[i].color : "rgba(0,0,0,0.08)"}
+                      strokeWidth={activeIdx === i ? 2 : 1}
+                      style={{ transition: "all 0.3s ease" }}
+                    />
+                  );
+                })}
+              </svg>
+
+              {GOALS.map((goal, i) => {
+                const angle = (i / GOALS.length) * 2 * Math.PI - Math.PI / 2;
+                const x = center + radius * Math.cos(angle);
+                const y = center + radius * Math.sin(angle);
+                const isActive = activeIdx === i;
+
+                return (
+                  <button
+                    key={goal.id}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveIdx(isActive ? null : i);
+                    }}
+                    className="absolute h-16 w-16 overflow-hidden rounded-full transition-all duration-300 focus:outline-none"
+                    style={{
+                      left: x - 32,
+                      top: y - 32,
+                      transform: isActive ? "scale(1.2)" : "scale(1)",
+                      boxShadow: isActive
+                        ? `0 0 0 4px ${goal.color}, 0 0 0 9px rgba(255,255,255,0.96), 0 14px 30px rgba(15,23,42,0.24)`
+                        : "0 0 0 7px rgba(255,255,255,0.94), 0 10px 24px rgba(15,23,42,0.14)",
+                      zIndex: isActive ? 20 : 10,
+                    }}
+                  >
+                    <span
+                      className="flex h-full w-full items-center justify-center rounded-full p-2"
+                      style={{ backgroundColor: goal.color }}
+                    >
+                      <img src={goal.img} alt={goal.name} className="h-full w-full object-contain" />
+                    </span>
+                  </button>
+                );
+              })}
+
+              {/* Center SDG logo */}
+              <div
+                className="pointer-events-none absolute rounded-full bg-white shadow-md"
+                style={{ left: center - 52, top: center - 52, width: 104, height: 104, padding: 6 }}
+              >
+                <img
+                  src={sdgLogo}
+                  alt="UN Sustainable Development Goals"
+                  className="h-full w-full rounded-full object-contain"
+                />
+              </div>
+            </div>
           </div>
 
-          {/* Wheel — right side */}
-          <div className="w-full lg:w-1/2 flex justify-center">
-            <div className="w-full max-w-[400px] aspect-square select-none">
-              <svg
-                viewBox="0 0 500 500"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ width: "100%", height: "100%", overflow: "visible", cursor: "pointer" }}
-                onClick={handleClick}
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
+          <div className="w-full lg:w-1/2">
+            {active ? (
+              <div
+                className="rounded-2xl p-6 transition-all duration-500"
+                style={{
+                  backgroundColor: `${active.color}18`,
+                  border: `1px solid ${active.color}44`,
+                }}
               >
-                <defs>
-                  <clipPath id="sdg-hub-clip">
-                    <circle cx={CX} cy={CY} r={R_IN - 10} />
-                  </clipPath>
-                </defs>
-
-                {/* Rotating segments and icons group */}
-                <g
-                  ref={wheelRef}
-                  className={`sdg-wheel-rotate${isPaused ? " sdg-wheel-pause" : ""}`}
-                >
-                  {/* Segments — colour only, no text */}
-                  {GOALS.map((g, i) => (
-                    <path
-                      key={`seg-${g.id}`}
-                      d={segPath(i)}
-                      fill={g.color}
-                      style={{ opacity: 1, transition: "opacity 0.25s ease" }}
-                    />
-                  ))}
-
-                  {/* Icons only — no text labels */}
-                  {GOALS.map((g, i) => {
-                    const [ix, iy] = segCenter(i);
-                    return (
-                      <image
-                        key={`icon-${g.id}`}
-                        href={g.img}
-                        x={ix - half}
-                        y={iy - half}
-                        width={ICON_SIZE}
-                        height={ICON_SIZE}
-                        preserveAspectRatio="xMidYMid meet"
-                        style={{
-                          pointerEvents: "none",
-                          opacity: 1,
-                          transition: "opacity 0.25s ease",
-                        }}
-                      />
-                    );
-                  })}
-                </g>
-
-                {/* Hub fill — active goal colour or white */}
-                <circle
-                  cx={CX} cy={CY} r={R_IN - 2}
-                  fill={active ? active.color : "white"}
-                  style={{ transition: "fill 0.3s ease" }}
-                />
-
-                {/* Hub content */}
-                {active ? (
-                  <>
-                    {/* Goal number */}
-                    <text
-                      x={CX} y={CY - 22}
-                      textAnchor="middle" dominantBaseline="middle"
-                      fill="white" fontSize={54} fontWeight="1000" fontFamily={ff}
-                      style={{ userSelect: "none" }}
+                <div className="mb-4 flex items-center gap-4">
+                  <img src={active.img} alt={active.name} className="h-14 w-14 rounded-xl" />
+                  <div>
+                    <span
+                      className="text-xs font-semibold uppercase tracking-widest"
+                      style={{ color: active.color }}
                     >
-                      {active.id}
-                    </text>
-                    {/* Goal name lines */}
-                    {active.lines[1] ? (
-                      <>
-                        <text x={CX} y={CY + 6} textAnchor="middle" fill="white"
-                          fontSize={14} fontWeight="bold" fontFamily={ff}
-                          style={{ userSelect: "none" }}>{active.lines[0]}</text>
-                        <text x={CX} y={CY + 20} textAnchor="middle" fill="white"
-                          fontSize={14} fontWeight="bold" fontFamily={ff}
-                          style={{ userSelect: "none" }}>{active.lines[1]}</text>
-                      </>
-                    ) : (
-                      <text x={CX} y={CY + 12} textAnchor="middle" fill="white"
-                        fontSize={12} fontWeight="bold" fontFamily={ff}
-                        style={{ userSelect: "none" }}>{active.lines[0]}</text>
-                    )}
-                  </>
-                ) : (
-                  /* Empty hub — show SDG logo initially */
-                  <image
-                    href={sdgLogo}
-                    x={CX - (R_IN - 12)}
-                    y={CY - (R_IN - 12)}
-                    width={(R_IN - 12) * 2}
-                    height={(R_IN - 12) * 2}
-                    preserveAspectRatio="xMidYMid meet"
-                    clipPath="url(#sdg-hub-clip)"
-                    style={{ userSelect: "none", pointerEvents: "none", opacity: 0.98 }}
-                  />
-                )}
-              </svg>
-            </div>
+                      Goal {active.id}
+                    </span>
+                    <h3 className="mt-0.5 text-lg font-bold text-foreground">{active.name}</h3>
+                  </div>
+                </div>
+
+                <div
+                  className="flex items-start gap-3 rounded-xl p-4"
+                  style={{ backgroundColor: `${active.color}15` }}
+                >
+                  <span
+                    className="mt-0.5 text-xs font-bold uppercase tracking-wider"
+                    style={{ color: active.color }}
+                  >
+                    Contribution
+                  </span>
+                  <span className="text-base font-medium leading-relaxed text-foreground">
+                    {active.contribution}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-5">
+                <h2 className="text-3xl font-bold text-foreground">
+                  Our Commitment to the {""}
+                  <span className="text-primary">UN Sustainable Development Goals</span>
+          
+                </h2>
+
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  As part of the Blue Planet Group, Zigma embeds sustainability into the core of its mission. By advancing the Triple Bottom Line of People, Planet, and Prosperity, every initiative is designed to create enduring value for communities and ecosystems.
+                </p>
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  Guided by the United Nations Sustainable Development Goals, our operations strengthen public health, safeguard water resources, and build more resilient cities through circular waste solutions.
+                </p>
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  Zigfly's BSF technology contributes meaningfully to 12 of the 17 UN Sustainable Development Goals, making it one of the most multi-dimensional environmental interventions available to urban local bodies today.
+                </p>
+                <p className="text-sm italic text-muted-foreground/60">
+                  Click any goal icon to see our impact.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
+

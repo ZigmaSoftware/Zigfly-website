@@ -3,30 +3,52 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Reveal from "@/components/animation/Reveal";
 import bsflWaste from "@/assets/BSFL project pictures/pic 3.jpeg";
-import iotWaste from "@/assets/services/WB.png";
-import eprService from "@/assets/services/EPR.webp";
+import bsflPic1 from "@/assets/BSFL project pictures/pic 1.jpeg";
+import bsflPic2 from "@/assets/BSFL project pictures/pic 2.jpeg";
+import bsflPic4 from "@/assets/BSFL project pictures/pic 4.jpeg";
 
 const services = [
   {
-    id: "bsfl-organic-waste",
-    title: "BSFL Based Organic Waste Management",
+    id: "waste-sourcing",
+    title: "Waste Sourcing",
     description:
-      "High-efficiency organic waste treatment using Black Soldier Fly larvae technology to derive highly enriched manure, frass and BSF larvae as protein supplements.",
+      "The process begins with the collection of segregated organic wet waste from municipal households, bulk generators such as hotels, markets, and wedding halls, and other commercial establishments. Only biodegradable waste enters our facility — free from non-biodegradable contaminants — ensuring the integrity of the bioconversion process from the very first step.",
+    image: bsflPic1,
+  },
+  {
+    id: "pre-processing",
+    title: "Pre-Processing",
+    description:
+      "On arrival at the facility, the incoming wet waste is shredded using purpose-built machinery to create a homogenous mass. This shredding is a critical step — it significantly accelerates biodegradation by increasing the surface area available to the larvae. What conventional composting methods take 48 days to achieve, our BSF technology accomplishes in as little as 18 days, using a fraction of the land area required by traditional methods.",
     image: bsflWaste,
   },
   {
-    id: "iot-waste-management",
-    title: "IOT Systems for Waste Management",
+    id: "bioconversion",
+    title: "Bioconversion — The BSF Larvae at Work",
     description:
-      "Smart monitoring systems delivering real-time waste analytics and optimization.",
-    image: iotWaste,
+      "The shredded organic mass is transferred to BSF processing beds where baby larvae are introduced. A single gram of BSF eggs yields between 20,000 and 35,000 larvae — each capable of consuming up to 200 mg of food waste per day. The larvae progress through six instar stages over approximately 14 days, suppressing harmful pathogens and reducing the waste mass rapidly.",
+    image: bsflPic2,
   },
   {
-    id: "epr-extended-producer-responsibility",
-    title: "EPR (Extended Producer Responsibility)",
+    id: "harvesting",
+    title: "Harvesting",
     description:
-      "Extended Producer Responsibility - Sustainable producer responsibility programs ensuring end-of-life product management and recycling.",
-    image: eprService,
+      "By the fifth instar, the larvae are harvested. The harvested larvae are protein-rich biomass containing 30–40% protein and 28–35% oil content, making them a highly sought-after ingredient for the poultry and aquaculture industries as a sustainable alternative to conventional fish meal.",
+    image: bsflPic4,
+  },
+  {
+    id: "residual-outputs",
+    title: "The Residual Outputs",
+    description:
+      "Beyond the larvae, the process generates two additional valuable outputs. Manure — the organic residue from the bioconversion — serves as a nutrient-rich natural fertilizer for agriculture, horticulture, and urban gardening. Frass functions as a potent biofertiliser with documented soil health benefits.",
+    image: bsflPic1,
+  },
+  {
+    id: "zero-waste",
+    title: "Zero Waste. Total Value.",
+    description:
+      "The Zigfly process ensures that every tonne of wet waste entering our facility exits as one of three commercially valuable outputs — larvae, manure, or frass. Nothing is landfilled. Nothing is wasted. The result is a closed-loop bioconversion system that reduces landfill burden and cuts greenhouse gas emissions.",
+    image: bsflPic2,
   },
 ];
 
@@ -60,8 +82,11 @@ const ServicesSection = () => {
           </span>
 
           <h2 className="mt-2 text-3xl md:text-4xl font-bold text-foreground">
-            Waste Management <span className="text-primary">Solutions</span>
+            BSFL Organic Waste Management <span className="text-primary">Solutions</span>
           </h2>
+          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground text-md leading-relaxed">
+            At Zigfly, we have engineered a scientifically precise, end-to-end bioconversion process that transforms organic wet waste into high-value protein, manure, and frass — rapidly, efficiently, and with near-zero residue. At the heart of this process is one of nature's most powerful bioconverters: the Black Soldier Fly larva (<em>Hermetia illucens</em>).
+          </p>
         </Reveal>
 
         {/* Services Grid */}
@@ -97,7 +122,7 @@ const ServicesSection = () => {
                 <h3 className="text-xl font-semibold leading-tight">
                   {service.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/90">
+                <p className="mt-3 text-sm leading-relaxed text-white/90 line-clamp-3">
                   {service.description}
                 </p>
                 <Link
