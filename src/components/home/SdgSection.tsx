@@ -148,18 +148,12 @@ export default function SDGSection() {
                 </div>
 
                 <div
-                  className="flex items-start gap-3 rounded-xl p-4"
+                  className="rounded-xl p-4"
                   style={{ backgroundColor: `${active.color}15` }}
                 >
-                  <span
-                    className="mt-0.5 text-xs font-bold uppercase tracking-wider"
-                    style={{ color: active.color }}
-                  >
-                    Contribution
-                  </span>
-                  <span className="text-base font-medium leading-relaxed text-foreground">
+                  <p className="text-base leading-relaxed text-foreground">
                     {active.contribution}
-                  </span>
+                  </p>
                 </div>
               </div>
             ) : (
