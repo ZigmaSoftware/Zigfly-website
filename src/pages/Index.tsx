@@ -2,7 +2,8 @@ import { lazy, useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/home/HeroSection";
-import AboutSection from "@/components/home/AboutSection";
+import GlassFly from "@/components/home/GlassFly";
+import Vision from "@/components/home/Vision";
 import StatsSection from "@/components/home/StatsSection";
 import SDGSection from "@/components/home/SdgSection";
 // import ULBClientsSectioncp from "@/components/home/ULBClientsSectioncp";
@@ -42,19 +43,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <GlassFly />
       <Header />
       <main>
         <HeroSection />
         <StatsSection />
-        <AboutSection />
-        {showDeferredSections && (
-          <>
-            <ServicesSection />
-            {/* <ULBClientsSection /> */}
-            {/* <PartnersSectioncp /> */}
-            <SDGSection />
-          </>
-        )}
+        <Vision />
+        <ServicesSection />
+        <SDGSection />
       </main>
       <Footer />
     </div>

@@ -18,7 +18,7 @@ const Footer = () => {
         <div className="container-main py-6 lg:py-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_2.5fr_1.8fr] gap-4 lg:gap-x-4 lg:gap-y-5">
             <div className="flex flex-col gap-8">
-              <Link to="/" className="flex items-center gap-3 mb-4">
+              <Link to="/" data-fly-target="footer-logo" className="flex items-center gap-3 mb-4">
                 <img
                   src={zigmaBpLogo}
                   alt="Zigma Blue Planet"

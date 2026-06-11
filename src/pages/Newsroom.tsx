@@ -36,6 +36,8 @@ const ytEmbed = (url: string) => {
 
 const VIDEO_LINKS = [
   "https://youtu.be/psbedFJNN4w",
+  "https://m.youtube.com/watch?v=lJxtoT8ZBzk&pp=iggCQAE%3D"
+
 ];
 
 

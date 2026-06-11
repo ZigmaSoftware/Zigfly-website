@@ -42,7 +42,10 @@ export default function SDGSection() {
           <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
             Sustainability
           </span>
-          <h2 className="mt-2 text-3xl font-bold leading-tight text-foreground md:text-4xl">
+          <h2
+            data-fly-target="sdg"
+            className="mt-2 text-3xl font-bold leading-tight text-foreground md:text-4xl"
+          >
           Our Commitment to the <span className="text-primary">UN SDGs</span>
           </h2>
         </Reveal>
@@ -184,4 +187,3 @@ export default function SDGSection() {
     </section>
   );
 }
-

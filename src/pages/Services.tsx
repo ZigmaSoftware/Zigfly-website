@@ -6,10 +6,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
-import bsflPic1 from "@/assets/BSFL project pictures/pic 1.jpeg";
-import bsflPic2 from "@/assets/BSFL project pictures/pic 2.jpeg";
-import bsflPic3 from "@/assets/BSFL project pictures/pic 3.jpeg";
-import bsflPic4 from "@/assets/BSFL project pictures/pic 4.jpeg";
+import preProcessingImg from "@/assets/services/pre-processing.png";
+import bioconversionImg from "@/assets/services/Bioconversion — The BSF Larvae at Work.png";
+import harvestingImg from "@/assets/services/harvesting.png";
 
 
 const SLOW_EASE = "power2.out";
@@ -206,7 +205,7 @@ const services = [
     id: "waste-sourcing",
     title: "Waste Sourcing",
     eyebrow: "Collection",
-    image: bsflPic1,
+    image: "/placeholder.svg",
     description: "The process begins with the collection of segregated organic wet waste from municipal households, bulk generators such as hotels, markets, and wedding halls, and other commercial establishments. Only biodegradable waste enters our facility — free from non-biodegradable contaminants — ensuring the integrity of the bioconversion process from the very first step.",
     features: [
       "Segregated collection from municipal households and bulk generators.",
@@ -219,7 +218,7 @@ const services = [
     id: "pre-processing",
     title: "Pre-Processing",
     eyebrow: "Shredding & Preparation",
-    image: bsflPic2,
+    image: preProcessingImg,
     description: "On arrival at the facility, the incoming wet waste is shredded using purpose-built machinery to create a homogenous mass. This shredding is a critical step — it significantly accelerates biodegradation by increasing the surface area available to the larvae. What conventional composting methods take 48 days to achieve, our BSF technology accomplishes in as little as 18 days, using a fraction of the land area required by traditional methods.",
     features: [
       "Purpose-built shredding machinery for homogenous mass preparation.",
@@ -232,7 +231,7 @@ const services = [
     id: "bioconversion",
     title: "Bioconversion — The BSF Larvae at Work",
     eyebrow: "Biological Processing",
-    image: bsflPic3,
+    image: bioconversionImg,
     description: "The shredded organic mass is transferred to BSF processing beds where baby larvae, hatched from carefully managed egg batches, are introduced. A single gram of BSF eggs yields between 20,000 and 35,000 larvae. Each larva is capable of consuming up to 200 mg of food waste per day. The larvae progress through six instar stages over approximately 14 days, growing from 1.8 mm to 20 mm in size. Their biological activity suppresses harmful pathogens and can remove certain toxic substances — a distinct advantage over conventional composting and vermicomposting technologies.",
     features: [
       "1 gram of BSF eggs yields 20,000–35,000 larvae.",
@@ -245,7 +244,7 @@ const services = [
     id: "harvesting",
     title: "Harvesting",
     eyebrow: "Protein Recovery",
-    image: bsflPic4,
+    image: harvestingImg,
     description: "By the fifth instar, the larvae are harvested. The harvested larvae are protein-rich biomass containing 30–40% protein and 28–35% oil content, making them a highly sought-after ingredient for the poultry and aquaculture industries as a sustainable alternative to conventional fish meal. Defatted larvae can achieve protein concentrations comparable to soybean meal, while the extracted oils find application in animal nutrition, chemical industries, and biodiesel production.",
     features: [
       "Harvested at fifth instar for peak protein and oil content.",
@@ -258,7 +257,7 @@ const services = [
     id: "residual-outputs",
     title: "The Residual Outputs",
     eyebrow: "Manure & Frass",
-    image: bsflPic1,
+    image: "/placeholder.svg",
     description: "Beyond the larvae, the process generates two additional valuable outputs. Manure — the organic residue from the bioconversion — serves as a nutrient-rich natural fertilizer for agriculture, horticulture, and urban gardening. Frass, the combination of larval excrement and shed skins, functions as a potent biofertiliser with documented soil health benefits.",
     features: [
       "Manure: nutrient-rich natural fertilizer for agriculture and horticulture.",
@@ -271,7 +270,7 @@ const services = [
     id: "zero-waste",
     title: "Zero Waste. Total Value.",
     eyebrow: "Closed-Loop Bioconversion",
-    image: bsflPic2,
+    image: "/placeholder.svg",
     description: "The Zigfly process ensures that every tonne of wet waste entering our facility exits as one of three commercially valuable outputs — larvae, manure, or frass. Nothing is landfilled. Nothing is wasted. The result is a closed-loop bioconversion system that reduces landfill burden, cuts greenhouse gas emissions, and delivers measurable agricultural and economic value — all driven by the remarkable biology of the Black Soldier Fly.",
     features: [
       "Every tonne of waste exits as larvae, manure, or frass — zero residue.",

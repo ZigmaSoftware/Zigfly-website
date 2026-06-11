@@ -8,13 +8,26 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import product1 from "@/assets/Products/goodearth.jpg";
 import larva from "@/assets/website/larva.jpeg";
-import furnitureCataloguePdf from "@/assets/Products/UNICEIL -WPE -Master Catalogue-2026.pdf";
 import frassPlus6mm from "@/assets/Products/Frass +6mm.jpeg";
-import frassMinus4mm from "@/assets/Products/Frass   -4mm.jpeg";
 import manure from "@/assets/Products/Manure.jpeg";
 import larvae from "@/assets/Products/larvae.jpeg";
 
 const SLOW_EASE = "power2.out";
+
+type Product = {
+  id: string;
+  name: string;
+  subtitle: string;
+  tagline: string;
+  description: string;
+  image: string;
+  imageHover?: string;
+  images?: string[];
+  color: string;
+  features: string[];
+  applications: string[];
+  icon: React.ComponentType<any>;
+};
 
 const ProductImage: React.FC<{
   image: string;
@@ -82,7 +95,7 @@ const ProductImage: React.FC<{
   );
 };
 
-const products = [
+const products: Product[] = [
   // {
   //   id: "refuse-derived-fuel-rdf",
   //   name: "Refuse Derived Fuel (RDF)",
@@ -177,43 +190,76 @@ const products = [
   //   icon: Sparkles
   // },
   {
-    id: "black-soldier-fly-larvae-bsfl",
-    name: "Black Soldier Fly Larvae (BSFL)",
-    subtitle: "High-protein biomass produced through controlled organic waste bioconversion",
-    tagline: "Sustainable Protein Source",
+    id: "frass",
+    name: "Frass",
+    subtitle: "Potent soil amendment from BSF bioconversion",
+    tagline: "Biofertiliser",
     description:
-      "Black Soldier Fly Larvae (BSFL) produced through controlled organic waste bioconversion for use in animal feed, aquaculture, and circular bio-economy applications. Rich in protein and fat, BSFL offer a sustainable alternative to conventional feed ingredients.",
-    image: larvae,
-    imageHover: larva,
-    images: [larvae, larva],
-    color: "from-amber-500 to-orange-700",
+      "BSF frass is a nutrient-rich organic output created during Black Soldier Fly processing. It supports soil health, improves microbial activity, and helps return value from organic waste back into productive land.",
+    image: frassPlus6mm,
+    color: "from-emerald-700 to-emerald-900",
     features: [
-      "High protein and fat content",
-      "Produced from organic waste streams",
-      "Supports circular waste management",
-      "Consistent quality output"
+      "Improves soil microbial activity",
+      "Supports nutrient cycling",
+      "Available in multiple grades",
+      "Organic farming friendly"
     ],
-    applications: ["Animal Feed", "Aquaculture", "Poultry Nutrition", "Organic Waste Bioconversion"],
+    applications: ["Agriculture & Field Crops", "Horticulture", "Nursery & Landscaping", "Soil Conditioning"],
     icon: Leaf
   },
   {
-    id: "bsfl-manure-and-frass",
-    name: "BSFL Manure and Frass",
-    subtitle: "Nutrient-rich organic fertiliser from BSF bioconversion",
-    tagline: "Closing the Loop on Organic Waste",
+    id: "manure",
+    name: "Manure",
+    subtitle: "Nutrient-rich organic manure for healthier soil",
+    tagline: "Organic Fertiliser",
     description:
-      "Black Soldier Fly Organic Manure (Frass) is produced through controlled bioconversion of organic waste by BSF larvae. A nutrient-rich, eco-friendly fertiliser ideal for agriculture, gardening, and soil health improvement — available in fine and standard grades.",
+      "Our organic manure is produced from controlled BSF-based organic waste processing. It adds organic matter to soil, supports root development, and offers a practical circular solution for farms, landscapes, and nurseries.",
     image: manure,
-    imageHover: frassPlus6mm,
-    images: [manure, frassPlus6mm, frassMinus4mm],
-    color: "from-emerald-700 to-emerald-900",
+    color: "from-green-700 to-green-900",
     features: [
-      "Rich in NPK (Nitrogen, Phosphorus, Potassium)",
-      "Enhances microbial activity and soil organic matter",
-      "Boosts root development and crop productivity",
-      "Eco-friendly, produced from organic waste"
+      "Rich organic matter",
+      "Improves soil structure",
+      "Supports root development",
+      "Eco-friendly waste output"
     ],
-    applications: ["Agriculture & Field Crops", "Horticulture & Gardening", "Nursery & Landscaping", "Organic Farming & Soil Conditioning"],
+    applications: ["Field Crops", "Horticulture & Gardening", "Landscaping", "Organic Soil Improvement"],
+    icon: Leaf
+  },
+ 
+  {
+    id: "live-larvae",
+    name: "Live Larvae",
+    subtitle: "Active BSF larvae for circular organic waste processing",
+    tagline: "Live Bioconversion Biomass",
+    description:
+      "Live Black Soldier Fly larvae actively convert organic wet waste into valuable biomass. They support high-efficiency waste reduction while creating a usable feed and bioconversion output stream.",
+    image: larvae,
+    color: "from-lime-700 to-emerald-900",
+    features: [
+      "Active waste conversion",
+      "High fat and protein biomass",
+      "Controlled BSF production",
+      "Traceable circular output"
+    ],
+    applications: ["Organic Waste Bioconversion", "Animal Feed", "Research & Demonstration", "Circular Bio-economy"],
+    icon: Leaf
+  },
+   {
+    id: "dry-larvae",
+    name: "Dry Larvae",
+    subtitle: "Shelf-stable protein-rich larvae for feed formulations",
+    tagline: "Sustainable Feed Ingredient",
+    description:
+      "Dry BSF larvae provide a compact, shelf-stable protein and fat source for feed applications. They are produced through controlled bioconversion and can help reduce dependency on conventional feed ingredients.",
+    image: larva,
+    color: "from-amber-600 to-orange-800",
+    features: [
+      "High protein content",
+      "Longer shelf life",
+      "Alternative to fish meal",
+      "Suitable for feed blending"
+    ],
+    applications: ["Poultry Feed", "Aquaculture Feed", "Pet Feed", "Protein Ingredient"],
     icon: Leaf
   }
 ];
@@ -248,10 +294,10 @@ const Products = () => {
                 Our Products
               </span>
               <h1 className="mt-3 text-5xl md:text-5xl font-bold leading-tight text-white">
-                Recovered Resources
+                BSFL Products
               </h1>
               <p className="mt-6 text-lg text-white/90 leading-relaxed max-w-2xl mx-auto">
-                Transforming waste into valuable products. Our recovered materials support sustainable construction and agriculture.
+                Explore Frass, Manure, Dry Larvae, and Live Larvae - circular outputs created through controlled Black Soldier Fly bioconversion.
               </p>
             </Reveal>
 
@@ -357,13 +403,6 @@ const Products = () => {
                           <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Link>
                       </Button>
-                      {product.name.includes("Recycled Furniture") ? (
-                        <Button asChild variant="outline">
-                          <a href={furnitureCataloguePdf} target="_blank" rel="noopener noreferrer">
-                            Know More
-                          </a>
-                        </Button>
-                      ) : null}
                     </div>
                   </div>
                 </Reveal>

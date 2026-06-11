@@ -2,10 +2,12 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Reveal from "@/components/animation/Reveal";
-import bsflWaste from "@/assets/BSFL project pictures/pic 3.jpeg";
 import bsflPic1 from "@/assets/BSFL project pictures/pic 1.jpeg";
 import bsflPic2 from "@/assets/BSFL project pictures/pic 2.jpeg";
 import bsflPic4 from "@/assets/BSFL project pictures/pic 4.jpeg";
+import bioconversionImg from "@/assets/services/Bioconversion — The BSF Larvae at Work.png";
+import harvestingImg from "@/assets/services/harvesting.png";
+import preProcessingImg from "@/assets/services/pre-processing.png";
 
 const services = [
   {
@@ -20,21 +22,21 @@ const services = [
     title: "Pre-Processing",
     description:
       "On arrival at the facility, the incoming wet waste is shredded using purpose-built machinery to create a homogenous mass. This shredding is a critical step — it significantly accelerates biodegradation by increasing the surface area available to the larvae. What conventional composting methods take 48 days to achieve, our BSF technology accomplishes in as little as 18 days, using a fraction of the land area required by traditional methods.",
-    image: bsflWaste,
+    image: preProcessingImg,
   },
   {
     id: "bioconversion",
     title: "Bioconversion — The BSF Larvae at Work",
     description:
       "The shredded organic mass is transferred to BSF processing beds where baby larvae are introduced. A single gram of BSF eggs yields between 20,000 and 35,000 larvae — each capable of consuming up to 200 mg of food waste per day. The larvae progress through six instar stages over approximately 14 days, suppressing harmful pathogens and reducing the waste mass rapidly.",
-    image: bsflPic2,
+    image: bioconversionImg,
   },
   {
     id: "harvesting",
     title: "Harvesting",
     description:
       "By the fifth instar, the larvae are harvested. The harvested larvae are protein-rich biomass containing 30–40% protein and 28–35% oil content, making them a highly sought-after ingredient for the poultry and aquaculture industries as a sustainable alternative to conventional fish meal.",
-    image: bsflPic4,
+    image: harvestingImg,
   },
   {
     id: "residual-outputs",
@@ -81,7 +83,10 @@ const ServicesSection = () => {
             Services
           </span>
 
-          <h2 className="mt-2 text-3xl md:text-4xl font-bold text-foreground">
+          <h2
+            data-fly-target="services"
+            className="mt-2 text-3xl md:text-4xl font-bold text-foreground"
+          >
             BSFL Organic Waste Management <span className="text-primary">Solutions</span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground text-md leading-relaxed">

@@ -1,20 +1,26 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Quote } from "lucide-react";
-import visionIcon from "@/assets/icons/rocket1.png";
-import visionGif from "@/assets/icons/rocket.gif";
-import missionIcon from "@/assets/icons/target1.png";
-import missionGif from "@/assets/icons/target.gif";
 
-// Using the same Mission/Vision text but in a narrative format as implied by "message"
-// If specific message text is provided later, simply update this const.
-const edQuote = `
-We partner with Urban Local Bodies and waste generators to address one of urban India's most persistent challenges — organic wet waste. Through scientifically managed Black Soldier Fly processing, we divert waste from landfills and convert it into larvae, organic manure, and frass, creating measurable environmental value at every stage of the process.
-`;
+import globeImg from "@/assets/website/eco_globe_no_background.webp";
+
+const introText =
+  "We partner with Urban Local Bodies and waste generators to address one of urban India's most persistent challenges — organic wet waste. Through scientifically managed Black Soldier Fly processing, we divert waste from landfills and convert it into larvae, organic manure, and frass, creating measurable environmental value at every stage of the process.";
+
+const ITEMS = [
+  {
+    label: "Our Vision",
+    text: "To lead global circular ecosystem transformation by setting the benchmark for a zero-waste future.",
+  },
+  {
+    label: "Our Mission",
+    text: "Deliver technology-driven waste management with integrity and safety.",
+  },
+] as const;
 
 const Vision = () => {
   const [isQuoteVisible, setIsQuoteVisible] = useState(false);
   const quoteRef = useRef<HTMLParagraphElement>(null);
-  const quoteText = useMemo(() => edQuote.replace(/\s+/g, " ").trim(), []);
+  const quoteText = useMemo(() => introText.replace(/\s+/g, " ").trim(), []);
 
   useEffect(() => {
     const node = quoteRef.current;
@@ -33,7 +39,7 @@ const Vision = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.35 }
+      { threshold: 0.35 },
     );
 
     observer.observe(node);
@@ -47,92 +53,76 @@ const Vision = () => {
       data-anim-duration="1.1"
     >
       <div className="container-main">
-        {/* <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"> */}
-        <div>
+        <div className="mb-12 text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground md:text-sm">
+            Purpose & Strategic Direction
+          </p>
 
-          {/* Left Column: Content */}
-          <div className=" justify-center">
+          <h2
+            data-fly-target="vision"
+            className="mt-2 text-3xl font-bold leading-tight text-foreground md:text-4xl"
+          >
+            Driving Sustainable <span className="text-primary">Change</span>
+          </h2>
 
-
-            <div className="text-center">
-              <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-muted-foreground">
-                Purpose & Strategic Direction
-              </p>
-
-              <h2 className="mt-3 text-3xl md:text-4xl font-semibold text-foreground leading-tight">
-                Driving Sustainable <span className="text-primary">Change</span>
-              </h2>
-
-            </div>
-
-
-            <div
-              className={`mt-5 max-w-3xl mx-auto relative transition-all duration-700 ease-out ${isQuoteVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-85 translate-y-1"
+          <p
+            ref={quoteRef}
+            className={`mx-auto mt-4 max-w-3xl text-center text-md leading-relaxed text-muted-foreground transition-all duration-700 ease-out ${
+              isQuoteVisible ? "translate-y-0 opacity-100" : "translate-y-1 opacity-85"
+            }`}
+            aria-label={quoteText}
+          >
+            <span className="mr-2 inline-flex align-middle text-primary/80">
+              <Quote className="h-6 w-6 rotate-180 text-primary/80" />
+            </span>
+            {quoteText.split("").map((char, index) => (
+              <span
+                key={`${char}-${index}`}
+                className={`inline transition-[color,opacity,filter] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  isQuoteVisible
+                    ? "text-foreground/80 opacity-100 blur-0"
+                    : "text-muted-foreground/40 opacity-70 blur-[0.5px]"
                 }`}
-            >
-              <p
-                ref={quoteRef}
-                className="text-lg leading-relaxed text-center relative z-10"
-                aria-label={quoteText}
+                style={
+                  isQuoteVisible
+                    ? { transitionDelay: `${Math.min(index * 22, 6200)}ms` }
+                    : undefined
+                }
               >
-                <span className="inline-flex  align-middle mr-2 text-primary/80">
-                  <Quote className="w-6 h-6 text-primary/80 rotate-180  " />
-                </span>
+                {char}
+              </span>
+            ))}
+            <span className="ml-2 inline-flex align-middle text-primary/80">
+              <Quote className="h-6 w-6 text-primary/80" />
+            </span>
+          </p>
+        </div>
 
-                {quoteText.split("").map((char, index) => (
-                  <span
-                    key={`${char}-${index}`}
-                    className={`inline transition-[color,opacity,filter] duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] ${isQuoteVisible
-                      ? "text-foreground/80 opacity-100 blur-0"
-                      : "text-muted-foreground/40 opacity-70 blur-[0.5px]"
-                      }`}
-                    style={
-                      isQuoteVisible
-                        ? { transitionDelay: `${Math.min(index * 22, 6200)}ms` }
-                        : undefined
-                    }
-                  >
-                    {char}
-                  </span>
-                ))}
-
-                <span className="inline-flex align-middle ml-2 text-primary/80">
-                  <Quote className="w-6 h-6 text-primary/80" />
-                </span>
-              </p>
-            </div>
-
-
-
-
-
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
-              <article className="group  border border-border rounded-md bg-card p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full  text-primary">
-                  <img src={visionIcon} alt="vision" className="h-10 w-10 object-contain group-hover:hidden" />
-                  <img src={visionGif} alt="vision active" className="hidden h-10 w-10 object-contain group-hover:block" />
-                </span>
-                <p className="mt-4 text-xs md:text-sm uppercase tracking-[0.3em] text-muted-foreground">Vision</p>
-                <p className="mt-3 text-md text-muted-foreground leading-relaxed">
-                  To lead global circular ecosystem transformation by setting the benchmark for a zero-waste future.
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="w-full max-w-md space-y-16 md:space-y-20">
+            {ITEMS.map((item) => (
+              <div key={item.label}>
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground md:text-sm">
+                  {item.label}
                 </p>
-              </article>
 
-              <article className="group  border border-border rounded-md bg-card p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full  text-primary">
-                  <img src={missionIcon} alt="mission" className="h-10 w-10 object-contain group-hover:hidden" />
-                  <img src={missionGif} alt="mission active" className="hidden h-10 w-10 object-contain group-hover:block" />
-                </span>
-                <p className="mt-4 text-xs md:text-sm uppercase tracking-[0.3em] text-muted-foreground">Mission</p>
-                <p className="mt-3 text-md text-muted-foreground leading-relaxed">
-                  Deliver technology-driven waste management with integrity and safety.
-                </p>
-              </article>
-            </div>
+                <div className="mt-4 border-l-[5px] border-primary pl-6 md:pl-8">
+                  <h3 className="text-lg font-semibold leading-snug text-foreground">
+                    {item.text}
+                  </h3>
+                </div>
+              </div>
+            ))}
           </div>
 
+          <div className="flex h-full items-center justify-center">
+            <img
+              src={globeImg}
+              alt="Global circular ecosystem transformation"
+              className="h-auto w-full max-w-sm object-contain md:max-w-lg lg:max-w-[500px]"
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </section>

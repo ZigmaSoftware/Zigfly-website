@@ -1,32 +1,42 @@
 import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ScrollToTop from "@/components/ScrollToTop";
-import manureImg from "@/assets/website/hero/Manure.jpeg";
-import larvaeImg from "@/assets/website/hero/larvae in hand.webp";
-import feedingImg from "@/assets/website/hero/Feeding pic.webp";
+import manureImg from "@/assets/website/hero/manure in hand.webp";
+import larvaeImg from "@/assets/website/hero/Larvae in hand.webp";
+import feedingImg from "@/assets/website/hero/chicken.webp";
 import droneImg from "@/assets/website/hero/Drone shot.webp";
+import rdfImg from "@/assets/website/hero/unloading.webp";
 import bsflPic2 from "@/assets/BSFL project pictures/pic 2.jpeg";
+import eggsImg from "@/assets/website/hero/rack with eggs.webp";
 
 const slides = [
-  {
-    image: manureImg,
-    title: "Turning Wet Waste into Nature's Gold.",
-  },
-  {
-    image: larvaeImg,
-    title: "Nature's Most Efficient Recyclers, Engineered for Impact.",
-  },
-  {
-    image: feedingImg,
-    title: "Feeding Farms, Fuelling Futures — From Waste, Responsibly.",
-  },
-  {
-    image: droneImg,
-    title: "Partnering with Urban Local Bodies for Cleaner, Greener Cities.",
-  },
-  {
-    image: bsflPic2,
-    title: "Innovating Waste Management, Inspiring a Greener Tomorrow.",
+    {
+      image: manureImg,
+      title: "Turning Wet Waste into Nature's Gold.",
+    },
+    {
+      image: larvaeImg,
+      title: "Nature's Most Efficient Recyclers, Engineered for Impact.",
+    },
+    {
+      image: feedingImg,
+      title: "Feeding Farms, Fuelling Futures - From Waste, Responsibly.",
+    },
+    {
+      image: droneImg,
+      title: "Partnering with Urban Local Bodies for Cleaner, Greener Cities.",
+    },
+    {
+      image: rdfImg,
+      title: "Reducing Landfill Burden, One Tonne at a Time.",
+    },
+    {
+      image: bsflPic2,
+      title: "Innovating Waste Management, Inspiring a Greener Tomorrow.",
+    },
+    {
+      image: eggsImg,
+    title: "Science-Driven. Community-Focused. Sustainably Delivered.",
   },
 ];
 
@@ -97,6 +107,7 @@ const HeroSection = () => {
             {/* Animated Text */}
             <h1
               key={current}
+              data-fly-target="hero"
               className="text-3xl md:text-5xl font-semibold text-white leading-[1.42] md:leading-[1.25] opacity-0 translate-x-[-45px] animate-slideIn [text-shadow:0_4px_14px_rgba(0,0,0,0.85),0_14px_36px_rgba(0,0,0,0.65)]"
             >
               {slides[current].title}

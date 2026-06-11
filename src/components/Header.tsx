@@ -52,10 +52,10 @@ const navItems: NavItem[] = [
     path: "/products",
     megaMenu: true,
     dropdown: [
-      { name: "Frass",       path: "/products", image: frass },
-      { name: "Manure",      path: "/products", image: manure },
-      { name: "Dry larvae",  path: "/products", image: drylarvae },
-      { name: "Live Larvae", path: "/products", image: livelarvae },
+      { name: "Frass",       path: "/products#frass", image: frass },
+      { name: "Manure",      path: "/products#manure", image: manure },
+      { name: "Live Larvae", path: "/products#live-larvae", image: livelarvae },
+      { name: "Dry larvae",  path: "/products#dry-larvae", image: drylarvae },
     ],
   },
 
