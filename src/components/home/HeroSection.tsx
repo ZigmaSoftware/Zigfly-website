@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ScrollToTop from "@/components/ScrollToTop";
 import manureImg from "@/assets/website/hero/manure in hand.webp";
-import larvaeImg from "@/assets/website/hero/Larvae in hand.webp";
+import larvaeImg from "@/assets/website/hero/larvae_in_hand.webp";
 import feedingImg from "@/assets/website/hero/chicken.webp";
 import droneImg from "@/assets/website/hero/Drone shot.webp";
 import rdfImg from "@/assets/website/hero/unloading.webp";
