@@ -1,13 +1,12 @@
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Reveal from "@/components/animation/Reveal";
 import bsflPic1 from "@/assets/BSFL project pictures/pic 1.jpeg";
 import bsflPic2 from "@/assets/BSFL project pictures/pic 2.jpeg";
-import bsflPic4 from "@/assets/BSFL project pictures/pic 4.jpeg";
 import bioconversionImg from "@/assets/services/Bioconversion — The BSF Larvae at Work.png";
 import harvestingImg from "@/assets/services/harvesting.png";
 import preProcessingImg from "@/assets/services/pre-processing.png";
+import unloadingImg from "@/assets/website/hero/unloading.webp";
 
 const services = [
   {
@@ -15,7 +14,7 @@ const services = [
     title: "Waste Sourcing",
     description:
       "The process begins with the collection of segregated organic wet waste from municipal households, bulk generators such as hotels, markets, and wedding halls, and other commercial establishments. Only biodegradable waste enters our facility — free from non-biodegradable contaminants — ensuring the integrity of the bioconversion process from the very first step.",
-    image: bsflPic1,
+    image: unloadingImg,
   },
   {
     id: "pre-processing",
@@ -54,19 +53,6 @@ const services = [
   },
 ];
 
-const cardAnimation = {
-  hidden: { opacity: 0, y: 40 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
-  hover: {
-    scale: 1.01,
-    transition: { type: "spring" as const, stiffness: 220, damping: 20 },
-  },
-};
-
 const ServicesSection = () => {
   return (
     <section className="section-padding relative overflow-hidden">
@@ -97,13 +83,9 @@ const ServicesSection = () => {
         {/* Services Grid */}
         <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
-            <motion.div
+            <div
               key={service.id}
-              variants={cardAnimation}
-              initial="hidden"
-              animate="show"
-              whileHover="hover"
-              className="group relative h-80 overflow-hidden rounded-md shadow-lg transition-shadow duration-500 hover:shadow-2xl"
+              className="group relative h-80 overflow-hidden rounded-md shadow-lg hover:scale-[1.01] hover:shadow-2xl transition-all duration-300"
             >
               <img
                 src={service.image}
@@ -138,7 +120,7 @@ const ServicesSection = () => {
                   Read More <ArrowRight size={15} />
                 </Link>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 

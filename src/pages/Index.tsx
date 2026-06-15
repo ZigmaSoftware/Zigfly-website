@@ -1,14 +1,14 @@
-import { lazy, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/home/HeroSection";
 import GlassFly from "@/components/home/GlassFly";
-import Vision from "@/components/home/Vision";
-import StatsSection from "@/components/home/StatsSection";
-import SDGSection from "@/components/home/SdgSection";
 // import ULBClientsSectioncp from "@/components/home/ULBClientsSectioncp";
 
+const StatsSection = lazy(() => import("@/components/home/StatsSection"));
+const Vision = lazy(() => import("@/components/home/Vision"));
 const ServicesSection = lazy(() => import("@/components/home/ServicesSection"));
+const SDGSection = lazy(() => import("@/components/home/SdgSection"));
 // const ULBClientsSection = lazy(() => import("@/components/home/ULBClientsSection"));
 // const PartnersSectioncp = lazy(() => import("@/components/home/PartnersSectioncp"));
 
@@ -47,10 +47,14 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
-        <StatsSection />
-        <Vision />
-        <ServicesSection />
-        <SDGSection />
+        {showDeferredSections && (
+          <Suspense fallback={null}>
+            <StatsSection />
+            <Vision />
+            <ServicesSection />
+            <SDGSection />
+          </Suspense>
+        )}
       </main>
       <Footer />
     </div>

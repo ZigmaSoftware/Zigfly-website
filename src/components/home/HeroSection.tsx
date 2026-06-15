@@ -93,7 +93,7 @@ const HeroSection = () => {
           alt=""
           aria-hidden="true"
           fetchPriority={current === 0 ? "high" : "auto"}
-          className="absolute inset-0 h-full w-full object-cover animate-heroZoom"
+          className="absolute inset-0 h-full w-full object-cover will-change-transform animate-heroZoom"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/30 via-foreground/20 to-transparent" />
       </div>

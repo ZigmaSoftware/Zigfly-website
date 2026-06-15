@@ -74,7 +74,7 @@ export default function SDGSection() {
                       y2={y2}
                       stroke={activeIdx === i ? GOALS[i].color : "rgba(0,0,0,0.08)"}
                       strokeWidth={activeIdx === i ? 2 : 1}
-                      style={{ transition: "all 0.3s ease" }}
+                      style={{ transition: "stroke 0.3s ease, stroke-width 0.3s ease" }}
                     />
                   );
                 })}

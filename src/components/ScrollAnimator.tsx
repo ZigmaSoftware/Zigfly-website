@@ -100,32 +100,11 @@ const ScrollAnimator = () => {
     if (prefersReduced) return;
 
     const ctx = gsap.context(() => {
-      const majorBlocks = gsap
-        .utils.toArray("main > *, main section, main article")
-        .filter((el) => {
-          const element = el as Element;
-          const tagName = element.tagName.toLowerCase();
-          if (tagName === "header" || tagName === "footer") return false;
-          if (element.hasAttribute("data-no-animate")) return false;
-          return !element.hasAttribute("data-animate");
-        });
-
-      const fadeUpEls = gsap.utils.toArray('[data-animate="fade-up"]');
-      const fadeLeftEls = gsap.utils.toArray('[data-animate="fade-left"]');
-      const staggerEls = gsap.utils.toArray('[data-animate="stagger"]');
-      const fallbackEls = gsap
-        .utils.toArray("section, [data-scroll], .scroll-animate")
-        .filter((el) => {
-          const element = el as Element;
-          const tagName = element.tagName.toLowerCase();
-          if (tagName === "header" || tagName === "footer") return false;
-          if (element.hasAttribute("data-no-animate")) return false;
-          return !element.hasAttribute("data-animate");
-        });
-      const uniqueFallbackEls = Array.from(new Set([...majorBlocks, ...fallbackEls]));
+      const fadeUpEls = gsap.utils.toArray<Element>('[data-animate="fade-up"]');
+      const fadeLeftEls = gsap.utils.toArray<Element>('[data-animate="fade-left"]');
+      const staggerEls = gsap.utils.toArray<Element>('[data-animate="stagger"]');
 
       runFadeUp(fadeUpEls);
-      runFadeUp(uniqueFallbackEls);
       runFadeLeft(fadeLeftEls);
       runStagger(staggerEls);
 

@@ -729,6 +729,13 @@ html.lenis body {
   opacity: 0;
   transform-origin: center center;
   cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.glass-fly.is-dragging {
+  cursor: grabbing;
 }
 
 .fly-body,
@@ -934,4 +941,3 @@ html.lenis body {
   .policy-nav-container { padding: 0 1rem; }
   .policy-main-content { padding: 1.5rem 1rem; gap: 1.5rem; }
 }
-

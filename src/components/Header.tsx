@@ -7,7 +7,7 @@ import logo from "@/assets/icons/logo-zig-bp.png";
 import zigflyLogo from "@/assets/services/zigfly.png";
 import livelarvae from "@/assets/Products/larvae.jpeg";
 import drylarvae from "@/assets/website/larva.jpeg";
-import manure from "@/assets/Products/Manure.jpeg";
+import manure from "@/assets/website/hero/manure in hand.webp";
 import frass from "@/assets/Products/Frass +6mm.jpeg";
 
 

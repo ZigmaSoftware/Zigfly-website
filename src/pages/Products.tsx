@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import product1 from "@/assets/Products/goodearth.jpg";
 import larva from "@/assets/website/larva.jpeg";
 import frassPlus6mm from "@/assets/Products/Frass +6mm.jpeg";
-import manure from "@/assets/Products/Manure.jpeg";
+import manure from "@/assets/website/hero/manure in hand.webp";
 import larvae from "@/assets/Products/larvae.jpeg";
 
 const SLOW_EASE = "power2.out";

@@ -9,6 +9,8 @@ import { Check } from "lucide-react";
 import preProcessingImg from "@/assets/services/pre-processing.png";
 import bioconversionImg from "@/assets/services/Bioconversion — The BSF Larvae at Work.png";
 import harvestingImg from "@/assets/services/harvesting.png";
+import bsflPic2 from "@/assets/BSFL project pictures/pic 2.jpeg";
+import unloadingImg from "@/assets/website/hero/unloading.webp";
 
 
 const SLOW_EASE = "power2.out";
@@ -205,7 +207,7 @@ const services = [
     id: "waste-sourcing",
     title: "Waste Sourcing",
     eyebrow: "Collection",
-    image: "/placeholder.svg",
+    image: unloadingImg,
     description: "The process begins with the collection of segregated organic wet waste from municipal households, bulk generators such as hotels, markets, and wedding halls, and other commercial establishments. Only biodegradable waste enters our facility — free from non-biodegradable contaminants — ensuring the integrity of the bioconversion process from the very first step.",
     features: [
       "Segregated collection from municipal households and bulk generators.",
@@ -270,7 +272,7 @@ const services = [
     id: "zero-waste",
     title: "Zero Waste. Total Value.",
     eyebrow: "Closed-Loop Bioconversion",
-    image: "/placeholder.svg",
+    image: bsflPic2,
     description: "The Zigfly process ensures that every tonne of wet waste entering our facility exits as one of three commercially valuable outputs — larvae, manure, or frass. Nothing is landfilled. Nothing is wasted. The result is a closed-loop bioconversion system that reduces landfill burden, cuts greenhouse gas emissions, and delivers measurable agricultural and economic value — all driven by the remarkable biology of the Black Soldier Fly.",
     features: [
       "Every tonne of waste exits as larvae, manure, or frass — zero residue.",

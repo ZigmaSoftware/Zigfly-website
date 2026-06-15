@@ -5,7 +5,7 @@ type LenisLike = {
   destroy: () => void;
   scrollTo: (
     target: number | string | HTMLElement,
-    options?: { immediate?: boolean; offset?: number },
+    options?: { duration?: number; immediate?: boolean; offset?: number },
   ) => void;
 };
 
@@ -43,18 +43,18 @@ const SmoothScrollProvider = ({ children }: SmoothScrollProviderProps) => {
         if (!isActive || !Lenis) return;
 
         lenis = new Lenis({
-          duration: 1.1,
+          duration: 0.8,
           smoothWheel: true,
-          touchMultiplier: 1.5,
-          wheelMultiplier: 0.95,
-          normalizeWheel: true,
+          touchMultiplier: 1.2,
+          wheelMultiplier: 0.8,
+          normalizeWheel: false,
         });
 
         window.__lenis = lenis;
         lenis.scrollTo(window.scrollY, { immediate: true });
 
         const updateScroll = () => ScrollTrigger.update();
-        gsap.ticker.lagSmoothing(0);
+        gsap.ticker.lagSmoothing(500, 33);
 
         const raf = (timeInSeconds: number) => {
           if (!lenis) return;

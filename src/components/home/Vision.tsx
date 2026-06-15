@@ -67,31 +67,15 @@ const Vision = () => {
 
           <p
             ref={quoteRef}
-            className={`mx-auto mt-4 max-w-3xl text-center text-md leading-relaxed text-muted-foreground transition-all duration-700 ease-out ${
-              isQuoteVisible ? "translate-y-0 opacity-100" : "translate-y-1 opacity-85"
+            className={`mx-auto mt-4 max-w-3xl text-center text-md leading-relaxed text-muted-foreground transition-opacity duration-700 ease-out ${
+              isQuoteVisible ? "opacity-100" : "opacity-0"
             }`}
             aria-label={quoteText}
           >
             <span className="mr-2 inline-flex align-middle text-primary/80">
               <Quote className="h-6 w-6 rotate-180 text-primary/80" />
             </span>
-            {quoteText.split("").map((char, index) => (
-              <span
-                key={`${char}-${index}`}
-                className={`inline transition-[color,opacity,filter] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                  isQuoteVisible
-                    ? "text-foreground/80 opacity-100 blur-0"
-                    : "text-muted-foreground/40 opacity-70 blur-[0.5px]"
-                }`}
-                style={
-                  isQuoteVisible
-                    ? { transitionDelay: `${Math.min(index * 22, 6200)}ms` }
-                    : undefined
-                }
-              >
-                {char}
-              </span>
-            ))}
+            {quoteText}
             <span className="ml-2 inline-flex align-middle text-primary/80">
               <Quote className="h-6 w-6 text-primary/80" />
             </span>
@@ -121,6 +105,7 @@ const Vision = () => {
               alt="Global circular ecosystem transformation"
               className="h-auto w-full max-w-sm object-contain md:max-w-lg lg:max-w-[500px]"
               loading="lazy"
+              decoding="async"
             />
           </div>
         </div>

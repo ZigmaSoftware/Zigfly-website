@@ -1,6 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import path from "path";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   assetsInclude: ["**/*.JPG", "**/*.JPEG", "**/*.PNG", "**/*.WEBP", "**/*.AVIF"],
@@ -33,13 +37,13 @@ export default defineConfig({
             "@radix-ui/react-dropdown-menu",
             "@radix-ui/react-tooltip",
             "@radix-ui/react-tabs",
-            "@radix-ui/react-select",
+            "@radix-ui/react-select"
           ],
           "vendor-animation": ["framer-motion", "gsap", "lenis"],
           "vendor-form": ["react-hook-form", "@hookform/resolvers", "zod"],
-          "vendor-query": ["@tanstack/react-query"],
-        },
-      },
-    },
-  },
+          "vendor-query": ["@tanstack/react-query"]
+        }
+      }
+    }
+  }
 });
