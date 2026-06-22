@@ -229,6 +229,7 @@
 //                   : "border-slate-300 hover:border-primary/60",
 //               ].join(" ")}
 //             >
+
 //               <img
 //                 src={slide.imageUrl}
 //                 alt={slide.title}
