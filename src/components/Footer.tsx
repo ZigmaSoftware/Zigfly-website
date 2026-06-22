@@ -118,14 +118,14 @@ const Footer = () => {
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="w-4 h-4 flex-shrink-0" />
-                  <a href="mailto:connect@zigma.in" className="text-foreground/70 hover:text-primary text-md transition-colors">
-                    connect@zigma.in
+                  <a href="mailto:admin.bsf@zigma.in" className="text-foreground/70 hover:text-primary text-md transition-colors">
+                    admin.bsf@zigma.in
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-4 h-4 flex-shrink-0" />
-                  <a href="tel:+911234567890" className="text-foreground/70 hover:text-primary text-md transition-colors">
-                    0424 222 5157
+                  <a href="tel:+91 9600611657" className="text-foreground/70 hover:text-primary text-md transition-colors">
+                    +91 9600611657
                   </a>
                 </li>
               </ul>

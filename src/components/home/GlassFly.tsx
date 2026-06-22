@@ -1,13 +1,14 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLocation } from "react-router-dom";
 
 const GlassFly = () => {
   const flyRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+    gsap.registerPlugin(MotionPathPlugin);
 
     const fly = flyRef.current;
     if (!fly) return;
@@ -17,167 +18,122 @@ const GlassFly = () => {
     let loadTimeout: number | undefined;
     let resizeTimeout: number | undefined;
     let pathRefreshTimeout: number | undefined;
-    let targetObserver: MutationObserver | undefined;
-    let resumeOnScroll: (() => void) | undefined;
+    let cursorFollowIdleTimeout: number | undefined;
+    let isCursorFollowing = false;
 
-    const dragState = {
-      isDragging: false,
-      pointerId: 0,
-      startPointerX: 0,
-      startPointerY: 0,
-      startX: 0,
-      startY: 0,
+    const clearCursorFollowIdle = () => {
+      if (!cursorFollowIdleTimeout) return;
+      window.clearTimeout(cursorFollowIdleTimeout);
+      cursorFollowIdleTimeout = undefined;
     };
 
-    const cancelScrollResume = () => {
-      if (!resumeOnScroll) return;
-      window.removeEventListener("scroll", resumeOnScroll);
-      resumeOnScroll = undefined;
-    };
+    const getFlyPoint = () => ({
+      x: Number(gsap.getProperty(fly, "x")) || window.innerWidth * 0.72,
+      y: Number(gsap.getProperty(fly, "y")) || window.innerHeight * 0.28,
+    });
 
-    const getFlyX = () => Number(gsap.getProperty(fly, "x")) || 0;
-    const getFlyY = () => Number(gsap.getProperty(fly, "y")) || 0;
+    const createInfinitePath = (startPoint = getFlyPoint()) => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const marginX = Math.max(72, width * 0.08);
+      const marginY = Math.max(72, height * 0.1);
 
-    const pauseAutoPath = () => {
-      cancelScrollResume();
-      flyTimeline?.pause();
-      ScrollTrigger.getById("flyScroll")?.disable(false, false);
-    };
-
-    const resumeAutoPath = () => {
-      cancelScrollResume();
-      ScrollTrigger.getById("flyScroll")?.enable(false, true);
-      flyTimeline?.resume();
-      ScrollTrigger.update();
-    };
-
-    const resumeAutoPathOnNextScroll = () => {
-      cancelScrollResume();
-      resumeOnScroll = resumeAutoPath;
-      window.addEventListener("scroll", resumeOnScroll, { once: true, passive: true });
-    };
-
-    const handlePointerDown = (event: PointerEvent) => {
-      if (event.pointerType === "mouse" && event.button !== 0) return;
-
-      dragState.isDragging = true;
-      dragState.pointerId = event.pointerId;
-      dragState.startPointerX = event.pageX;
-      dragState.startPointerY = event.pageY;
-      dragState.startX = getFlyX();
-      dragState.startY = getFlyY();
-
-      pauseAutoPath();
-      fly.setPointerCapture(event.pointerId);
-      fly.classList.add("is-dragging", "is-moving");
-      fly.classList.remove("is-resting");
-      event.preventDefault();
-    };
-
-    const handlePointerMove = (event: PointerEvent) => {
-      if (!dragState.isDragging || event.pointerId !== dragState.pointerId) return;
-
-      gsap.set(fly, {
-        x: dragState.startX + event.pageX - dragState.startPointerX,
-        y: dragState.startY + event.pageY - dragState.startPointerY,
-      });
-      event.preventDefault();
-    };
-
-    const endDrag = (event: PointerEvent) => {
-      if (!dragState.isDragging || event.pointerId !== dragState.pointerId) return;
-
-      dragState.isDragging = false;
-      if (fly.hasPointerCapture(event.pointerId)) {
-        fly.releasePointerCapture(event.pointerId);
-      }
-      fly.classList.remove("is-dragging", "is-moving");
-      fly.classList.add("is-resting");
-      resumeAutoPathOnNextScroll();
-    };
-
-    fly.addEventListener("pointerdown", handlePointerDown);
-    fly.addEventListener("pointermove", handlePointerMove);
-    fly.addEventListener("pointerup", endDrag);
-    fly.addEventListener("pointercancel", endDrag);
-
-    if (prefersReducedMotion) {
-      return () => {
-        cancelScrollResume();
-        fly.removeEventListener("pointerdown", handlePointerDown);
-        fly.removeEventListener("pointermove", handlePointerMove);
-        fly.removeEventListener("pointerup", endDrag);
-        fly.removeEventListener("pointercancel", endDrag);
-      };
-    }
-
-    const buildFlyPath = () => {
-      if (flyTimeline) {
-        flyTimeline.kill();
-        ScrollTrigger.getById("flyScroll")?.kill();
-      }
-
-      const targets = [
-        { selector: '[data-fly-target="hero"]', offsetX: window.innerWidth > 768 ? 300 : 0, offsetY: -100 },
-        { selector: '[data-fly-target="stats"]', offsetX: window.innerWidth > 768 ? -220 : 0, offsetY: 24 },
-        { selector: '[data-fly-target="vision"]', offsetX: -100, offsetY: 50 },
-        { selector: '[data-fly-target="services"]', offsetX: 100, offsetY: 0 },
-        { selector: '[data-fly-target="sdg"]', offsetX: 0, offsetY: -50 },
-        { selector: '[data-fly-target="footer-logo"]', offsetX: 80, offsetY: -20 },
+      return [
+        startPoint,
+        { x: width - marginX, y: marginY },
+        { x: width * 0.26, y: height * 0.24 },
+        { x: width * 0.82, y: height * 0.42 },
+        { x: width * 0.2, y: height * 0.62 },
+        { x: width * 0.74, y: height - marginY },
+        { x: width * 0.14, y: height * 0.78 },
       ];
+    };
 
-      const pathPoints = targets.flatMap((target) => {
-        const el = document.querySelector<HTMLElement>(target.selector);
-        if (!el) return [];
-        const rect = el.getBoundingClientRect();
-        const scrollY = window.scrollY || document.documentElement.scrollTop;
-        const scrollX = window.scrollX || document.documentElement.scrollLeft;
-        return {
-          x: rect.left + scrollX + rect.width / 2 + target.offsetX,
-          y: rect.top + scrollY + rect.height / 2 + target.offsetY,
-        };
-      });
+    const startInfiniteFlight = (startPoint = getFlyPoint()) => {
+      flyTimeline?.kill();
 
-      if (pathPoints.length < 2) return;
+      const motionPathPoints = createInfinitePath(startPoint);
 
       gsap.set(fly, {
-        x: pathPoints[0].x,
-        y: pathPoints[0].y,
+        x: motionPathPoints[0].x,
+        y: motionPathPoints[0].y,
         opacity: 1,
         xPercent: -50,
         yPercent: -50,
       });
 
+      fly.classList.add("is-moving");
+      fly.classList.remove("is-resting");
+
       flyTimeline = gsap.timeline({
-        scrollTrigger: {
-          id: "flyScroll",
-          trigger: document.body,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1.5,
-          onUpdate: (self) => {
-            const velocity = Math.abs(self.getVelocity());
-            if (velocity > 15) {
-              fly.classList.add("is-moving");
-              fly.classList.remove("is-resting");
-            } else {
-              fly.classList.remove("is-moving");
-              fly.classList.add("is-resting");
-            }
-          },
-        },
+        repeat: -1,
       });
 
       flyTimeline.to(fly, {
         motionPath: {
-          path: pathPoints,
+          path: motionPathPoints,
           curviness: 1.5,
           autoRotate: 90,
           alignOrigin: [0.5, 0.5],
         },
         ease: "power1.inOut",
-        duration: 1,
+        duration: 22,
       });
+    };
+
+    const pauseAutoPath = () => {
+      flyTimeline?.pause();
+    };
+
+    const resumeAutoPath = () => {
+      clearCursorFollowIdle();
+      isCursorFollowing = false;
+      startInfiniteFlight(getFlyPoint());
+    };
+
+    const beginCursorFollow = () => {
+      if (prefersReducedMotion) return;
+      if (!isCursorFollowing) {
+        pauseAutoPath();
+        isCursorFollowing = true;
+      }
+      clearCursorFollowIdle();
+      fly.classList.add("is-moving");
+    };
+
+    const scheduleCursorFollowRelease = () => {
+      clearCursorFollowIdle();
+      cursorFollowIdleTimeout = window.setTimeout(() => {
+        resumeAutoPath();
+      }, 700);
+    };
+
+    const handleWindowPointerMove = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+
+      beginCursorFollow();
+      gsap.to(fly, {
+        x: event.clientX,
+        y: event.clientY,
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.out",
+        overwrite: true,
+      });
+      scheduleCursorFollowRelease();
+    };
+
+    window.addEventListener("pointermove", handleWindowPointerMove, { passive: true });
+
+    if (prefersReducedMotion) {
+      return () => {
+        clearCursorFollowIdle();
+        window.removeEventListener("pointermove", handleWindowPointerMove);
+      };
+    }
+
+    const buildFlyPath = () => {
+      startInfiniteFlight();
     };
 
     const scheduleFlyPathRefresh = () => {
@@ -200,37 +156,35 @@ const GlassFly = () => {
       window.addEventListener("load", handleLoad);
     }
     window.addEventListener("resize", handleResize);
-    targetObserver = new MutationObserver(scheduleFlyPathRefresh);
-    targetObserver.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener("scroll", scheduleFlyPathRefresh, { passive: true });
 
     return () => {
       window.removeEventListener("load", handleLoad);
       window.removeEventListener("resize", handleResize);
-      cancelScrollResume();
+      window.removeEventListener("scroll", scheduleFlyPathRefresh);
+      clearCursorFollowIdle();
       if (loadTimeout) window.clearTimeout(loadTimeout);
       if (resizeTimeout) window.clearTimeout(resizeTimeout);
       if (pathRefreshTimeout) window.clearTimeout(pathRefreshTimeout);
-      targetObserver?.disconnect();
-      fly.removeEventListener("pointerdown", handlePointerDown);
-      fly.removeEventListener("pointermove", handlePointerMove);
-      fly.removeEventListener("pointerup", endDrag);
-      fly.removeEventListener("pointercancel", endDrag);
+      window.removeEventListener("pointermove", handleWindowPointerMove);
       flyTimeline?.kill();
-      ScrollTrigger.getById("flyScroll")?.kill();
     };
-  }, []);
+  }, [location.pathname]);
 
   return (
     <div ref={flyRef} id="glass-fly" className="glass-fly" aria-hidden="true">
-      <div className="fly-wing wing-left" />
-      <div className="fly-wing wing-right" />
-      <div className="fly-body">
-        <div className="fly-head" />
-        <div className="fly-thorax" />
-        <div className="fly-abdomen" />
+      <div className="glass-fly-visual">
+        <div className="fly-wing wing-left" />
+        <div className="fly-wing wing-right" />
+        <div className="fly-body">
+          <div className="fly-head" />
+          <div className="fly-thorax" />
+          <div className="fly-abdomen" />
+        </div>
       </div>
     </div>
   );
 };
 
 export default GlassFly;
+

@@ -8,6 +8,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import SmoothScrollProvider from "@/components/animation/SmoothScrollProvider";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import RouteMeta from "@/components/RouteMeta";
+import GlassFly from "@/components/home/GlassFly";
 
 const ScrollAnimator = lazy(() => import("@/components/ScrollAnimator"));
 const Index = lazy(() => import("./pages/Index"));
@@ -69,6 +70,7 @@ const App = () => (
             v7_relativeSplatPath: true,
           }}
         >
+          <GlassFly />
           <ScrollToTop />
           <RouteMeta />
           <Suspense fallback={null}>

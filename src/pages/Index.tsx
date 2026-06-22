@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/home/HeroSection";
-import GlassFly from "@/components/home/GlassFly";
 // import ULBClientsSectioncp from "@/components/home/ULBClientsSectioncp";
 
 const StatsSection = lazy(() => import("@/components/home/StatsSection"));
@@ -43,7 +42,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <GlassFly />
       <Header />
       <main>
         <HeroSection />
@@ -51,7 +49,7 @@ const Index = () => {
           <Suspense fallback={null}>
             <StatsSection />
             <Vision />
-            <ServicesSection />
+            {/* <ServicesSection /> */}
             <SDGSection />
           </Suspense>
         )}

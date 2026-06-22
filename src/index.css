@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
   font-family: "Ebrima";
   src: url("./assets/font/ebrima.ttf") format("truetype");
   font-weight: 400;
@@ -704,12 +704,12 @@ html.lenis body {
   display: none;
 }
 
-/* ─── Hero Slider 3D helpers ─── */
+/* â”€â”€â”€ Hero Slider 3D helpers â”€â”€â”€ */
 .perspective-1000 { perspective: 1000px; }
 .preserve-3d { transform-style: preserve-3d; }
 .ease-smooth { transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 
-/* ─── Map marker pulse ─── */
+/* â”€â”€â”€ Map marker pulse â”€â”€â”€ */
 @keyframes pulse-ring {
   0% { transform: translate(-50%, -50%) scale(0.33); }
   40%, 50% { opacity: 1; }
@@ -719,23 +719,27 @@ html.lenis body {
 
 /* Glassmorphism Fly */
 .glass-fly {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 40px;
-  height: 60px;
+  width: 28px;
+  height: 42px;
   z-index: 50;
-  pointer-events: auto;
+  pointer-events: none;
   opacity: 0;
   transform-origin: center center;
-  cursor: grab;
-  touch-action: none;
+  transform-style: preserve-3d;
+  perspective: 900px;
+  filter: drop-shadow(0 10px 20px rgba(12, 60, 24, 0.28));
   user-select: none;
   -webkit-user-select: none;
 }
 
-.glass-fly.is-dragging {
-  cursor: grabbing;
+.glass-fly-visual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: flyFloat 3.6s ease-in-out infinite;
 }
 
 .fly-body,
@@ -745,71 +749,79 @@ html.lenis body {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1.5px solid rgba(60, 160, 80, 0.6);
+  transform-style: preserve-3d;
   box-shadow:
-    inset 0 0 8px rgba(255, 255, 255, 0.6),
-    0 4px 18px rgba(20, 100, 40, 0.5),
-    0 0 0 1px rgba(20, 100, 40, 0.2);
+    inset 0 0 10px rgba(255, 255, 255, 0.75),
+    inset 0 -4px 10px rgba(30, 110, 46, 0.2),
+    0 6px 18px rgba(20, 100, 40, 0.28),
+    0 0 0 1px rgba(20, 100, 40, 0.18);
 }
 
 .fly-body {
-  width: 14px;
-  height: 48px;
-  left: 13px;
-  top: 6px;
+  width: 7px;
+  height: 34px;
+  left: 9px;
+  top: 4px;
   border-radius: 40% 40% 50% 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(120, 200, 130, 0.55);
+  background: linear-gradient(180deg, rgba(165, 235, 172, 0.82), rgba(80, 170, 92, 0.62));
   backdrop-filter: blur(12px);
   border: 1.5px solid rgba(40, 140, 70, 0.7);
+  transform: translateZ(10px) rotateX(16deg);
 }
 
 .fly-head {
-  width: 10px;
-  height: 8px;
+  width: 7px;
+  height: 6px;
   border-radius: 50%;
-  background: rgba(80, 180, 100, 0.8);
+  background: radial-gradient(circle at 30% 30%, rgba(220, 255, 224, 0.95), rgba(76, 170, 96, 0.85));
   margin-top: 2px;
+  transform: translateZ(8px);
 }
 
 .fly-thorax {
-  width: 12px;
-  height: 14px;
+  width: 8px;
+  height: 10px;
   border-radius: 40%;
-  background: rgba(100, 190, 120, 0.7);
+  background: linear-gradient(180deg, rgba(190, 245, 195, 0.9), rgba(92, 178, 112, 0.75));
   margin-top: 2px;
+  transform: translateZ(11px);
 }
 
 .fly-abdomen {
-  width: 10px;
-  height: 18px;
+  width: 7px;
+  height: 13px;
   border-radius: 40% 40% 50% 50%;
-  background: rgba(120, 200, 130, 0.65);
+  background: linear-gradient(180deg, rgba(185, 236, 188, 0.84), rgba(78, 156, 90, 0.74));
   margin-top: 2px;
+  transform: translateZ(7px);
 }
 
 .fly-wing {
-  width: 28px;
-  height: 44px;
+  width: 20px;
+  height: 31px;
   border-radius: 50% 50% 10% 80%;
-  top: 10px;
+  top: 7px;
   transform-origin: 50% 10%;
+  backface-visibility: hidden;
   border: 1.5px solid rgba(100, 200, 120, 0.7);
-  background: linear-gradient(135deg, rgba(200, 245, 210, 0.75), rgba(150, 220, 170, 0.4));
+  background: linear-gradient(135deg, rgba(236, 255, 240, 0.9), rgba(174, 230, 188, 0.42));
   box-shadow:
-    inset 0 0 8px rgba(255, 255, 255, 0.5),
-    0 2px 12px rgba(20, 100, 40, 0.4);
+    inset 0 0 12px rgba(255, 255, 255, 0.72),
+    inset -2px -4px 8px rgba(60, 150, 74, 0.12),
+    0 4px 12px rgba(20, 100, 40, 0.2);
 }
 
 .wing-left {
-  left: -12px;
-  transform: rotate(-15deg);
+  left: -8px;
+  transform: rotate(-15deg) rotateX(18deg) rotateY(-18deg) translateZ(4px);
 }
 
 .wing-right {
-  right: -12px;
-  transform: scaleX(-1) rotate(-15deg);
+  right: -8px;
+  transform: scaleX(-1) rotate(-15deg) rotateX(18deg) rotateY(-18deg) translateZ(4px);
 }
 
 .glass-fly.is-moving .wing-left {
@@ -820,37 +832,36 @@ html.lenis body {
   animation: flapRight 0.05s infinite alternate linear;
 }
 
-.glass-fly.is-resting .wing-left {
-  transform: rotate(15deg);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.glass-fly.is-resting .wing-right {
-  transform: scaleX(-1) rotate(15deg);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
 @keyframes flapLeft {
   0% {
-    transform: rotate(-10deg) rotateY(0deg);
+    transform: rotate(-10deg) rotateX(10deg) rotateY(8deg) translateZ(4px);
   }
 
   100% {
-    transform: rotate(-50deg) rotateY(60deg);
+    transform: rotate(-52deg) rotateX(28deg) rotateY(68deg) translateZ(14px);
   }
 }
 
 @keyframes flapRight {
   0% {
-    transform: scaleX(-1) rotate(-10deg) rotateY(0deg);
+    transform: scaleX(-1) rotate(-10deg) rotateX(10deg) rotateY(8deg) translateZ(4px);
   }
 
   100% {
-    transform: scaleX(-1) rotate(-50deg) rotateY(60deg);
+    transform: scaleX(-1) rotate(-52deg) rotateX(28deg) rotateY(68deg) translateZ(14px);
   }
 }
 
-/* ─── Policies page ─── */
+/* â”€â”€â”€ Policies page â”€â”€â”€ */
+@keyframes flyFloat {
+  0%, 100% {
+    transform: translateY(0) rotateZ(-2deg) rotateX(0deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotateZ(2deg) rotateX(6deg);
+  }
+}
 .policy-container { position: relative; z-index: 1; padding-top: 80px; }
 .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary))); z-index: 1000; transition: width 0.1s ease; }
 .policy-header { background: linear-gradient(135deg, hsl(145 63% 20%), hsl(var(--primary))); color: #fff; padding: 1rem; position: relative; overflow: hidden; }
@@ -902,14 +913,14 @@ html.lenis body {
 .policy-table tr:last-child td { border-bottom: none; }
 .policy-table tr:hover { background: hsl(var(--muted)); }
 
-/* ─── Contact page ─── */
+/* â”€â”€â”€ Contact page â”€â”€â”€ */
 .contact-card { display: flex; gap: 16px; padding: 18px; border-radius: var(--radius-lg); background: hsl(var(--card)); border: 1px solid hsl(var(--border)); box-shadow: var(--elevation-1); transition: transform var(--motion-duration-base) var(--motion-ease-standard), box-shadow var(--motion-duration-base) var(--motion-ease-standard); }
 .contact-card:hover { transform: translateY(-2px); box-shadow: var(--elevation-2); }
-.contact-icon { width: 44px; height: 44px; border-radius: var(--radius-md); background: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--card)) 100%); display: flex; align-items: center; justify-content: center; border: 1px solid hsl(var(--border)); flex-shrink: 0; }
+.contact-icon { width: 44px; height: 31px; border-radius: var(--radius-md); background: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--card)) 100%); display: flex; align-items: center; justify-content: center; border: 1px solid hsl(var(--border)); flex-shrink: 0; }
 .contact-label { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 4px; }
 .contact-title { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
 
-/* ─── ProjectShowcase ─── */
+/* â”€â”€â”€ ProjectShowcase â”€â”€â”€ */
 .showcase-frame { border-radius: 20px; }
 .split-panel { background: hsl(var(--muted)); cursor: col-resize; user-select: none; touch-action: none; }
 .split-divider { position: absolute; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.8); box-shadow: 0 0 0 1px rgba(0,0,0,0.05); z-index: 3; }
@@ -925,7 +936,7 @@ html.lenis body {
 .nav-square { width: 52px; height: 52px; border-radius: var(--radius-md); background: hsl(var(--card)); border: 1px solid hsl(var(--border)); color: hsl(var(--muted-foreground)); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--elevation-1); transition: transform var(--motion-duration-fast) var(--motion-ease-standard), color var(--motion-duration-fast) var(--motion-ease-standard), border var(--motion-duration-fast) var(--motion-ease-standard); }
 .nav-square:hover { transform: translateY(-1px); color: hsl(var(--foreground)); border-color: hsl(var(--primary)); }
 
-/* ─── Responsive: Policies ─── */
+/* â”€â”€â”€ Responsive: Policies â”€â”€â”€ */
 @media (max-width: 1024px) {
   .policy-main-content { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
   .policy-sidebar { position: static; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
@@ -941,3 +952,9 @@ html.lenis body {
   .policy-nav-container { padding: 0 1rem; }
   .policy-main-content { padding: 1.5rem 1rem; gap: 1.5rem; }
 }
+
+
+
+
+
+

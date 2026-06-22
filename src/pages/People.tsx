@@ -3,9 +3,15 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import Reveal from "@/components/animation/Reveal";
+import peopleHero from "@/assets/people at zigfly/Zigma beyond work/74_result.webp";
 
-// ── Types ──────────────────────────────────────────────────────────────────
 type TabId = "office" | "plants" | "beyond";
+
+interface GalleryImage {
+  id: string;
+  src: string;
+  alt: string;
+}
 
 const TABS: { id: TabId; label: string }[] = [
   { id: "office", label: "Our Office" },
@@ -13,102 +19,103 @@ const TABS: { id: TabId; label: string }[] = [
   { id: "beyond", label: "Zigma beyond work" },
 ];
 
-// ── YouTube videos (beyond tab) ────────────────────────────────────────────
-const YOUTUBE_EMBEDS = [
-  "https://www.youtube.com/embed/l-IyVxyO1jw?autoplay=0&rel=0&modestbranding=1&playsinline=1",
-  "https://www.youtube.com/embed/W6385dkjsjc?autoplay=0&rel=0&modestbranding=1&playsinline=1",
-  "https://www.youtube.com/embed/-zGlQTDRWuc?autoplay=0&rel=0&modestbranding=1&playsinline=1",
-];
-
-// ── Placeholder counts per tab ─────────────────────────────────────────────
-const PLACEHOLDER_COUNTS: Record<TabId, number> = {
-  office: 12,
-  plants: 12,
-  beyond: 0, // beyond uses YouTube embeds only
+const TAB_FOLDERS: Record<TabId, string> = {
+  office: "office",
+  plants: "Plants",
+  beyond: "Zigma beyond work",
 };
 
-// ── Sub-components ─────────────────────────────────────────────────────────
-const PlaceholderCard = ({ index }: { index: number }) => (
-  <div
-    className="w-full overflow-hidden rounded-xl bg-muted flex items-center justify-center"
-    style={{ aspectRatio: index % 3 === 0 ? "4/5" : "4/3" }}
-    aria-hidden="true"
-  >
-    <svg
-      className="h-10 w-10 text-muted-foreground/30"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1}
+const peopleAssets = import.meta.glob("../assets/people at zigfly/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}", {
+  eager: true,
+  import: "default",
+});
+
+const toTitle = (fileName: string) =>
+  fileName
+    .replace(/\.[^/.]+$/, "")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const PEOPLE_GALLERIES: Record<TabId, GalleryImage[]> = (Object.keys(TAB_FOLDERS) as TabId[]).reduce(
+  (acc, tabId) => {
+    const folderName = TAB_FOLDERS[tabId];
+    const folderImages = Object.entries(peopleAssets)
+      .filter(([path]) => path.includes(`/people at zigfly/${folderName}/`))
+      .map(([path, src]) => {
+        const fileName = path.split("/").pop() ?? "Zigma gallery image";
+        return {
+          id: path,
+          src: src as string,
+          alt: toTitle(fileName),
+        };
+      })
+      .sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: "base" }));
+
+    acc[tabId] = folderImages;
+    return acc;
+  },
+  {} as Record<TabId, GalleryImage[]>,
+);
+
+const ImageCard = ({ image, index }: { image: GalleryImage; index: number }) => (
+  <article className="group overflow-hidden rounded-2xl bg-slate-100 shadow-sm">
+    <div
+      className="overflow-hidden"
+      style={{ aspectRatio: index % 3 === 0 ? "4 / 5" : index % 2 === 0 ? "1 / 1" : "4 / 3" }}
     >
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-      <circle cx="8.5" cy="8.5" r="1.5" />
-      <polyline points="21 15 16 10 5 21" />
-    </svg>
-  </div>
+      <img
+        src={image.src}
+        alt={image.alt}
+        loading="lazy"
+        className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+      />
+    </div>
+  </article>
 );
 
-const YoutubeCard = ({ src, index }: { src: string; index: number }) => (
-  <div className="w-full overflow-hidden rounded-xl bg-slate-100">
-    <iframe
-      src={src}
-      title={`Zigma beyond work ${index + 1}`}
-      className="w-full aspect-video"
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      referrerPolicy="strict-origin-when-cross-origin"
-      allowFullScreen
-    />
-  </div>
-);
-
-// ── Main component ─────────────────────────────────────────────────────────
 const People = () => {
   const [activeTab, setActiveTab] = useState<TabId>("office");
+  const activeImages = PEOPLE_GALLERIES[activeTab];
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <ScrollToTop />
       <Header />
 
-      {/* ── Hero ── */}
-      <section className="relative flex min-h-[60vh] items-center overflow-hidden pt-20">
-        {/* gradient background in place of photo */}
+      <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-20 scroll-mt-24 lg:scroll-mt-28">
         <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(135deg, hsl(145 63% 20%) 0%, hsl(145 50% 32%) 50%, hsl(38 60% 35%) 100%)",
-          }}
+          className="absolute inset-0 h-full w-full bg-cover bg-center"
+          style={{ backgroundImage: `url(${peopleHero})` }}
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
+        {/* <div className="absolute inset-0 bg-black/35" aria-hidden="true" /> */}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/28 to-black/22"
+          aria-hidden="true"
+        />
 
         <div className="container-main relative">
           <Reveal variant="fade-up">
             <div className="text-center">
-              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-white/80">
+              <p className="text-sm font-medium uppercase tracking-[0.35em] text-white/85 md:text-base">
                 Our Team
               </p>
-              <h1 className="mt-3 text-4xl font-bold leading-tight text-white md:text-5xl">
-                Life at Zigma
+              <h1 className="mt-3 text-5xl font-bold leading-tight text-white md:text-6xl">
+                Life at Zigfly
               </h1>
-              <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/85 md:text-lg">
-                Experience a workplace that values innovation, collaboration and
-                makes a meaningful impact. Indulge in an intrapreneurial culture
-                that enables you to find your own identity.
+              <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-white/90 text-center">
+                Experience a workplace that values innovation, collaboration and makes a meaningful
+                impact. Indulge in an intrapreneurial culture that enables you to find your own
+                identity.
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ── Gallery ── */}
       <section className="section-padding">
         <div className="container-main">
-
-          {/* Tab bar */}
           <div className="mb-8 flex w-full justify-start gap-0 overflow-x-auto md:justify-center">
             {TABS.map((tab) => (
               <button
@@ -125,30 +132,18 @@ const People = () => {
             ))}
           </div>
 
-          {/* Content */}
-          {activeTab === "beyond" ? (
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {YOUTUBE_EMBEDS.map((src, i) => (
-                <YoutubeCard key={src} src={src} index={i} />
+          {activeImages.length > 0 ? (
+            <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+              {activeImages.map((image, index) => (
+                <div key={image.id} className="mb-4 break-inside-avoid">
+                  <ImageCard image={image} index={index} />
+                </div>
               ))}
             </div>
           ) : (
-            <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
-              {Array.from({ length: PLACEHOLDER_COUNTS[activeTab] }).map(
-                (_, i) => (
-                  <div key={i} className="mb-4 break-inside-avoid">
-                    <PlaceholderCard index={i} />
-                  </div>
-                )
-              )}
+            <div className="rounded-md border border-dashed border-slate-300 bg-slate-50 py-16 text-center text-slate-500">
+              <p className="text-sm">No images available for this section yet.</p>
             </div>
-          )}
-
-          {/* Coming soon notice */}
-          {activeTab !== "beyond" && (
-            <p className="mt-8 text-center text-sm text-muted-foreground">
-              Photos coming soon — check back for updates.
-            </p>
           )}
         </div>
       </section>

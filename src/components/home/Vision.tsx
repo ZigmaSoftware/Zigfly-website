@@ -13,7 +13,7 @@ const ITEMS = [
   },
   {
     label: "Our Mission",
-    text: "Deliver technology-driven waste management with integrity and safety.",
+    text: "Deliver technology-driven waste management with integrity and with inbuilt Safety, Health and Environmental Standards.",
   },
 ] as const;
 
@@ -67,7 +67,7 @@ const Vision = () => {
 
           <p
             ref={quoteRef}
-            className={`mx-auto mt-4 max-w-3xl text-center text-md leading-relaxed text-muted-foreground transition-opacity duration-700 ease-out ${
+            className={`mx-auto mt-4 max-w-3xl text-center text-lg leading-relaxed text-muted-foreground transition-opacity duration-700 ease-out ${
               isQuoteVisible ? "opacity-100" : "opacity-0"
             }`}
             aria-label={quoteText}

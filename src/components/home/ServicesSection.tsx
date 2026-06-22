@@ -75,7 +75,7 @@ const ServicesSection = () => {
           >
             BSFL Organic Waste Management <span className="text-primary">Solutions</span>
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground text-md leading-relaxed">
+          <p className="mt-4 max-w-3xl  mx-auto text-muted-foreground text-lg  leading-relaxed">
             At Zigfly, we have engineered a scientifically precise, end-to-end bioconversion process that transforms organic wet waste into high-value protein, manure, and frass — rapidly, efficiently, and with near-zero residue. At the heart of this process is one of nature's most powerful bioconverters: the Black Soldier Fly larva (<em>Hermetia illucens</em>).
           </p>
         </Reveal>

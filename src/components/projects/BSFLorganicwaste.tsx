@@ -71,14 +71,6 @@ const METRICS: MetricItem[] = [
     unit: 'KGS / DAY',
     image: pic2,
   },
-  {
-    id: 'project-status',
-    title: 'Project Status',
-    description: 'Current project stage.',
-    value: 'Ongoing',
-    unit: 'CURRENT STAGE',
-    image: pic1,
-  },
 ];
 
 const FOCUS_SECTIONS: FocusSection[] = [
@@ -108,10 +100,10 @@ const FOCUS_SECTIONS: FocusSection[] = [
   },
   {
     id: 'production-status',
-    title: 'Production & Status',
-    description: 'Egg production capacity: 4 kgs/day | Project status: Ongoing',
+    title: 'Production',
+    description: 'Egg production capacity: 4 kgs/day',
     image: pic4,
-    metricId: 'project-status',
+    metricId: 'egg-capacity',
     bottomLabel: 'Solar drying',
   },
 ];

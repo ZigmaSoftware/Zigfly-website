@@ -14,7 +14,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import erode from "@/assets/website/zigma-picture.webp";
-import chennai from "@/assets/BSFL project pictures/pic 1.jpeg";
+import chennai from "@/assets/website/bsf_front_view.webp";
 
 import Herobg from '@/assets/website/Office Night.jpeg';
 
@@ -168,8 +168,8 @@ return (
                     {/* <p className="text-[11px] font-bold tracking-[0.22em] uppercase text-muted-foreground mb-1">Office</p> */}
                     <h3 className="text-base font-bold text-foreground mb-1.5">HO Address</h3>
                     <p className="text-muted-foreground">
-                      178, Indu Nagar, Palayapalayam, <br />
-                      Perundurai Road, Erode, Tamilnadu - 638 011, India.
+                      Near Brahmapuram Waste to Energy Plant, Brahmapuram, <br />
+                      Kakkanad, Ernakulam, Keralam - 682030.
                     </p>
                   </div>
                 </div>
@@ -182,8 +182,8 @@ return (
                   <div>
                     {/* <p className="text-[11px] font-bold tracking-[0.22em] uppercase text-muted-foreground mb-1">Email</p> */}
                     <h3 className="text-base font-bold text-foreground mb-1.5">Email Us</h3>
-                    <a href="mailto:connect@zigma.in" className="text-primary hover:underline">
-                      connect@zigma.in
+                    <a href="mailto:admin.bsf@zigma.in" className="text-primary hover:underline">
+                      admin.bsf@zigma.in
                     </a>
                   </div>
                 </div>
@@ -196,7 +196,7 @@ return (
                     {/* <p className="text-[11px] font-bold tracking-[0.22em] uppercase text-muted-foreground mb-1">Phone</p> */}
                     <h3 className="text-base font-bold text-foreground mb-1.5">Call Us</h3>
                     <a href="tel:+911234567890" className="text-primary hover:underline">
-                      0424 222 5157
+                      +91 9600611657
                     </a>
                   </div>
                 </div>
