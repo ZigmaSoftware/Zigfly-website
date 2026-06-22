@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -12,6 +12,9 @@ interface GalleryImage {
   src: string;
   alt: string;
 }
+
+const ANIMATION_BASE_DURATION = 18;
+const ANIMATION_LANE_MULTIPLIERS = [1, 1, 1] as const;
 
 const TABS: { id: TabId; label: string }[] = [
   { id: "office", label: "Our Office" },
@@ -74,14 +77,56 @@ const ImageCard = ({ image, index }: { image: GalleryImage; index: number }) => 
   </article>
 );
 
+const createLaneImages = (images: GalleryImage[]): [GalleryImage[], GalleryImage[], GalleryImage[]] => {
+  const lanes: [GalleryImage[], GalleryImage[], GalleryImage[]] = [[], [], []];
+
+  images.forEach((image, index) => {
+    lanes[index % 3].push(image);
+  });
+
+  return lanes.map((lane) => (lane.length > 0 ? [...lane, ...lane] : lane)) as [
+    GalleryImage[],
+    GalleryImage[],
+    GalleryImage[],
+  ];
+};
+
+const calculateLaneDurations = (imageCount: number): [number, number, number] => {
+  const base = Math.max(ANIMATION_BASE_DURATION, Math.ceil(imageCount / 8) * 12);
+  return [
+    base,
+    base * ANIMATION_LANE_MULTIPLIERS[1],
+    base * ANIMATION_LANE_MULTIPLIERS[2],
+  ];
+};
+
+const getLaneStyle = (duration: number, delay: string): CSSProperties => ({
+  animationName: "peopleScrollUp",
+  animationDuration: `${duration}s`,
+  animationTimingFunction: "linear",
+  animationIterationCount: "infinite",
+  animationDirection: "normal",
+  animationDelay: delay,
+  willChange: "transform",
+});
+
 const People = () => {
   const [activeTab, setActiveTab] = useState<TabId>("office");
   const activeImages = PEOPLE_GALLERIES[activeTab];
+  const laneImages = useMemo(() => createLaneImages(activeImages), [activeImages]);
+  const laneDurations = useMemo(() => calculateLaneDurations(activeImages.length), [activeImages.length]);
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <ScrollToTop />
       <Header />
+
+      <style>{`
+        @keyframes peopleScrollUp {
+          from { transform: translateY(0); }
+          to { transform: translateY(-50%); }
+        }
+      `}</style>
 
       <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-20 scroll-mt-24 lg:scroll-mt-28">
         <div
@@ -133,12 +178,39 @@ const People = () => {
           </div>
 
           {activeImages.length > 0 ? (
-            <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
-              {activeImages.map((image, index) => (
-                <div key={image.id} className="mb-4 break-inside-avoid">
-                  <ImageCard image={image} index={index} />
-                </div>
-              ))}
+            <div className="mt-5 min-w-0 flex-1">
+              <div className="grid grid-cols-1 gap-3 md:hidden">
+                {activeImages.map((image, index) => (
+                  <ImageCard
+                    key={`${activeTab}-mobile-${image.id}`}
+                    image={image}
+                    index={index}
+                  />
+                ))}
+              </div>
+
+              <div className="hidden md:grid md:grid-cols-3 gap-5">
+                {laneImages.map((lane, laneIndex) => (
+                  <div
+                    key={`${activeTab}-lane-${laneIndex}`}
+                    className="overflow-hidden h-[920px]"
+                  >
+                    <div
+                      className="flex flex-col gap-5 hover:[animation-play-state:paused]"
+                      style={getLaneStyle(
+                        laneDurations[laneIndex],
+                        `${laneIndex * -3.5}s`,
+                      )}
+                    >
+                      {lane.map((image, index) => (
+                        <div key={`${activeTab}-lane-${laneIndex}-${image.id}-${index}`}>
+                          <ImageCard image={image} index={index} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           ) : (
             <div className="rounded-md border border-dashed border-slate-300 bg-slate-50 py-16 text-center text-slate-500">

@@ -5,10 +5,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/icons/logo-zig-bp.png";
 import zigflyLogo from "@/assets/services/zigfly.png";
-import livelarvae from "@/assets/Products/larvae.jpeg";
-import drylarvae from "@/assets/website/larva.jpeg";
-import manure from "@/assets/website/hero/manure in hand.webp";
-import frass from "@/assets/Products/Frass +6mm.jpeg";
 
 
 
@@ -17,6 +13,7 @@ interface DropdownItem {
   name: string;
   path: string;
   image?: string;
+  mediaType?: "image" | "video";
 }
 
 interface NavItem {
@@ -52,10 +49,10 @@ const navItems: NavItem[] = [
     path: "/products",
     megaMenu: true,
     dropdown: [
-      { name: "Frass",       path: "/products#frass", image: frass },
-      { name: "Manure",      path: "/products#manure", image: manure },
-      { name: "Live Larvae", path: "/products#live-larvae", image: livelarvae },
-      { name: "Dry larvae",  path: "/products#dry-larvae", image: drylarvae },
+      { name: "Frass",       path: "/products#frass", image: "/Videos/frass.mp4", mediaType: "video" },
+      { name: "Manure",      path: "/products#manure", image: "/Videos/Manure.mp4", mediaType: "video" },
+      { name: "Live Larvae", path: "/products#live-larvae", image: "/Videos/live larvae.mp4", mediaType: "video" },
+      { name: "Dry larvae",  path: "/products#dry-larvae", image: "/Videos/Dry Larvae.mp4", mediaType: "video" },
     ],
   },
 
@@ -470,12 +467,25 @@ const Header = () => {
                               )}
                             </>
                           ) : sub.image ? (
-                            <img
-                              src={sub.image}
-                              alt={sub.name}
-                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                              loading="lazy"
-                            />
+                            sub.mediaType === "video" ? (
+                              <video
+                                src={sub.image}
+                                className="h-full w-full bg-[#6c4f37] object-cover scale-[1.08] transition-transform duration-500 group-hover:scale-[1.13]"
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                preload="metadata"
+                                aria-label={sub.name}
+                              />
+                            ) : (
+                              <img
+                                src={sub.image}
+                                alt={sub.name}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                loading="lazy"
+                              />
+                            )
                           ) : (
                             <div className="w-full h-full bg-secondary" />
                           )}
