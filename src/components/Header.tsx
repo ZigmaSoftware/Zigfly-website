@@ -77,7 +77,7 @@ const navItems: NavItem[] = [
       // { name: "Newsletters", path: "/newsletters" },
       // { name: "Events", path: "/events" },
       // { name: "Awards and Recognitions", path: "/AwardsandRecognition" },
-      { name: "Testimonials", path: "/Testimonials" },
+      { name: "Testimonials", path: "/testimonials" },
       // { name: "Newsroom", path: "/newsroom" },
 
       // { name: "Cascadeslider", path: "/cascadeslider" }, 
@@ -125,7 +125,18 @@ const Header = () => {
 
   const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  const isActive = useCallback((path: string) => location.pathname === path, [location.pathname]);
+  const normalizePath = useCallback((path: string) => path.split("#")[0].toLowerCase(), []);
+
+  const isActive = useCallback(
+    (path: string) => normalizePath(location.pathname) === normalizePath(path),
+    [location.pathname, normalizePath]
+  );
+
+  const isNavItemActive = useCallback(
+    (item: NavItem) =>
+      isActive(item.path) || item.dropdown?.some((sub) => isActive(sub.path)) || false,
+    [isActive]
+  );
 
   /* Close dropdown when clicking outside */
 
@@ -164,7 +175,7 @@ const Header = () => {
   }, []);
 
   const resetIndicatorToActive = useCallback(() => {
-    const activeItem = navItems.find((item) => isActive(item.path));
+    const activeItem = navItems.find((item) => isNavItemActive(item));
 
     if (activeItem) {
       updateIndicatorToItem(activeItem.name);
@@ -172,7 +183,7 @@ const Header = () => {
     }
 
     setIndicatorStyle((prev) => ({ ...prev, opacity: 0 }));
-  }, [isActive, updateIndicatorToItem]);
+  }, [isNavItemActive, updateIndicatorToItem]);
 
   useEffect(() => {
     resetIndicatorToActive();
@@ -368,7 +379,7 @@ const Header = () => {
                   <button
                     onMouseEnter={() => setActiveDropdown(item.name)}
                     className={`flex items-center gap-1 py-4 text-sm font-medium transition-colors whitespace-nowrap ${
-                      isActive(item.path)
+                      isNavItemActive(item)
                         ? desktopActiveNavItemClass
                         : desktopNavItemClass
                     }`}
@@ -388,7 +399,7 @@ const Header = () => {
                   <Link
                     to={item.path}
                     className={`flex items-center py-4 text-sm font-medium transition-colors whitespace-nowrap ${
-                      isActive(item.path)
+                      isNavItemActive(item)
                         ? desktopActiveNavItemClass
                         : desktopNavItemClass
                     }`}
@@ -547,7 +558,7 @@ const Header = () => {
                     <button
                       onClick={() => setMobileDropdown(mobileDropdown === item.name ? null : item.name)}
                       className={`flex items-center justify-between w-full py-4 text-sm font-medium transition-colors ${
-                        isActive(item.path)
+                        isNavItemActive(item)
                           ? mobileActiveNavItemClass
                           : mobileNavItemClass
                       }`}
@@ -586,7 +597,7 @@ const Header = () => {
                   <Link
                     to={item.path}
                     className={`flex items-center py-4 text-sm font-medium transition-colors ${
-                      isActive(item.path)
+                      isNavItemActive(item)
                         ? mobileActiveNavItemClass
                         : mobileNavItemClass
                     }`}

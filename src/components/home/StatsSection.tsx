@@ -45,7 +45,7 @@ const ICON_GAP = 13;
 const TITLE_LINE_HEIGHT = 13;
 const DIVIDER_GAP_TOP = 12;
 const DIVIDER_GAP_BOTTOM = 11;
-const DESC_LINE_HEIGHT = 9;
+const DESC_LINE_HEIGHT = 11;
 const DIVIDER_WIDTH = 66;
 const TITLE_FONT_SIZE = 11.5;
 const DESC_FONT_SIZE = 9;
@@ -59,10 +59,10 @@ const metrics: ImpactMetric[] = [
     dx: 2,
     revealStart: 0.005,
     revealEnd: 0.04,
-    titleLines: ["50 Tons", "per day"],
-    descLines: ["Wet waste processing", "capacity"],
+    titleLines: ["50 Tons"],
+    descLines: ["Wet waste processing", "capacity per day"],
     countTarget: 50,
-    countSuffix: " Tons",
+    countSuffix: "+ Tons",
   },
   {
     id: "wet-waste-diverted",
@@ -75,7 +75,7 @@ const metrics: ImpactMetric[] = [
     titleLines: ["Tons"],
     descLines: ["Wet waste diverted", "from landfills"],
     countTarget: 22000,
-    countSuffix: " Tons",
+    countSuffix: "+ Tons",
   },
   {
     id: "larvae-generation",
@@ -85,11 +85,10 @@ const metrics: ImpactMetric[] = [
     dy: 2,
     revealStart: 0.04,
     revealEnd: 0.07,
-    titleLines: ["Tons", "per day"],
-    descLines: ["Larvae generation", "capacity"],
-    countTarget: 2.5,
-    countSuffix: " Tons",
-    countDecimals: 1,
+    titleLines: ["Kg"],
+    descLines: ["Larvae generation", "capacity per day"],
+    countTarget: 2500,
+    countSuffix: "+ Kg",
   },
   {
     id: "manure-generation",
@@ -100,10 +99,10 @@ const metrics: ImpactMetric[] = [
     dy: 2,
     revealStart: 0.06,
     revealEnd: 0.09,
-    titleLines: ["Tons", "per day"],
-    descLines: ["Manure generation", "capacity"],
+    titleLines: ["Tons"],
+    descLines: ["Manure generation", "capacity per day"],
     countTarget: 5,
-    countSuffix: " Tons",
+    countSuffix: "+ Tons",
   },
   {
     id: "employees",
@@ -113,9 +112,10 @@ const metrics: ImpactMetric[] = [
     dx: -1,
     revealStart: 0.09,
     revealEnd: 0.12,
-    titleLines: ["19", "Team Members"],
+    titleLines: ["19"],
     descLines: ["On-ground", "workforce"],
     countTarget: 19,
+    countSuffix: "+",
   },
   {
     id: "facility-operations",
@@ -128,7 +128,7 @@ const metrics: ImpactMetric[] = [
     titleLines: ["365 Days"],
     descLines: ["Facility operations", "round-the-clock"],
     countTarget: 365,
-    countSuffix: " Days",
+    countSuffix: "+ Days",
   },
 ];
 
@@ -141,7 +141,10 @@ const easeInOutCubic = (progress: number) =>
 
 const formatCount = (value: number, decimals = 0) =>
   decimals > 0
-    ? value.toFixed(decimals)
+    ? Number(value.toFixed(decimals)).toLocaleString(undefined, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: decimals,
+      })
     : Math.floor(value).toLocaleString();
 
 const useCountUp = (
@@ -294,9 +297,7 @@ const MobileMetricCard = ({
       <h3 className="mt-4 text-lg font-bold leading-tight text-foreground">
         {titleFirst}{restLines.length > 0 ? " " + restLines.join(" ") : ""}
       </h3>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-        {metric.descLines.join(" ")}
-      </p>
+    
     </article>
   );
 };

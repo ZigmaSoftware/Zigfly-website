@@ -234,7 +234,10 @@ const services = [
     title: "Bioconversion — The BSF Larvae at Work",
     eyebrow: "Biological Processing",
     image: bioconversionImg,
-    description: "The shredded organic mass is transferred to BSF processing beds where baby larvae, hatched from carefully managed egg batches, are introduced. A single gram of BSF eggs yields between 20,000 and 35,000 larvae. Each larva is capable of consuming up to 200 mg of food waste per day. The larvae progress through six instar stages over approximately 14 days, growing from 1.8 mm to 20 mm in size. Their biological activity suppresses harmful pathogens and can remove certain toxic substances — a distinct advantage over conventional composting and vermicomposting technologies.",
+    description: [
+      "The shredded organic mass is transferred to BSF processing beds where baby larvae, hatched from carefully managed egg batches, are introduced. A single gram of BSF eggs yields between 20,000 and 35,000 larvae. Each larva is capable of consuming up to 200 mg of food waste per day. With their powerful chewing mouthparts, rich intestinal microbiota, and high enzymatic activity, the larvae efficiently metabolize starches, proteins, and lipids present in the waste.",
+      "The larvae progress through six instar stages over approximately 14 days, growing from 1.8 mm to 20 mm in size. As consumption rates peak after the third instar, the waste mass reduces rapidly and measurably. The larvae's biological activity also suppresses harmful pathogens and can remove certain toxic substances from the processed material — a distinct advantage over conventional composting and vermicomposting technologies.",
+    ],
     features: [
       "1 gram of BSF eggs yields 20,000–35,000 larvae.",
       "Each larva consumes up to 200 mg of food waste per day.",
@@ -541,3 +544,5 @@ const Services = () => {
 };
 
 export default Services;
+
+

@@ -2,7 +2,7 @@ import Reveal from "@/components/animation/Reveal";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CheckCircle, ArrowRight, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -21,6 +21,7 @@ type Product = {
   tagline: string;
   description: string;
   image: string;
+  video?: string;
   imageHover?: string;
   images?: string[];
   color: string;
@@ -31,13 +32,17 @@ type Product = {
 
 const ProductImage: React.FC<{
   image: string;
+  video?: string;
   imageHover?: string;
   images?: string[];
   alt: string;
-}> = ({ image, imageHover, images, alt }) => {
+}> = ({ image, video, imageHover, images, alt }) => {
   const imageSet = images?.length ? images : imageHover ? [image, imageHover] : [image];
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [autoIndex, setAutoIndex] = useState(0);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
+  const mediaRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const shouldAutoPlay = hoveredIndex == null && imageSet.length > 1;
   const effectiveIndex = shouldAutoPlay ? autoIndex : hoveredIndex ?? 0;
   const currentImage = imageSet[effectiveIndex] ?? imageSet[0];
@@ -49,6 +54,53 @@ const ProductImage: React.FC<{
     }, 3000);
     return () => window.clearInterval(timer);
   }, [imageSet.length, shouldAutoPlay]);
+
+  useEffect(() => {
+    if (!video || !mediaRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVideoVisible(entry.isIntersecting && entry.intersectionRatio >= 0.6);
+      },
+      { threshold: [0.6] }
+    );
+
+    observer.observe(mediaRef.current);
+    return () => observer.disconnect();
+  }, [video]);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    if (isVideoVisible) {
+      void videoRef.current.play().catch(() => {});
+      return;
+    }
+
+    videoRef.current.pause();
+    videoRef.current.currentTime = 0;
+  }, [isVideoVisible]);
+
+  if (video) {
+    return (
+      <div
+        ref={mediaRef}
+        className="relative overflow-hidden rounded-xl bg-black"
+      >
+        <video
+          ref={videoRef}
+          src={video}
+          poster={image}
+          aria-label={alt}
+          className="w-full h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
+      </div>
+    );
+  }
 
   if (imageSet.length === 1) {
     return (
@@ -197,6 +249,7 @@ const products: Product[] = [
     description:
       "BSF frass is a nutrient-rich organic output created during Black Soldier Fly processing. It supports soil health, improves microbial activity, and helps return value from organic waste back into productive land.",
     image: frassPlus6mm,
+    video: "/Videos/frass.mp4",
     color: "from-emerald-700 to-emerald-900",
     features: [
       "Improves soil microbial activity",
@@ -215,6 +268,7 @@ const products: Product[] = [
     description:
       "Our organic manure is produced from controlled BSF-based organic waste processing. It adds organic matter to soil, supports root development, and offers a practical circular solution for farms, landscapes, and nurseries.",
     image: manure,
+    video: "/Videos/Manure.mp4",
     color: "from-green-700 to-green-900",
     features: [
       "Rich organic matter",
@@ -234,6 +288,7 @@ const products: Product[] = [
     description:
       "Live Black Soldier Fly larvae actively convert organic wet waste into valuable biomass. They support high-efficiency waste reduction while creating a usable feed and bioconversion output stream.",
     image: larvae,
+    video: "/Videos/live larvae.mp4",
     color: "from-lime-700 to-emerald-900",
     features: [
       "Active waste conversion",
@@ -252,6 +307,7 @@ const products: Product[] = [
     description:
       "Dry BSF larvae provide a compact, shelf-stable protein and fat source for feed applications. They are produced through controlled bioconversion and can help reduce dependency on conventional feed ingredients.",
     image: larva,
+    video: "/Videos/Dry Larvae.mp4",
     color: "from-amber-600 to-orange-800",
     features: [
       "High protein content",
@@ -347,6 +403,7 @@ const Products = () => {
                     {/* <div className={`absolute inset-0 bg-gradient-to-br ${product.color} rounded-3xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500`} /> */}
                     <ProductImage
                       image={product.image}
+                      video={product.video}
                       imageHover={product.imageHover}
                       images={product.images}
                       alt={product.name}

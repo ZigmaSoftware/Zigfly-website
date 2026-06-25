@@ -38,17 +38,6 @@ export default function SDGSection() {
   return (
     <section className="bg-background section-padding">
       <div className="container-main">
-        <Reveal className="mb-12 text-center" variant="fade-up">
-          <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
-            Sustainability
-          </span>
-          <h2
-            data-fly-target="sdg"
-            className="mt-2 text-3xl font-bold leading-tight text-foreground md:text-4xl"
-          >
-          Our Commitment to the <span className="text-primary">UN SDGs</span>
-          </h2>
-        </Reveal>
 
         <div className="flex flex-col items-center gap-12 lg:flex-row">
           <div className="flex w-full justify-center overflow-visible lg:w-1/2">
@@ -160,11 +149,15 @@ export default function SDGSection() {
                 </div>
               </div>
             ) : (
-              <div className="space-y-5">
+              <div className="space-y-3">
+
+                <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
+                  Sustainability
+                </span>
                 <h2 className="text-3xl font-bold text-foreground">
-                  Our Commitment to the {""}
+                  Our Commitment to the <br />
                   <span className="text-primary">UN Sustainable Development Goals</span>
-          
+
                 </h2>
 
                 <p className="text-lg leading-relaxed text-muted-foreground">
