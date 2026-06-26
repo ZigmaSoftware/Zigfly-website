@@ -11,12 +11,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import picture1 from "@/assets/website/hero/career-bg.jpg";
+import picture1 from "@/assets/website/hero/career-bg.webp";
 
 import {
   Send,
   Copy,
-  Building2,
   MapPin,
   Briefcase,
   Clock3,
@@ -36,7 +35,7 @@ type JobOpening = {
   responsibilities: string[];
 };
 
-const jobOpenings: JobOpening[] = [
+const _jobOpenings: JobOpening[] = [
   // {
   //   id: 1,
   //   title: "Environmental Engineer / Officer",
@@ -127,7 +126,7 @@ const jobOpenings: JobOpening[] = [
 /* ---------------- COMPONENT ---------------- */
 
 const Careers = () => {
-  const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null);
+  const [selectedJob, _setSelectedJob] = useState<JobOpening | null>(null);
   const [isJobDetailsOpen, setIsJobDetailsOpen] = useState(false);
 
   const careersEmail = "careers@zigma.in";
@@ -172,12 +171,6 @@ const Careers = () => {
   }, []);
 
   /* ---------------- HANDLERS ---------------- */
-
-  const openJobDetails = (jobId: number) => {
-    const job = jobOpenings.find((j) => j.id === jobId) ?? null;
-    setSelectedJob(job);
-    setIsJobDetailsOpen(Boolean(job));
-  };
 
   const closeJobDetails = () => {
     setIsJobDetailsOpen(false);

@@ -11,7 +11,6 @@ import sdg13 from "@/assets/website/sdg-icons/sdg-13.png";
 import sdg14 from "@/assets/website/sdg-icons/sdg-14.webp";
 import sdg15 from "@/assets/website/sdg-icons/sdg-15.png";
 import sdg17 from "@/assets/website/sdg-icons/sdg-17.png";
-import Reveal from "@/components/animation/Reveal";
 import sdgLogo from "@/assets/website/Sustainable-Development-Goals.logo.png";
 
 const GOALS = [

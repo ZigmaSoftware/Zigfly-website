@@ -113,13 +113,13 @@ const Footer = () => {
                 <li className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 mt-1.5 flex-shrink-0" />
                   <span className="text-foreground/70 text-md">
-                  Near Brahmapuram Waste to Energy Plant,Brahmapuram,Kakkanad, Ernakulam, Keralam - 682030.
+                  Near Brahmapuram Waste to Energy Plant, Brahmapuram, Kakkanad, Ernakulam, Keralam - 682030.
                   </span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="w-4 h-4 flex-shrink-0" />
-                  <a href="mailto:admin.bsf@zigma.in" className="text-foreground/70 hover:text-primary text-md transition-colors">
-                    admin.bsf@zigma.in
+                  <a href="mailto:santhosh@zigma.in" className="text-foreground/70 hover:text-primary text-md transition-colors">
+                    santhosh@zigma.in
                   </a>
                 </li>
                 <li className="flex items-center gap-3">

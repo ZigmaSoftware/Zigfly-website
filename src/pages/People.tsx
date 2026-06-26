@@ -3,9 +3,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import Reveal from "@/components/animation/Reveal";
-import peopleHero from "@/assets/people at zigfly/Zigma beyond work/74_result.webp";
+import peopleHero from "@/assets/website/hero/people-bg.webp";
 
-type TabId = "office" | "plants" | "beyond";
+type TabId = "office" | "beyond";
 
 interface GalleryImage {
   id: string;
@@ -18,14 +18,12 @@ const ANIMATION_LANE_MULTIPLIERS = [1, 1, 1] as const;
 
 const TABS: { id: TabId; label: string }[] = [
   { id: "office", label: "Our Office" },
-  { id: "plants", label: "Our Plants" },
-  { id: "beyond", label: "Zigma beyond work" },
+  { id: "beyond", label: "Zigfly beyond work" },
 ];
 
 const TAB_FOLDERS: Record<TabId, string> = {
   office: "office",
-  plants: "Plants",
-  beyond: "Zigma beyond work",
+  beyond: "Zigfly beyond work",
 };
 
 const peopleAssets = import.meta.glob("../assets/people at zigfly/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}", {

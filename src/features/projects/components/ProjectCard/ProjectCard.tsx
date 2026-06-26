@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Project, InteractiveMetric, MetricKey } from '../../types';
+import React, { useState, useEffect, useRef } from 'react';
+import { Project, MetricKey } from '../../types';
 import { ComparisonSlider } from '../ComparisonSlider';
 import { useProjectMetrics } from '../../hooks/useProjectMetrics';
 
@@ -17,8 +17,6 @@ interface ProjectCardProps {
  */
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
-  index,
-  total,
   onViewDetails,
   allProjects,
   isComparison = true,

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import pic1 from '@/assets/BSFL project pictures/pic 1.jpeg';
+import pic1 from '@/assets/BSFL project pictures/pic 1.webp';
 import pic2 from '@/assets/BSFL project pictures/pic 2.jpeg';
-import pic3 from '@/assets/BSFL project pictures/pic 3.jpeg';
-import pic4 from '@/assets/BSFL project pictures/pic 4.jpeg';
+import pic3 from '@/assets/BSFL project pictures/pic 3.webp';
+import pic4 from '@/assets/BSFL project pictures/pic 4.webp';
 
 interface MetricItem {
   id: string;

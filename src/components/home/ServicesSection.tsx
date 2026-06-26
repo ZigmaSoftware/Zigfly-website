@@ -1,11 +1,11 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Reveal from "@/components/animation/Reveal";
-import bsflPic1 from "@/assets/BSFL project pictures/pic 1.jpeg";
 import bsflPic2 from "@/assets/BSFL project pictures/pic 2.jpeg";
-import bioconversionImg from "@/assets/services/Bioconversion — The BSF Larvae at Work.png";
-import harvestingImg from "@/assets/services/harvesting.png";
-import preProcessingImg from "@/assets/services/pre-processing.png";
+import bioconversionImg from "@/assets/services/Bioconversion — The BSF Larvae at Work.webp";
+import harvestingImg from "@/assets/services/harvesting.webp";
+import preProcessingImg from "@/assets/services/pre-processing.webp";
+import residualOutputsImg from "@/assets/services/Residual Outputs.webp";
 import unloadingImg from "@/assets/website/hero/unloading.webp";
 
 const services = [
@@ -42,7 +42,7 @@ const services = [
     title: "The Residual Outputs",
     description:
       "Beyond the larvae, the process generates two additional valuable outputs. Manure — the organic residue from the bioconversion — serves as a nutrient-rich natural fertilizer for agriculture, horticulture, and urban gardening. Frass functions as a potent biofertiliser with documented soil health benefits.",
-    image: bsflPic1,
+    image: residualOutputsImg,
   },
   {
     id: "zero-waste",

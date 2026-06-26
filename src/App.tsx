@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
-import SmoothScrollProvider from "@/components/animation/SmoothScrollProvider";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import RouteMeta from "@/components/RouteMeta";
 import GlassFly from "@/components/home/GlassFly";
@@ -13,7 +12,7 @@ import GlassFly from "@/components/home/GlassFly";
 const ScrollAnimator = lazy(() => import("@/components/ScrollAnimator"));
 const Index = lazy(() => import("./pages/Index"));
 const About = lazy(() => import("./pages/About"));
-const Awards = lazy(() => import("./pages/Awards"));
+// const Awards = lazy(() => import("./pages/Awards"));
 const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
@@ -23,7 +22,6 @@ const CareersApply = lazy(() => import("./pages/CareersApply"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const People = lazy(() => import("./pages/People"));
 const Projects = lazy(() => import("./pages/Projects"));
-const WasteManagementShowcase = lazy(() => import("./pages/WasteManagementShowcase"));
 const Policies = lazy(() => import("./pages/Policies"));
 // const AwardsandRecognition = lazy(() => import("./pages/AwardsandRecognition"));
 // const Publications = lazy(() => import("./pages/Publications"));
@@ -61,52 +59,47 @@ const RouteFallback = () => (
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <SmoothScrollProvider>
-        <BrowserRouter
-          future={{
-            v7_startTransition: true,
-            v7_relativeSplatPath: true,
-          }}
-        >
-          <GlassFly />
-          <ScrollToTop />
-          <RouteMeta />
-          <Suspense fallback={null}>
-            <ScrollAnimator />
+      <BrowserRouter
+        // basename="/zigfly_react_app"
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
+        <GlassFly />
+        <ScrollToTop />
+        <RouteMeta />
+        <Suspense fallback={null}>
+          <ScrollAnimator />
+        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<RouteFallback />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              {/* <Route path="/awards" element={<Awards />} /> */}
+              <Route path="/services" element={<Services />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/projects/:id" element={<ProjectDetail />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/careers/apply" element={<CareersApply />} />
+              <Route path="/media" element={<Navigate to="/newsroom" replace />} />
+              <Route path="/mediacp" element={<Navigate to="/newsroom" replace />} />
+              <Route path="/people" element={<People />} />
+              <Route path="/policies" element={<Policies />} />
+              <Route path="/testimonials" element={<Testimonials />} />
+              <Route path="/newsroom" element={<Newsroom />} />
+              <Route path="/ongoingprojects" element={<Navigate to="/projects?tab=ongoing" replace />} />
+              <Route path="/completedprojects" element={<Navigate to="/projects?tab=completed" replace />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
           </Suspense>
-          <ErrorBoundary>
-            <Suspense fallback={<RouteFallback />}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/awards" element={<Awards />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route path="/projects/:id" element={<ProjectDetail />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/careers" element={<Careers />} />
-                <Route path="/careers/apply" element={<CareersApply />} />
-                <Route path="/media" element={<Navigate to="/newsroom" replace />} />
-                <Route path="/mediacp" element={<Navigate to="/newsroom" replace />} />
-                {/* <Route path="/publications" element={<Publications />} /> */}
-                {/* <Route path="/newsletters" element={<Newsletters />} /> */}
-                <Route path="/people" element={<People />} />
-                <Route path="/policies" element={<Policies />} />
-                <Route path="/waste-management-showcase" element={<WasteManagementShowcase />} />
-                {/* <Route path="/awardsandrecognition" element={<AwardsandRecognition />} /> */}
-                <Route path="/testimonials" element={<Testimonials />} />
-                <Route path="/newsroom" element={<Newsroom />} />
-                <Route path="/ongoingprojects" element={<Navigate to="/projects?tab=ongoing" replace />} />
-                <Route path="/completedprojects" element={<Navigate to="/projects?tab=completed" replace />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </ErrorBoundary>
-        </BrowserRouter>
-      </SmoothScrollProvider>
+        </ErrorBoundary>
+        <Toaster />
+        <Sonner />
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );

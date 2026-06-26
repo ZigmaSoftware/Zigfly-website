@@ -241,14 +241,14 @@ export default function Newsroom() {
           />
 
           <div className="container-main relative grid items-center justify-items-center text-center">
-            <p className="text-sm font-medium uppercase tracking-[0.35em] text-white/85 md:text-base">
+            <p className="text-lg font-medium uppercase tracking-[0.35em] text-white/85">
               Newsroom
             </p>
             <h1 className="mt-3 text-5xl font-bold leading-tight text-white md:text-6xl">
               In The News
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/90 text-center">
-              Explore media coverage, project stories, and important updates from Zigma Blue Planet.
+              Stay updated with our latest news, media coverage, and project highlights.
             </p>
           </div>
         </section>
@@ -327,10 +327,7 @@ export default function Newsroom() {
           </div>
         )}
 
-        <section
-          className="section-padding bg-top bg-repeat"
-          style={{ backgroundImage: `url(${sectionBg})`, backgroundSize: "520px auto" }}
-        >
+        <section className="section-padding bg-white">
           <div className="container-main">
             {selectedItem ? (
               <DetailView

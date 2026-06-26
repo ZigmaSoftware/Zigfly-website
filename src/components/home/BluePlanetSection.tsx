@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink } from "lucide-react";
-import worldMapUrl from "../../assets/website/BP-worldmap.svg";
+import worldMapUrl from "../../assets/website/BP-worldmap.webp";
 
 type Marker = {
   name: string;

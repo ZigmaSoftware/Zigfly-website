@@ -82,7 +82,7 @@
 //   return (
 //     <div
 //       className={[
-//         `absolute left-1/2 top-1/2 w-[88vw] ${imageOnly ? "max-w-[560px]" : "max-w-[700px]"} transition-[transform,opacity,filter] duration-[1400ms] ease-[cubic-bezier(0.19,1,0.22,1)] will-change-transform`,
+//         `absolute left-1/2 top-1/2 w-[88vw] ${imageOnly ? "max-w-[560px]" : "max-w-[700px]"} transition-[transform,opacity,filter] will-change-transform`,
 //         position === "prev" || position === "next" ? "brightness-[0.9]" : "brightness-100",
 //         POSITION_CLASSES[position],
 //       ].join(" ")}

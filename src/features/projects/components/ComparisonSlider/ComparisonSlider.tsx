@@ -54,7 +54,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
         <img
           src={afterSrc}
           alt="After"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[800ms]"
+          className="absolute inset-0 w-full h-full object-cover transition-transform [transition-duration:800ms]"
           style={{ transform: revealed ? 'scale(1)' : 'scale(1.08)' }}
           draggable={false}
         />
@@ -66,7 +66,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
 
       {/* Before panel (clipped overlay) */}
       <div
-        className="absolute inset-0 z-[10] transition-all duration-[800ms]"
+        className="absolute inset-0 z-[10] transition-all [transition-duration:800ms]"
         style={{
           clipPath: `inset(0 calc(100% - ${sliderPos}) 0 0 round 0 ${revealed ? '0px' : '20px'} ${revealed ? '0px' : '20px'} 0)`,
           transition: 'clip-path 0.8s cubic-bezier(0.16,1,0.3,1)',
@@ -75,7 +75,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
         <img
           src={beforeSrc}
           alt="Before"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[800ms]"
+          className="absolute inset-0 w-full h-full object-cover transition-transform [transition-duration:800ms]"
           style={{ transform: revealed ? 'scale(1.04)' : 'scale(1)' }}
           draggable={false}
         />
@@ -87,7 +87,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
 
       {/* Shadow on before-panel edge */}
       <div
-        className="absolute top-0 bottom-0 z-[11] pointer-events-none transition-all duration-[800ms]"
+        className="absolute top-0 bottom-0 z-[11] pointer-events-none transition-all [transition-duration:800ms]"
         style={{
           left: 0,
           width: sliderPos,

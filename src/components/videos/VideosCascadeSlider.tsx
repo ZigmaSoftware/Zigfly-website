@@ -70,16 +70,15 @@ function ChevronRight() {
 interface VideoSlideCardProps {
   slide: VideoCascadeSlide;
   position: SlidePosition;
-  isActive: boolean;
   onClick: () => void;
   onPlayVideo?: (video: VideoCascadeSlide) => void;
 }
 
-function VideoSlideCard({ slide, position, isActive, onClick, onPlayVideo }: VideoSlideCardProps) {
+function VideoSlideCard({ slide, position, onClick, onPlayVideo }: VideoSlideCardProps) {
   return (
     <div
       className={[
-        `absolute left-1/2 top-1/2 w-[88vw] max-w-[560px] transition-[transform,opacity,filter] duration-[1400ms] ease-[cubic-bezier(0.19,1,0.22,1)] will-change-transform`,
+        `absolute left-1/2 top-1/2 w-[88vw] max-w-[560px] transition-[transform,opacity,filter] [transition-duration:1400ms] [transition-timing-function:cubic-bezier(0.19,1,0.22,1)] will-change-transform`,
         position === "prev" || position === "next" ? "brightness-[0.9]" : "brightness-100",
         POSITION_CLASSES[position],
       ].join(" ")}
@@ -169,14 +168,12 @@ const VideosCascadeSlider = ({
         <div className="relative h-[360px] w-full md:h-[400px] lg:h-[420px]">
           {slides.map((slide, index) => {
             const position = getPosition(index, currentIndex, slides.length);
-            const isActive = position === "now";
 
             return (
               <VideoSlideCard
                 key={slide.id}
                 slide={slide}
                 position={position}
-                isActive={isActive}
                 onClick={() => onIndexChange(index)}
                 onPlayVideo={onPlayVideo}
               />

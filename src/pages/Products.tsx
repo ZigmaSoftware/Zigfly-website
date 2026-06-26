@@ -3,12 +3,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import { useEffect, useRef, useState } from "react";
-import { CheckCircle, ArrowRight, Leaf } from "lucide-react";
+import { CheckCircle, ArrowRight, Leaf, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import product1 from "@/assets/Products/goodearth.jpg";
+import product1 from "@/assets/Products/goodearth.webp";
 import larva from "@/assets/website/larva.jpeg";
-import frassPlus6mm from "@/assets/Products/Frass +6mm.jpeg";
+import frassPlus6mm from "@/assets/Products/Frass +6mm.webp";
 import manure from "@/assets/website/hero/manure in hand.webp";
 import larvae from "@/assets/Products/larvae.jpeg";
 
@@ -27,7 +27,7 @@ type Product = {
   color: string;
   features: string[];
   applications: string[];
-  icon: React.ComponentType<any>;
+  icon: LucideIcon;
 };
 
 const ProductImage: React.FC<{
@@ -148,99 +148,7 @@ const ProductImage: React.FC<{
 };
 
 const products: Product[] = [
-  // {
-  //   id: "refuse-derived-fuel-rdf",
-  //   name: "Refuse Derived Fuel (RDF)",
-  //   subtitle: "Turning non-recyclable waste into industrial energy",
-  //   tagline: "High-Calorific Recovery",
-  //   description: "Engineered refuse-derived fuel processed from non-recyclable waste streams for efficient co-processing in industrial kilns and energy recovery systems.",
-  //   image: productRdf,
-  //   color: "from-orange-600 to-orange-800",
-  //   features: [
-  //     "Consistent calorific value",
-  //     "Moisture-controlled output",
-  //     "Reduced landfill dependency",
-  //     "Industrial-grade processing"
-  //   ],
-  //   applications: ["Cement Kilns", "Waste-to-Energy Plants", "Industrial Boilers", "Co-processing Units"],
-  //   icon: Recycle
-  // },
-  // {
-  //   id: "inert-soil-and-stones",
-  //   name: "Inert Soil and Stones",
-  //   subtitle: "Chemically stable materials recovered from waste for construction use",
-  //   tagline: "Recovered Aggregates",
-  //   description:
-  //     "Processed inert soil and stones recovered from waste streams, suitable for construction, land reclamation, and infrastructure projects. Chemically stable and non-reactive, available in bulk for large-scale applications.",
-  //   image: product3,
-  //   imageHover: product2,
-  //   color: "from-amber-600 to-amber-800",
-  //   features: [
-  //     "Chemically stable and non-reactive",
-  //     "Consistent grading and quality",
-  //     "Suitable for road construction",
-  //     "Bulk availability"
-  //   ],
-  //   applications: ["Road Construction", "Land Filling & Embankment", "Backfilling", "Building Foundation & Drainage"],
-  //   icon: Recycle
-  // },
-  // {
-  //   id: "recyclables",
-  //   name: "Recyclables",
-  //   subtitle: "Recovered glass, metal and more — sorted, cleaned, and ready for reuse",
-  //   tagline: "Circular Material Recovery",
-  //   description:
-  //     "Sorted and processed recyclable materials including glass scrap and iron scrap recovered from waste streams. Each material is cleaned, graded, and prepared for direct use by manufacturing and industrial partners.",
-  //   image: product4,
-  //   imageHover: product5,
-  //   color: "from-cyan-600 to-cyan-800",
-  //   features: [
-  //     "Colour-segregated glass scrap",
-  //     "Clean, contaminant-free iron scrap",
-  //     "High purity levels",
-  //     "Multiple size grades available"
-  //   ],
-  //   applications: ["Glass Manufacturing", "Steel Manufacturing", "Construction & Abrasives", "Industrial Raw Material Supply"],
-  //   icon: Recycle
-  // },
-  // {
-  //   id: "bio-earth",
-  //   name: "Bio-earth",
-  //   subtitle: "Nutrient-rich organic compost for healthier soils and higher yields",
-  //   tagline: "Nature's Gift Renewed",
-  //   description:
-  //     "Nutrient-rich organic compost and soil conditioner produced from processed wet waste, perfect for agriculture, horticulture, and gardening. Chemical-free, FSSAI-compliant, and designed to restore soil health naturally.",
-  //   image: product1,
-  //   color: "from-green-600 to-green-800",
-  //   features: [
-  //     "Rich in organic matter",
-  //     "Improves soil fertility and microbial activity",
-  //     "Chemical-free production",
-  //     "FSSAI compliant"
-  //   ],
-  //   applications: ["Non-Agricultural Crops", "Horticulture & Gardening", "Landscaping", "Urban & Organic Farming"],
-  //   icon: Leaf
-  // },
-  // {
-  //   id: "recycled-furniture",
-  //   name: "Recycled Furniture",
-  //   subtitle: "Durable, stylish furniture crafted from reclaimed materials",
-  //   tagline: "From Waste to Wealth, Responsibly",
-  //   description:
-  //     "Eco-friendly furniture crafted from recycled materials, promoting sustainable living and reducing environmental impact through innovative design. Available in customisable options for home, office, and commercial use.",
-  //   image: wpeFurniture1,
-  //   imageHover: wpeFurniture2,
-  //   images: [ wpeFurniture1, wpeFurniture2, wpePic1, wpePic2],
-  //   color: "from-purple-600 to-purple-800",
-  //   features: [
-  //     "Made from recycled materials",
-  //     "Durable and stylish designs",
-  //     "Eco-friendly production process",
-  //     "Customisable options available"
-  //   ],
-  //   applications: ["Home Furniture", "Office Furniture", "Outdoor Furniture", "Commercial Spaces"],
-  //   icon: Sparkles
-  // },
+  
   {
     id: "frass",
     name: "Frass",
@@ -357,29 +265,6 @@ const Products = () => {
               </p>
             </Reveal>
 
-            {/* <div className="grid sm:grid-cols-3 gap-6">
-              <div className="rounded-2xl border border-white/30 bg-white/95 p-5 text-center backdrop-blur-sm">
-                <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
-                  <Recycle className="w-7 h-7 text-slate-700" />
-                </div>
-                <h3 className="text-base font-bold text-slate-900 mb-2">100% Recycled</h3>
-                <p className="text-slate-600 text-sm">All products recovered from landfill waste</p>
-              </div>
-              <div className="rounded-2xl border border-white/30 bg-white/95 p-5 text-center backdrop-blur-sm">
-                <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="w-7 h-7 text-slate-700" />
-                </div>
-                <h3 className="text-base font-bold text-slate-900 mb-2">Quality Certified</h3>
-                <p className="text-slate-600 text-sm">Meets industry standards and specifications</p>
-              </div>
-              <div className="rounded-2xl border border-white/30 bg-white/95 p-5 text-center backdrop-blur-sm">
-                <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
-                  <Leaf className="w-7 h-7 text-slate-700" />
-                </div>
-                <h3 className="text-base font-bold text-slate-900 mb-2">Eco-Friendly</h3>
-                <p className="text-slate-600 text-sm">Supporting circular economy principles</p>
-              </div>
-            </div> */}
           </div>
         </section>
 

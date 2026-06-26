@@ -182,8 +182,8 @@ return (
                   <div>
                     {/* <p className="text-[11px] font-bold tracking-[0.22em] uppercase text-muted-foreground mb-1">Email</p> */}
                     <h3 className="text-base font-bold text-foreground mb-1.5">Email Us</h3>
-                    <a href="mailto:admin.bsf@zigma.in" className="text-primary hover:underline">
-                      admin.bsf@zigma.in
+                    <a href="mailto:santhosh@zigma.in" className="text-primary hover:underline">
+                      santhosh@zigma.in
                     </a>
                   </div>
                 </div>

@@ -6,11 +6,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
-import preProcessingImg from "@/assets/services/pre-processing.png";
-import bioconversionImg from "@/assets/services/Bioconversion — The BSF Larvae at Work.png";
-import harvestingImg from "@/assets/services/harvesting.png";
+import preProcessingImg from "@/assets/services/pre-processing.webp";
+import bioconversionImg from "@/assets/services/Bioconversion — The BSF Larvae at Work.webp";
+import harvestingImg from "@/assets/services/harvesting.webp";
+import residualOutputsImg from "@/assets/services/Residual Outputs.webp";
 import bsflPic2 from "@/assets/BSFL project pictures/pic 2.jpeg";
 import unloadingImg from "@/assets/website/hero/unloading.webp";
+import servicesHeroBg from "@/assets/website/hero/services-bg.webp";
 
 
 const SLOW_EASE = "power2.out";
@@ -262,7 +264,7 @@ const services = [
     id: "residual-outputs",
     title: "The Residual Outputs",
     eyebrow: "Manure & Frass",
-    image: "/placeholder.svg",
+    image: residualOutputsImg,
     description: "Beyond the larvae, the process generates two additional valuable outputs. Manure — the organic residue from the bioconversion — serves as a nutrient-rich natural fertilizer for agriculture, horticulture, and urban gardening. Frass, the combination of larval excrement and shed skins, functions as a potent biofertiliser with documented soil health benefits.",
     features: [
       "Manure: nutrient-rich natural fertilizer for agriculture and horticulture.",
@@ -284,101 +286,7 @@ const services = [
       "Delivers measurable agricultural and economic value at scale.",
     ],
   },
-  // {
-  //   id: "machinery-sales-rentals",
-  //   title: "Machinery Sales & Rentals",
-  //   eyebrow: "Industrial Processing Equipment",
-  //   image: machine,
-  //   description: "We engineer and provide state-of-the-art machinery specifically designed for the rigorous technical demands of legacy waste reclamation and municipal solid waste (MSW) processing. These industrial assets are developed through our dedicated in-house research and development (R&D) and specialized fabrication setup, ensuring that every system is optimized for high-performance resource recovery. To accommodate diverse project requirements, our equipment is available for outright sale or on a flexible rental basis. Every deployment is backed by scientific technical support available round-the-clock, guaranteeing maximum operational uptime, high-quality output, and the scalability necessary for large-scale environmental projects.",
-  //   features: [
-  //     "Proprietary Engineering: Custom-built processing systems developed via in-house R&D and precision fabrication.",
-  //     "Versatile Waste Processing: Specialized hardware for both high-throughput MSW sorting and complex legacy landfill mining.",
-  //     "Flexible Acquisition Models: Comprehensive support for both equipment purchase and operational leasing.",
-  //     "24/7 Scientific Support: Continuous technical and operational assistance to ensure consistent, high-performance results.",
-    
-  //   ],
-  // },
-  // {
-  //   id: "iot-waste-management",
-  //   title: "IOT Systems for Waste Management",
-  //   eyebrow: "Smart Technology Solutions",
-  //   image: iot,
-  //   description: "Our Industrial Internet of Things (IoT) platforms provide granular, real-time visibility into the entire waste management lifecycle. By integrating smart sensor networks, we enable data-driven optimization and predictive system maintenance to ensure maximum operational efficiency. This infrastructure facilitates real-time landfill management, oversight of door-to-door collection logistics, and continuous waste transfer station monitoring. Our technology ensures precise capacity monitoring, process monitoring, and disposal monitoring, providing total transparency from collection to final disposal, while incorporating a robust grievance redressal mechanism to ensure service accountability.",
-  //   features: [
-  //     "Advanced Pre-Processing: Utilization of automated crushing, shredding, and screening systems to produce standardized feedstock.",
-  //     "Thermal Engineering: Precision calorific blending and moisture reduction to maximize energy recovery and combustion efficiency",
-  //     "Industrial Feedstock Stability: Strategic planning and logistics to ensure a stable and regular supply of alternative fuel for continuous industrial operations.",
-  //     "Compliance-Driven Integration: System establishment and maintenance that prioritizes high-quality outputs while meeting all environmental and safety protocols.",
-   
-  //   ],
-  // },
-  // {
-  //   id: "integrated-alternative-fuel-solutions",
-  //   title: "Integrated Alternative Fuel Solutions",
-  //   eyebrow: "ALTERNATIVE FUEL SYSTEMS",
-  //   image: integrated,
-  //   description: [
-  //     "Consistent feedstock. Continuous supply. No surprises. The bottleneck in most alternative fuel programmes isn't intent, it's specification. RDF that swings in calorific value, arrives off-schedule, or carries excess moisture doesn't just underperform; it disrupts kiln stability and pushes operations back to coal.",
-  //     "ZIGMA engineers and operates end-to-end RDF production and supply systems, from pre-processing facility design through to delivery logistics, built around the precise technical requirements of cement plants, power producers, and paper mills. Designed to spec. Held to it.",
-  //   ],
-    
-  //   features: [
-  //     "Pre-Processing Infrastructure: Automated shredding, crushing, and multi-stage screening engineered to produce consistent, specification-grade RDF at scale.",
-  //     "Calorific & Moisture Engineering: Precision blending and drying protocols to consistently hit the calorific and moisture targets co-processing operations require maximizing energy recovery and combustion efficiency.",
-  //     "Feedstock Supply Planning: Strategic sourcing, logistics, and inventory management to guarantee uninterrupted feedstock flow for continuous industrial operations, eliminating the supply volatility.",
-  //     "Regulatory Integration: Full compliance with environmental norms and industrial safety standards across facility setup, operations, and supply chain, documented and audit-ready at every stage.",
-  //   ],
-  // },
-  // {
-  //   id: "industrial-commercial-waste-solutions",
-  //   title: "Industrial & Commercial Waste Solutions",
-  //   eyebrow: "Comprehensive Waste Management",
-  //   image: industrial,
-  //   description: [
-  //     "Industrial and commercial waste streams have value, but realising it requires the right technical preparation, the right buyer, and a supply chain that holds.",
-  //     "We work directly with waste generators and industrial consumers alike. Generators get end-to-end handling for hazardous and non-hazardous streams, with RDF pre-processing, calorific optimisation, and compliance built in. Industrial consumers get a stable, specification-matched supply of alternative raw materials. And the material intelligence to connect both sides knowing exactly what co-processors need and what generators actually produce is what makes the supply relationship durable.",
-  //   ],
-  //   features: [
-  //     "RDF Pre-Processing & Quality Control: Shredding, moisture reduction, and calorific blending tailored to the specific requirements of cement kilns, power plants, and other co-processing end-users.",
-  //     "Material Brokerage & Supply Chain Management: Technically informed matching of waste producers with verified industrial buyers with ongoing management to ensure quality and delivery reliability hold over time.",
-  //     "Industrial Waste Handling: End-to-end disposal and processing for manufacturing and commercial waste of all compositions hazardous and non-hazardous, at any scale.",
-  //     "Compliance Management: Rigorous documentation, regulatory tracking, and audit-ready reporting across waste streams managed end to end.",
-      
-  //   ],
-  // },
-  // {
-  //   id: "epr-extended-producer-responsibility",
-  //   title: "EPR compliance built to withstand audit.",
-  //   eyebrow: "EPR PROGRAMS & COMPLIANCE",
-  //   image: epr,
-  //   description: [
-  //     "One unverified recycler. One missed filing. One gap in the traceability chain. That's all it takes for a year of EPR effort to unravel under audit.",
-  //     "ZIGMA runs the full EPR cycle for PIBOs, registration and target mapping on the CPCB portal, processing through authorised PWPFs, credit generation and transfer, annual return filing, and ongoing support as regulations change. Every transaction is backed by ERP-based documentation covering material movement, GST, and processing proof structured for CPCB audit from day one. 3,500 TPD RDF operations, backed by a verified network across recyclers, co-processing units, and cement plants.",
-  //   ],
-  //   features: [
-  //     "Annual Target Planning & Tracking: Structured compliance planning from target-setting through to annual return submission with real-time tracking.",
-  //     "Verified PWPFs Network: Processing partners across recycling, co-processing, and waste-to-energy - onboarded, verified, and actively monitored against CPCB standards.",
-  //     "Digital Traceability: Auditable documentation from point of collection through to end-of-life processing giving PIBOs the evidence base to satisfy regulators and report with confidence.",
-  //     "Collection & Sorting Infrastructure: Scalable plastic waste collection and sorting networks engineered for high-efficiency material recovery and circularity solutions.",
-      
-  //   ],
-  // },
-  // {
-  //   id: "recycled-furniture",
-  //   title: "WPE",
-  //   eyebrow: "From Waste to Wealth, Responsibly.",
-  //   image: recycledFurniture,
-  //   description:
-  //     "WPE range blends recycled material sustainability with architectural-grade performance. Engineered for exterior and high-use applications, the profiles offer high weather resistance, anti-slip behavior, termite and biological resistance, and long-term dimensional stability with low maintenance.",
-  //   features: [
-  //     "100% recyclable, eco-friendly WPE material for responsible construction.",
-  //     "High durability with weather, moisture, termite, algae, and fungi resistance.",
-  //     "Anti-slip and mechanically stable profiles suitable for demanding outdoor use.",
-  //     "EN 15534-aligned tested performance with strong moisture and water absorption results.",
-  //     "Applications: Facade, Decking, Exterior Seating, Gates, Railing, Fencing, and Kiosk structures.",
-  //   ],
-  // },
-
+  
 ];
 
 const Services = () => {
@@ -395,14 +303,14 @@ const Services = () => {
           className="relative min-h-[100svh] box-border pt-20 flex items-center overflow-hidden scroll-mt-24 lg:scroll-mt-28"
         >
           <img
-            src="/hero/Pdgclose.webp"
+            src={servicesHeroBg}
             alt=" Services Hero Background"
             aria-hidden="true"
             fetchPriority="high"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/30" aria-hidden="true" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/28 to-black/18" aria-hidden="true" />
+          {/* <div className="absolute inset-0 bg-black/30" aria-hidden="true" /> */}
+          {/* <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/28 to-black/18" aria-hidden="true" /> */}
 
           <div className="container-main relative grid items-center justify-items-center text-center">
             <Reveal

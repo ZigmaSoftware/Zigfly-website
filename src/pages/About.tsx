@@ -1,5 +1,5 @@
 ﻿import { useEffect, useRef } from 'react';
-import { FileText, Shield, Lock, Users, ArrowUpRight } from 'lucide-react';
+import { FileText, Shield, Lock, Users, ArrowUpRight, ExternalLink } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '@/components/Header';
@@ -8,21 +8,6 @@ import Reveal from '@/components/animation/Reveal';
 import hero from '@/assets/website/zigma-picture.webp';
 import globeSvg from '@/assets/website/contact_globe.svg';
 import BluePlanetSection from '@/components/home/BluePlanetSection';
-
-import picture1 from '@/assets/Leaders/Boopathy Dharmaraj.jpeg';
-import picture2 from '@/assets/Leaders/K P Mutharasu.jpeg';
-import picture3 from '@/assets/Leaders/ANAND THANGARAJ.png';
-import picture4 from '@/assets/Leaders/KTI.png';
-import picture5 from '@/assets/Leaders/NAGESH PRABHU.jpeg';
-import picture6 from '@/assets/Leaders/Aghoramoorthy Rajasekaran.png';
-import picture7 from '@/assets/Leaders/Sridhar Jagannathan.jpeg';
-import picture11 from '@/assets/Leaders/Shankar Raman.png';
-import picture13 from '@/assets/Leaders/Varun Boralkar.png';
-import picture14 from '@/assets/Leaders/Maran.png';
-import picture15 from '@/assets/Leaders/Senthil Annamalai.jpeg';
-import picture16 from '@/assets/Leaders/Vijayan.png';
-import picture17 from '@/assets/Leaders/Mohan kumar.png';
-import picture18 from '@/assets/Leaders/ShivashankaraPandian.jpg';
 
 import Pdf1 from '@/assets/Pdf Files/ABAC-AML-Policies-Zigma-Global.pdf';
 import Pdf2 from '@/assets/Pdf Files/Amended_Zigma-Global-Whistle-Blower-Policy-Clean.pdf';
@@ -35,8 +20,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 const SLOW_EASE = 'power2.out';
-const ABOUT_VIDEO_EMBED_URL =
-  'https://www.youtube.com/embed/0zmdFARwHsA?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=0zmdFARwHsA&rel=0&modestbranding=1&playsinline=1&vq=hd1080';
+
+const leaderImageModules = import.meta.glob('../assets/Leaders/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
+  eager: true,
+  import: 'default',
+});
+
+const getLeaderImage = (fileName: string): string | undefined =>
+  leaderImageModules[`../assets/Leaders/${fileName}`] as string | undefined;
 
 type Leader = {
   group: 'Promoters and CoFounders' | 'Management Team';
@@ -46,32 +37,71 @@ type Leader = {
   linkedin?: string;
 };
 
+const policies = [
+  {
+    id: 'abac-aml',
+    title: 'ABAC & AML Policies',
+    description: 'Anti-bribery, anti-corruption, and anti-money laundering framework with governance controls.',
+    updated: 'February 2024',
+    file: Pdf1,
+    icon: Shield,
+    accent: 'from-[hsl(145_63%_32%)] to-[hsl(145_63%_32%)]'
+  },
+  {
+    id: 'whistleblower',
+    title: 'Whistle Blower Policy',
+    description: 'Confidential reporting channels, protection against retaliation, and investigation procedures.',
+    updated: 'October 2025',
+    file: Pdf2,
+    icon: Users,
+    accent: 'from-[hsl(145_63%_32%)] to-[hsl(145_63%_32%)]'
+  },
+  {
+    id: 'privacy',
+    title: 'Privacy Policy',
+    description: 'How we collect, use, and protect personal data across our digital and on-site operations.',
+    updated: 'December 2025',
+    file: Pdf3,
+    icon: Lock,
+    accent: 'from-[hsl(145_63%_32%)] to-[hsl(145_63%_32%)]'
+  },
+  {
+    id: 'pdpa',
+    title: 'PDPA Policy',
+    description: 'Personal Data Protection compliance with strong governance and security controls.',
+    updated: 'September 2025',
+    file: Pdf4,
+    icon: FileText,
+    accent: 'from-[hsl(145_63%_32%)] to-[hsl(145_63%_32%)]'
+  }
+];
+
 const leaders: Leader[] = [
   {
     group: 'Promoters and CoFounders',
     name: 'Boopathy Dharmaraj',
-    image: picture1,
+    image: getLeaderImage('Boopathy Dharmaraj.webp'),
     designation: 'Managing Director & Co-Founder',
     linkedin: 'https://www.linkedin.com/in/boopathy-dharmaraj-6b64b0ba/',
   },
   {
     group: 'Promoters and CoFounders',
     name: 'Ku Tha Ilangovan',
-    image: picture4,
+    image: getLeaderImage('KTI.webp'),
     designation: 'Director & Co-Founder',
     linkedin: 'https://www.linkedin.com/in/ilangovan-thangavelu-kugalur-a44084185/',
   },
   {
     group: 'Promoters and CoFounders',
     name: 'Anand Thangaraj',
-    image: picture3,
+    image: getLeaderImage('ANAND THANGARAJ.webp'),
     designation: 'Director',
     linkedin: 'https://www.linkedin.com/in/anand-thangaraj-b421b8400/',
   },
   {
     group: 'Promoters and CoFounders',
     name: 'K P Mutharasu',
-    image: picture2,
+    image: getLeaderImage('K P Mutharasu.webp'),
     designation: ' Promoter & Co- Founder',
     linkedin: 'https://www.linkedin.com/in/mutharasu-k-p-125b2546/',
   },
@@ -79,13 +109,13 @@ const leaders: Leader[] = [
     group: 'Promoters and CoFounders',
     name: 'Vijayan S',
     designation: 'Promoter',
-    image: picture16,
+    image: getLeaderImage('Vijayan.webp'),
     // linkedin: 'https://www.linkedin.com/in/vijayan-s/', / / FIX: was incorrectly pointing to Anand Thangaraj's profile
   },
   {
     group: 'Promoters and CoFounders',
     name: 'Nagesh Prabhu Chinivartha',
-    image: picture5,
+    image: getLeaderImage('NAGESH PRABHU.webp'),
     designation: 'Promoter & Co- Founder',
     linkedin: 'https://www.linkedin.com/in/nageshprabhu/',
   },
@@ -93,56 +123,56 @@ const leaders: Leader[] = [
   {
     group: 'Management Team',
     name: 'A Rajasekaran',
-    image: picture6,
+    image: getLeaderImage('Aghoramoorthy Rajasekaran.webp'),
     designation: 'President - Technical',
     linkedin: 'https://www.linkedin.com/in/aghoramoorthy-rajasekaran-54479521/',
   },
   {
     group: 'Management Team',
     name: 'Senthil Annamalai',
-    image: picture15,
+    image: getLeaderImage('Senthil Annamalai.webp'),
     designation: 'Chief Operating Officer',
     linkedin: 'https://www.linkedin.com/in/senthil-annamalai-b3b38258/',
   },
   {
     group: 'Management Team',
     name: 'Maran V',
-    image: picture14,
+    image: getLeaderImage('Maran.webp'),
     designation: 'Vice President - Research & Product  Development',
     // linkedin: 'https://www.linkedin.com/in/maaran-9b1a8614a/',
   },
   {
     group: 'Management Team',
     name: 'Sridhar Jagannathan',
-    image: picture7,
+    image: getLeaderImage('Sridhar Jagannathan.webp'),
     designation: 'Vice President - Operations',
     linkedin: 'https://www.linkedin.com/in/sridhar-jagannathan-00a52444/',
   },
   {
     group: 'Management Team',
     name: 'Shankar Raman C V',
-    image: picture11,
+    image: getLeaderImage('Shankar Raman.webp'),
     designation: 'Vice President - Business Development',
     linkedin: 'https://www.linkedin.com/in/shankar-raman-c-v-64528611/',
   },
   {
     group: 'Management Team',
     name: 'Varun Boralkar',
-    image: picture13,
+    image: getLeaderImage('Varun Boralkar.webp'),
     designation: 'Vice President - Strategic Business Group',
     linkedin: 'https://www.linkedin.com/in/varun-boralkar-aa085a15/',
   },
   {
     group: 'Management Team',
     name: 'Mohan Kumaar S',
-    image: picture17,
+    image: getLeaderImage('Mohan kumar.webp'),
     designation: 'General Manager - AFR',
     linkedin: 'https://www.linkedin.com/in/mohan-kumaar-subramaniam-a3b064175/',
   },
   {
     group: 'Management Team',
     name: 'Sivasankarapandian P',
-    image: picture18,
+    image: getLeaderImage('ShivashankaraPandian.webp'),
     designation: 'General Manager - Finance & Accounts',
     linkedin: 'https://www.linkedin.com/in/sivasankarapandian-ssp-b35152392/', // FIX: was incorrectly pointing to Mohan Kumar's profile
   },
@@ -191,45 +221,6 @@ const About = (): JSX.Element => {
     return () => ctx.revert();
   }, [prefersReducedMotion]);
 
-  const policies = [
-    {
-      id: 'abac-aml',
-      title: 'ABAC & AML Policies',
-      description: 'Anti-bribery, anti-corruption, and anti-money laundering framework with governance controls.',
-      updated: 'February 2024',
-      file: Pdf1,
-      icon: Shield,
-      accent: 'from-[hsl(145_63%_32%)] to-[hsl(145_63%_32%)]'
-    },
-    {
-      id: 'whistleblower',
-      title: 'Whistle Blower Policy',
-      description: 'Confidential reporting channels, protection against retaliation, and investigation procedures.',
-      updated: 'October 2025',
-      file: Pdf2,
-      icon: Users,
-      accent: 'from-[hsl(145_63%_32%)] to-[hsl(145_63%_32%)]'
-    },
-    {
-      id: 'privacy',
-      title: 'Privacy Policy',
-      description: 'How we collect, use, and protect personal data across our digital and on-site operations.',
-      updated: 'December 2025',
-      file: Pdf3,
-      icon: Lock,
-      accent: 'from-[hsl(145_63%_32%)] to-[hsl(145_63%_32%)]'
-    },
-    {
-      id: 'pdpa',
-      title: 'PDPA Policy',
-      description: 'Personal Data Protection compliance with strong governance and security controls.',
-      updated: 'September 2025',
-      file: Pdf4,
-      icon: FileText,
-      accent: 'from-[hsl(145_63%_32%)] to-[hsl(145_63%_32%)]'
-    }
-  ];
-
 
   return (
     <div className="min-h-screen bg-background">
@@ -260,13 +251,13 @@ const About = (): JSX.Element => {
               data-anim-ease={SLOW_EASE}
             >
               <div className="text-lg font-medium uppercase tracking-[0.35em] text-white/85">
-                About Zigma
+                Our Journey
               </div>
               <h1 className="mt-3 text-5xl font-bold leading-tight text-white md:text-5xl">
-                Building Sustainable Waste Solutions
+               Milestones That Shaped Us
               </h1>
               <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-relaxed text-white/90">
-                We help transform legacy waste into cleaner land, stronger systems, and long-term environmental impact.
+                Explore the defining moments that transformed our vision into a global footprint. Each year marks a new chapter in growth, innovation, and impact.
               </p>
             </Reveal>
           </div>
@@ -285,6 +276,8 @@ const About = (): JSX.Element => {
             <img
               src={globeSvg}
               alt=""
+              loading="lazy"
+              decoding="async"
               className="h-full w-full opacity-[.25] drop-shadow-[0_0_20px_rgba(22,101,52,0.2)] motion-safe:animate-[spin_40s_linear_infinite] motion-reduce:animate-none"
             />
           </div>
@@ -314,30 +307,22 @@ const About = (): JSX.Element => {
               <p className="mt-4 text-justify text-base leading-relaxed text-slate-600 lg:text-lg">
                 At the heart of our operations lies a low-carbon emission model that scientifically segregates and remediates decades of accumulated waste. What began as a quest to solve India's most pressing environmental challenge has evolved into a mission with global resonance - turning neglected dump yards into opportunities for renewal, sustainability, and impact.
               </p>
+              <div className="mt-6 flex flex-wrap gap-4">
+                <a
+                  href="https://zigma.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  Visit Zigma
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </div>
             </Reveal>
           </div>
         </section>
 
-        {/* Blueplanet  */}
         <BluePlanetSection/>
-
-
-        
-        {/* <section data-no-animate className="scroll-mt-24 lg:scroll-mt-28">
-          <div className="group relative mx-auto w-full overflow-hidden border border-border shadow-xl">
-            <div className="relative w-full pt-[56.25%]">
-              <iframe
-                src={ABOUT_VIDEO_EMBED_URL}
-                title="Zigma corporate video"
-                className="absolute inset-0 h-full w-full"
-                frameBorder={0}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </section> */}
 
         <section
           data-no-animate
